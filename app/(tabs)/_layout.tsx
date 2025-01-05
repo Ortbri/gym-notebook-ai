@@ -2,10 +2,10 @@ import useHaptics from '@/hooks/useHaptics';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
 import { BlurView } from 'expo-blur';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Tabs, router } from 'expo-router';
+import { Router, router } from 'expo-router';
+import { Tabs } from 'expo-router';
 import type React from 'react';
-import { StyleSheet, View, useColorScheme } from 'react-native';
+import { useColorScheme } from 'react-native';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -19,7 +19,12 @@ export default function TabLayout() {
   const { lightHaptic } = useHaptics();
   const { colors } = useTheme();
   const colorScheme = useColorScheme();
-  const styles = createStyles(colors);
+
+  // const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  // const handlePresentModalPress = useCallback(() => {
+  //   bottomSheetModalRef.current?.present();
+  // }, []);
 
   /* --------------------------------- return --------------------------------- */
   return (
@@ -29,18 +34,18 @@ export default function TabLayout() {
         headerShown: false,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: 'transparent',
+          backgroundColor: 'trasnparent',
           borderColor: 'transparent',
         },
 
         tabBarBackground: () => (
           <BlurView
-            intensity={100}
+            intensity={24}
             tint="prominent"
             style={{
               flex: 1,
               backgroundColor:
-                colorScheme === 'dark' ? 'rgba(0, 0, 0, 0.0)' : 'rgba(255, 255, 255, 0.5)',
+                colorScheme === 'dark' ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.5)',
             }}
           />
         ),
@@ -64,18 +69,9 @@ export default function TabLayout() {
           },
         }}
         options={{
-          tabBarIcon: () => {
+          tabBarIcon: ({ focused }) => {
             return (
-              <View style={styles.aiButtonContainer}>
-                <LinearGradient
-                  colors={['#7C3AED', '#3B82F6']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={styles.aiButton}
-                >
-                  <Ionicons name="sparkles" size={20} color="#fff" />
-                </LinearGradient>
-              </View>
+              <TabBarIcon name={focused ? 'sparkles' : 'sparkles-outline'} color={colors.text} />
             );
           },
         }}
@@ -91,27 +87,3 @@ export default function TabLayout() {
     </Tabs>
   );
 }
-
-const createStyles = (colors: any) =>
-  StyleSheet.create({
-    aiButtonContainer: {
-      marginBottom: -24,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    aiButton: {
-      width: 46,
-      height: 46,
-      borderRadius: 28,
-      justifyContent: 'center',
-      alignItems: 'center',
-      shadowColor: colors.primary,
-      shadowOffset: {
-        width: 0,
-        height: 4,
-      },
-      shadowOpacity: 0.3,
-      shadowRadius: 4.65,
-      elevation: 8,
-    },
-  });

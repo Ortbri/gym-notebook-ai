@@ -1,20 +1,19 @@
 'use client';
 
 import { sendMessage } from '@/actions/ai-processor';
-import * as AColors from '@bacons/apple-colors';
-import { Ionicons } from '@expo/vector-icons';
+import ChatInput from '@/components/chat/ChatInput';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useTheme } from '@react-navigation/native';
 import { BlurView } from 'expo-blur';
 import { Stack, router } from 'expo-router';
 
-import { SFSymbol, SymbolView, SymbolViewProps } from 'expo-symbols';
+import { SFSymbol, SymbolView } from 'expo-symbols';
 import type React from 'react';
-import { Suspense, useEffect, useRef, useState } from 'react';
-import * as DropdownMenu from 'zeego/dropdown-menu';
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   Animated,
+  Dimensions,
   Keyboard,
   Platform,
   Pressable,
@@ -25,6 +24,7 @@ import {
 } from 'react-native';
 import {
   type SharedValue,
+  useAnimatedKeyboard,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -37,12 +37,13 @@ interface ChatMessage {
   response: React.ReactNode;
 }
 
-export default function Profile() {
+export default function Chat() {
   /* ---------------------------------- hooks --------------------------------- */
   const headerHeight = useHeaderHeight();
   const insets = useSafeAreaInsets();
-  const keyboardValue = useKeyboardAnimation();
-  // console.log('keyboardValue', keyboardValue);
+  const { colors } = useTheme();
+  const colorScheme = useColorScheme();
+  // const keyboardHeight = useKeyboardHeight();
   /* ---------------------------------- state --------------------------------- */
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>(exampleMsg);
@@ -80,12 +81,7 @@ export default function Profile() {
     ]);
 
     setPrompt('');
-    // setLoading(false);
   };
-
-  const scrollViewAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: -keyboardValue.value }],
-  }));
 
   /* ---------------------------- message renderer ---------------------------- */
   const renderMessage = ({ item }: { item: ChatMessage }) => {
@@ -108,13 +104,13 @@ export default function Profile() {
               borderRadius: 24,
               alignItems: 'flex-end',
               justifyContent: 'flex-end',
-              backgroundColor: '#000000',
+              backgroundColor: colors.text,
             }}
           >
             <Text
               style={{
                 fontWeight: '500',
-                color: 'white',
+                color: colors.background,
               }}
             >
               {item.prompt}
@@ -125,10 +121,9 @@ export default function Profile() {
               position: 'absolute',
               height: 18,
               width: 18,
-              backgroundColor: 'white',
+              backgroundColor: colors.background,
               alignSelf: 'flex-end',
               borderRadius: 14,
-              // justifyContent: 'flex-end',
               bottom: -4,
               right: -4,
             }}
@@ -138,7 +133,7 @@ export default function Profile() {
               position: 'absolute',
               height: 14,
               width: 14,
-              backgroundColor: '#000000',
+              backgroundColor: colors.text,
               alignSelf: 'flex-end',
               borderRadius: 30,
               bottom: -2,
@@ -169,7 +164,7 @@ export default function Profile() {
               {/* <Expoic */}
               <SymbolView
                 name="apple.intelligence"
-                tintColor={'black'}
+                tintColor={colorScheme === 'dark' ? 'white' : 'black'}
                 style={{
                   width: 30,
                   height: 30,
@@ -180,8 +175,14 @@ export default function Profile() {
               {/* <Ionicons name="analy" size={14} color={'white'} /> */}
             </View>
 
-            <View>
-              <Text style={{ flex: 1, fontSize: 15, lineHeight: 22 }}>{item.response}</Text>
+            <View
+              style={{
+                flex: 1,
+              }}
+            >
+              <Text style={{ flex: 1, fontSize: 15, lineHeight: 22, color: colors.text }}>
+                {item.response}
+              </Text>
               {/* have ai generate some ui for the response */}
             </View>
           </View>
@@ -190,58 +191,11 @@ export default function Profile() {
     );
   };
 
-  // const headerRight = () => {
-  //   return (
-  //     <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
-  //       <DropdownMenu.Trigger>
-  //         <Pressable>
-  //           <SymbolView
-  //             name="sparkle"
-  //             tintColor={'darkgray'}
-  //             style={{
-  //               width: 25,
-  //               height: 25,
-  //             }}
-  //             type="palette"
-  //           />
-  //         </Pressable>
-  //       </DropdownMenu.Trigger>
+  useEffect(() => {
+    console.log('keyboard is visible:', Keyboard.isVisible());
+    // set visiable on mount
+  }, []);
 
-  //       <DropdownMenu.Content>
-  //         <DropdownMenu.Item key="new">
-  //           <DropdownMenu.ItemTitle>New Chat</DropdownMenu.ItemTitle>
-  //           <DropdownMenu.ItemIcon
-  //             ios={{
-  //               name: 'sparkle',
-  //             }}
-  //           />
-  //         </DropdownMenu.Item>
-
-  //         <DropdownMenu.Item key="clear">
-  //           <DropdownMenu.ItemTitle>Clear History</DropdownMenu.ItemTitle>
-  //           <DropdownMenu.ItemIcon
-  //             ios={{
-  //               name: 'sparkle',
-  //             }}
-  //           />
-  //         </DropdownMenu.Item>
-
-  //         <DropdownMenu.Separator />
-
-  //         <DropdownMenu.Item key="settings">
-  //           <DropdownMenu.ItemTitle>Settings</DropdownMenu.ItemTitle>
-  //           <DropdownMenu.ItemIcon
-  //             ios={{
-  //               name: 'sparkle',
-  //             }}
-  //           />
-  //         </DropdownMenu.Item>
-  //       </DropdownMenu.Content>
-  //     </DropdownMenu.Root>
-  //   );
-  // };
-
-  // const [isOpen, setIsOpen] = useState(false);
   /* --------------------------------- return --------------------------------- */
   return (
     <>
@@ -252,203 +206,52 @@ export default function Profile() {
           }
         }
       />
-      <View style={{ flex: 1 }}>
-        {/* just a small ui feature here */}
+      {/* <View style={{ flex: 1 }}> */}
+      {/* just a small ui feature here */}
 
-        <Animated.FlatList
-          // contentInset={{
-          //   // bottom: insets.bottom,
-          // }}
-          // scrollIndicatorInsets={{
-          //   bottom: 400,
-          // }}
-          // contentInsetAdjustmentBehavior="automatic"
-          ref={flatListRef}
-          data={messages}
-          inverted
-          renderItem={renderMessage}
-          contentContainerStyle={{
-            gap: 24,
-            // TOP
-            paddingBottom: headerHeight + 10,
-            // BOTTOM
-            paddingTop: insets.bottom + 46 + 8 + 10,
-          }}
-          // BOTTOM OF THE Flatlist
-          ListHeaderComponentStyle={
-            {
-              // backgroundColor: 'red',
-            }
+      <Animated.FlatList
+        // contentInset={{
+        //   // bottom: insets.bottom,
+        // }}
+        // scrollIndicatorInsets={{
+        //   bottom: 400,
+        // }}
+        // contentInsetAdjustmentBehavior="automatic"
+        ref={flatListRef}
+        data={messages}
+        inverted
+        renderItem={renderMessage}
+        contentContainerStyle={{
+          gap: 24,
+          // TOP
+          paddingBottom: headerHeight + 10,
+          // BOTTOM
+          paddingTop: insets.bottom + 46 + 8 + 10,
+        }}
+        // BOTTOM OF THE Flatlist
+        ListHeaderComponentStyle={
+          {
+            // backgroundColor: 'red',
           }
-          // TOP OF THE Flatlist
-          ListFooterComponentStyle={
-            {
-              // backgroundColor: 'red',
-              // paddingBottom: 100,
-            }
+        }
+        // TOP OF THE Flatlist
+        ListFooterComponentStyle={
+          {
+            // backgroundColor: 'red',
+            // paddingBottom: 100,
           }
-        />
-        <ChatInput
-          value={prompt}
-          setValue={setPrompt}
-          sharedValue={keyboardValue}
-          onSubmit={handleSubmit}
-        />
-      </View>
+        }
+      />
+
+      <ChatInput
+        value={prompt}
+        setValue={setPrompt}
+        // keyboardHeight={keyboardHeight}
+        onSubmit={handleSubmit}
+      />
     </>
   );
 }
-//TODO:
-/* -------------------------------------------------------------------------- */
-/*                              export once ready                             */
-/* -------------------------------------------------------------------------- */
-const ChatInput = ({
-  value,
-  setValue,
-  sharedValue,
-  onSubmit,
-}: {
-  value: string;
-  setValue: ((text: string) => void) | undefined;
-  sharedValue: SharedValue<number>;
-  onSubmit: () => void;
-}) => {
-  /**
-   * in order to create a proper IOS blur fronm behind the text and behind the inupt and keyboard
-   * reanimated has to push up the flatlist
-   * and push up the text input container above the keyboard
-   */
-  const { bottom } = useSafeAreaInsets();
-  const { colors } = useTheme();
-  const colorScheme = useColorScheme();
-
-  const inputAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: -sharedValue.value }],
-    // bottom: 0,
-  }));
-
-  // height of input is what?
-
-  // 46 + bottom + 8
-
-  return (
-    <View>
-      <BlurView
-        intensity={100}
-        tint="light"
-        style={{
-          paddingBottom: bottom,
-          paddingHorizontal: 10,
-          paddingTop: 8,
-          position: 'absolute',
-          backgroundColor:
-            colorScheme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.7)',
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-      >
-        <View
-          style={{
-            flexDirection: 'row',
-            borderRadius: 30,
-            minHeight: 46,
-            overflow: 'hidden',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor:
-              colorScheme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(244,244,244,1)',
-          }}
-        >
-          <SymbolView
-            name="plus"
-            tintColor={'black'}
-            style={{
-              width: 21,
-              height: 21,
-              // backgroundColor: 'red',
-              marginLeft: 10,
-            }}
-            type="palette"
-          />
-          <TextInput
-            value={value}
-            onChangeText={setValue}
-            onSubmitEditing={onSubmit}
-            placeholder="Message"
-            style={{
-              flex: 1,
-              padding: 10,
-              borderRadius: 8,
-              backgroundColor: 'transparent',
-              fontWeight: '500',
-              fontSize: 16,
-            }}
-          />
-          <Pressable
-            style={{ marginRight: 10, padding: 5, backgroundColor: 'black', borderRadius: 24 }}
-          >
-            <SymbolView
-              name="microphone"
-              tintColor={'white'}
-              style={{
-                width: 21,
-                height: 21,
-                // backgroundColor: 'red',
-                // backgroundColor: 'red',
-                // padding: 10,
-                // marginRight: 10,
-              }}
-              type="palette"
-            />
-          </Pressable>
-        </View>
-      </BlurView>
-      <Animated.View style={inputAnimatedStyle} />
-    </View>
-  );
-};
-
-/* ------------------------------- aware input ------------------------------ */
-const useKeyboardAnimation = () => {
-  const keyboardValue = useSharedValue(0);
-
-  useEffect(() => {
-    const keyboardWillShow = (event) => {
-      const keyboardHeight = event.endCoordinates?.height ?? 0;
-      keyboardValue.value = withSpring(keyboardHeight, {
-        damping: 20,
-        stiffness: 140,
-        mass: 0.4,
-      });
-    };
-
-    const keyboardWillHide = () => {
-      keyboardValue.value = withSpring(0, {
-        damping: 20,
-        stiffness: 140,
-        mass: 0.5,
-      });
-    };
-
-    const showSubscription = Keyboard.addListener(
-      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
-      keyboardWillShow,
-    );
-    const hideSubscription = Keyboard.addListener(
-      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
-      keyboardWillHide,
-    );
-
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-  }, [keyboardValue]);
-
-  return keyboardValue;
-};
-
 /* -------------------------------------------------------------------------- */
 /*                                example data                                */
 /* -------------------------------------------------------------------------- */

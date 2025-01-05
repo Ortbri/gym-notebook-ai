@@ -31,7 +31,8 @@ export default function HomeLayout() {
               style={{
                 width: 36,
                 height: 5,
-                backgroundColor: 'rgba(0,0,0,0.3)',
+                backgroundColor:
+                  colorScheme === 'dark' ? 'rgba(255,255,255, .3)' : 'rgba(0,0,0,0.3)',
                 borderRadius: 2.5,
                 // marginTop: 8,
               }}
@@ -39,19 +40,19 @@ export default function HomeLayout() {
           ),
           headerBackground: () => (
             <BlurView
-              intensity={100}
-              tint="light"
+              intensity={colorScheme === 'dark' ? 30 : 100}
+              tint={colorScheme === 'dark' ? 'promient' : 'light'}
               style={{
                 flex: 1,
                 borderBottomWidth: StyleSheet.hairlineWidth,
                 borderBottomColor: colors.border,
                 backgroundColor:
-                  colorScheme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.7)',
+                  colorScheme === 'dark' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.7)',
               }}
             />
           ),
           contentStyle: {
-            backgroundColor: colors.card,
+            backgroundColor: colorScheme === 'dark' ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)',
           },
         }}
       />
