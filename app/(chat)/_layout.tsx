@@ -38,19 +38,19 @@ export default function HomeLayout() {
               }}
             />
           ),
-          headerBackground: () => (
-            <BlurView
-              intensity={colorScheme === 'dark' ? 30 : 100}
-              tint={colorScheme === 'dark' ? 'promient' : 'light'}
-              style={{
-                flex: 1,
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                borderBottomColor: colors.border,
-                backgroundColor:
-                  colorScheme === 'dark' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.7)',
-              }}
-            />
-          ),
+          // headerBackground: () => (
+          //   <BlurView
+          //     intensity={colorScheme === 'dark' ? 30 : 100}
+          //     tint={colorScheme === 'dark' ? 'promient' : 'light'}
+          //     style={{
+          //       flex: 1,
+          //       borderBottomWidth: StyleSheet.hairlineWidth,
+          //       borderBottomColor: colors.border,
+          //       backgroundColor:
+          //         colorScheme === 'dark' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.7)',
+          //     }}
+          //   />
+          // ),
           contentStyle: {
             backgroundColor: colorScheme === 'dark' ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)',
           },
