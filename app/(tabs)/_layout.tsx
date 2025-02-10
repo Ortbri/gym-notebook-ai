@@ -6,6 +6,7 @@ import { useTheme } from '@react-navigation/native';
 import { router } from 'expo-router';
 // import { Tabs } from 'expo-router';
 import type React from 'react';
+import { useColorScheme } from 'react-native';
 // import { useColorScheme } from 'react-native';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -17,6 +18,7 @@ import type React from 'react';
 // }
 
 export default function TabLayout() {
+  const colorScheme = useColorScheme();
   // const { lightHaptic } = useHaptics();
   // const { colors } = useTheme();
   // const colorScheme = useColorScheme();
@@ -35,6 +37,7 @@ export default function TabLayout() {
       hapticFeedbackEnabled
       scrollEdgeAppearance="transparent"
       initialRouteName="(index)"
+      tabBarActiveTintColor={colorScheme === "dark"  ? "white" : "black"}
       // screenOptions={{
       //   tabBarShowLabel: false,
       //   headerShown: false,
@@ -60,8 +63,24 @@ export default function TabLayout() {
       <Tabs.Screen
         name="(index)"
         options={{
-          title: 'Chats',
-          tabBarIcon: () => ({ sfSymbol: 'message.badge.fill' }),
+          title: 'Feed',
+
+          tabBarIcon: () => ({ sfSymbol: 'aqi.low' }),
+          // tabBarActiveTintColor: 'white',
+        }}
+
+        // options={{
+        //   tabBarIcon: ({ focused }) => {
+        //     return <TabBarIcon name={focused ? 'home' : 'home-outline'} color={colors.text} />;
+        //   },
+        // }}
+      />
+      <Tabs.Screen
+        name="(tracking)"
+        options={{
+          title: 'Tracking',
+
+          tabBarIcon: () => ({ sfSymbol: 'chart.dots.scatter' }),
           // tabBarActiveTintColor: 'white',
         }}
 
