@@ -26,6 +26,7 @@
       "package": "com.ortbit02.faxtions"
     },
     "web": {
+      "output": "server",
       "bundler": "metro",
       "favicon": "./src/assets/images/faxtionsLogo.png"
     },
