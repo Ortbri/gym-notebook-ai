@@ -1,27 +1,32 @@
 import useHaptics from '@/hooks/useHaptics';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
-import { Router, router } from 'expo-router';
-import { Tabs } from 'expo-router';
-import type React from 'react';
+import { Tabs, router } from 'expo-router';
+import { SymbolView, type SymbolViewProps } from 'expo-symbols';
+import { Platform } from 'react-native';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>['name'];
   color: string;
+  iosSymbol?: SymbolViewProps['name'];
 }) {
+  if (Platform.OS === 'ios' && props.iosSymbol) {
+    return (
+      <SymbolView
+        name={props.iosSymbol}
+        size={30}
+        tintColor={props.color}
+        style={{ marginBottom: -24 }}
+      />
+    );
+  }
   return <Ionicons size={22} style={{ marginBottom: -24 }} {...props} />;
 }
 
 export default function TabLayout() {
   const { lightHaptic } = useHaptics();
   const { colors } = useTheme();
-
-  // const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  // const handlePresentModalPress = useCallback(() => {
-  //   bottomSheetModalRef.current?.present();
-  // }, []);
 
   /* --------------------------------- return --------------------------------- */
   return (
@@ -30,9 +35,7 @@ export default function TabLayout() {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
-          position: 'absolute',
-          backgroundColor: 'trasnparent',
-          borderColor: 'transparent',
+          backgroundColor: colors.background,
         },
       }}
     >
@@ -40,7 +43,13 @@ export default function TabLayout() {
         name="(index)"
         options={{
           tabBarIcon: ({ focused }) => {
-            return <TabBarIcon name={focused ? 'home' : 'home-outline'} color={colors.text} />;
+            return (
+              <TabBarIcon
+                name={focused ? 'home' : 'home-outline'}
+                iosSymbol={focused ? 'house.fill' : 'house'}
+                color={colors.text}
+              />
+            );
           },
         }}
       />
@@ -56,7 +65,11 @@ export default function TabLayout() {
         options={{
           tabBarIcon: ({ focused }) => {
             return (
-              <TabBarIcon name={focused ? 'sparkles' : 'sparkles-outline'} color={colors.text} />
+              <TabBarIcon
+                name={focused ? 'sparkles' : 'sparkles-outline'}
+                iosSymbol={focused ? 'sparkles' : 'sparkles'}
+                color={colors.text}
+              />
             );
           },
         }}
@@ -65,7 +78,13 @@ export default function TabLayout() {
         name="(profile)"
         options={{
           tabBarIcon: ({ focused }) => {
-            return <TabBarIcon name={focused ? 'person' : 'person-outline'} color={colors.text} />;
+            return (
+              <TabBarIcon
+                name={focused ? 'person' : 'person-outline'}
+                iosSymbol={focused ? 'person.fill' : 'person'}
+                color={colors.text}
+              />
+            );
           },
         }}
       />
