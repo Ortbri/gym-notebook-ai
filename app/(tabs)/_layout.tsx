@@ -1,11 +1,9 @@
 import useHaptics from '@/hooks/useHaptics';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
-import { BlurView } from 'expo-blur';
 import { Router, router } from 'expo-router';
 import { Tabs } from 'expo-router';
 import type React from 'react';
-import { useColorScheme } from 'react-native';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -18,7 +16,6 @@ function TabBarIcon(props: {
 export default function TabLayout() {
   const { lightHaptic } = useHaptics();
   const { colors } = useTheme();
-  const colorScheme = useColorScheme();
 
   // const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -37,18 +34,6 @@ export default function TabLayout() {
           backgroundColor: 'trasnparent',
           borderColor: 'transparent',
         },
-
-        tabBarBackground: () => (
-          <BlurView
-            intensity={24}
-            tint="prominent"
-            style={{
-              flex: 1,
-              backgroundColor:
-                colorScheme === 'dark' ? 'rgba(0, 0, 0, 0.3)' : 'rgba(255, 255, 255, 0.5)',
-            }}
-          />
-        ),
       }}
     >
       <Tabs.Screen
