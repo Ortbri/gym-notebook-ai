@@ -11,7 +11,7 @@
     "lint": "biome check .",
     "format": "biome format . --write",
     "test": "jest --watchAll",
-    "restart:proj": "rm -rf node_modules && rm -rf .expo && rm -rf android && rm -rf ios"
+    "restart:proj": "rm -rf node_modules && rm -rf .expo && rm -rf android && rm -rf ios && rm -rf yarn.lock"
   },
   "jest": {
     "preset": "jest-expo"
@@ -19,18 +19,15 @@
   "dependencies": {
     "@bacons/apple-colors": "^0.0.7",
     "@expo/vector-icons": "^14.0.2",
-    "@gorhom/bottom-sheet": "^5.0.6",
-    "@react-native-async-storage/async-storage": "1.23.1",
-    "@react-native-menu/menu": "^1.1.7",
+    "@gorhom/bottom-sheet": "^5.1.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/elements": "^2.2.5",
     "@react-navigation/native": "^7.0.0",
-    "@supabase/supabase-js": "^2.47.10",
     "expo": "^52.0.23",
     "expo-blur": "~14.0.1",
-    "expo-camera": "~16.0.10",
     "expo-constants": "~17.0.3",
     "expo-dev-client": "~5.0.8",
+    "expo-device": "^7.0.2",
     "expo-font": "~13.0.2",
     "expo-haptics": "^14.0.0",
     "expo-image": "~2.0.3",
@@ -39,7 +36,6 @@
     "expo-linking": "~7.0.3",
     "expo-navigation-bar": "^4.0.6",
     "expo-router": "~4.0.15",
-    "expo-speech-recognition": "^1.1.0",
     "expo-splash-screen": "~0.29.18",
     "expo-status-bar": "~2.0.0",
     "expo-symbols": "~0.2.0",
@@ -51,8 +47,6 @@
     "react-dom": "18.3.1",
     "react-native": "0.76.5",
     "react-native-edge-to-edge": "^1.1.3",
-    "react-native-gesture-handler": "~2.20.2",
-    "react-native-ios-context-menu": "^2.5.3",
     "react-native-ios-utilities": "^4.5.1",
     "react-native-purchases": "^8.5.0",
     "react-native-reanimated": "~3.16.1",
@@ -60,9 +54,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "zeego": "^2.0.4",
-    "zod": "^3.23.8",
-    "zustand": "^5.0.1"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
