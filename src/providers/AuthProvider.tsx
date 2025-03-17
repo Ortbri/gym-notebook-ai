@@ -1,5 +1,4 @@
 // AuthContext.tsx - Handles Firebase authentication state and caching with MMKV
-import type { Session } from '@supabase/supabase-js';
 import { useRouter } from 'expo-router';
 import {
   type PropsWithChildren,
@@ -9,11 +8,8 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { supabase } from '../../lib/supabase';
 
-interface AuthProps {
-  session: Session | null;
-}
+type AuthProps = {};
 
 /* -------------------------------------------------------------------------- */
 /*                                   context                                    */
@@ -42,19 +38,19 @@ export function AuthProvider({ children }: PropsWithChildren) {
   /* ---------------------------------- state --------------------------------- */
   const [session, setSession] = useState<Session | null>(null);
   /* ----------------------------- auth listener ------------------------------ */
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     setSession(session);
+  //   });
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      if (!session) {
-        //** FIXME: in case this is incorrect */
-        router.navigate('/(auth)/login');
-      }
-    });
-  }, []);
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //     if (!session) {
+  //       //** FIXME: in case this is incorrect */
+  //       router.navigate('/(auth)/login');
+  //     }
+  //   });
+  // }, []);
   /* ---------------------------------- memo ---------------------------------- */
   // Memoize context value to prevent unnecessary rerenders
   const value = useMemo(
