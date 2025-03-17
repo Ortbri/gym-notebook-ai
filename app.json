@@ -4,7 +4,7 @@
     "slug": "faxtions",
     "version": "1.0.0",
     "orientation": "portrait",
-    "owner": "colony-app",
+    "owner": "colony-apps",
     "icon": "./src/assets/images/faxtionsApp.png",
     "scheme": "faxtions",
     "userInterfaceStyle": "automatic",
@@ -16,8 +16,18 @@
       "backgroundColor": "#000"
     },
     "ios": {
+      "appleTeamId": "BHZZN22RM5",
       "supportsTablet": true,
-      "bundleIdentifier": "com.ortbit02.faxtions"
+      "bundleIdentifier": "com.ortbit02.faxtions",
+      "icon": {
+        "dark": "./src/assets/images/faxtionsApp.png",
+        "light": "./src/assets/images/faxtionsApp.png"
+      },
+      "associatedDomains": [
+        "applinks:faxtions.expo.app",
+        "activitycontinuation:faxtions.expo.app",
+        "activitycontinuation:www.faxtions.expo.app"
+      ]
     },
     "android": {
       "adaptiveIcon": {
@@ -54,9 +64,6 @@
       "reactServerFunctions": true
     },
     "extra": {
-      "router": {
-        "origin": "http://localhost:8081"
-      },
       "eas": {
         "projectId": "d8640f3c-e8c7-4496-abf7-b0cc7f3002ea"
       }
