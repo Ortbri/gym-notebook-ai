@@ -12,7 +12,7 @@ function TabBarIcon(props: {
   iosSymbol?: SymbolViewProps['name'];
 }) {
   const iconStyle = Platform.select({
-    web: undefined,
+    web: { width: 22, height: 22 },
     default: { marginBottom: -24 },
   });
 
@@ -38,21 +38,39 @@ export default function TabLayout() {
           : undefined
       }
       screenOptions={{
-        tabBarShowLabel: Platform.OS === 'web',
+        tabBarShowLabel: Platform.OS !== 'web', // Hide labels on web
         headerShown: false,
+        // tabBarVariant: 'material',
         tabBarPosition: Platform.OS === 'web' ? 'left' : 'bottom',
         tabBarStyle: [
           {
             backgroundColor: colors.card,
+            ...(Platform.OS === 'web'
+              ? {
+                  width: 60, // Set a smaller width for the sidebar
+                  alignItems: 'center',
+                }
+              : {}),
           },
         ],
         tabBarItemStyle: Platform.select({
-          web: { padding: 0, borderRadius: 0, marginVertical: 4 },
+          web: {
+            padding: 0,
+            borderRadius: 0,
+            marginVertical: 2,
+            height: 40,
+            minHeight: 40,
+            width: '100%', // Make items fill the sidebar width
+          },
           ios: { padding: 0, borderRadius: 0, marginVertical: 0 },
           android: { padding: 0, borderRadius: 0, marginVertical: 0 },
         }),
         tabBarLabelStyle: Platform.select({
-          web: { fontSize: 20, fontWeight: '500' },
+          web: {
+            fontSize: 10,
+            fontWeight: '500',
+            display: 'none', // Hide labels on web to save space
+          },
           ios: { fontSize: 12, fontWeight: '500' },
           android: { fontSize: 12, fontWeight: '500' },
         }),
@@ -64,6 +82,9 @@ export default function TabLayout() {
         tabBarActiveBackgroundColor: Platform.select({
           web: colors.card,
           default: undefined,
+        }),
+        tabBarIconStyle: Platform.select({
+          web: { backdropFilter: 'blur(10px)' },
         }),
       }}
     >
