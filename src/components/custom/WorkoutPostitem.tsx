@@ -3,7 +3,7 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import formatDistanceToNow from '@/utils/formatDistanceToNow';
 import { Ionicons } from '@expo/vector-icons';
 // import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import type { BottomSheetModal } from '@gorhom/bottom-sheet';
+// import type { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
@@ -11,7 +11,7 @@ import { router, useRouter } from 'expo-router';
 import type React from 'react';
 import { useCallback, useRef } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
-import * as DropdownMenu from 'zeego/dropdown-menu';
+// import * as DropdownMenu from 'zeego/dropdown-menu';
 import { CommentsSheet } from '../sheets/CommentsSheet';
 
 interface WorkoutPostItemInterface {
@@ -116,7 +116,7 @@ const WorkoutPostItem = () => {
               />
             </View>
           </View>
-          <DropdownMenu.Root>
+          {/* <DropdownMenu.Root>
             <DropdownMenu.Trigger>
               <Pressable style={{ padding: 8, backgroundColor: colors.border, borderRadius: 100 }}>
                 <Ionicons name="ellipsis-horizontal-outline" size={18} color={colors.text} />
@@ -136,7 +136,7 @@ const WorkoutPostItem = () => {
                 <DropdownMenu.ItemIcon ios={{ name: 'flag' }} />
               </DropdownMenu.Item>
             </DropdownMenu.Content>
-          </DropdownMenu.Root>
+          </DropdownMenu.Root> */}
         </View>
 
         {/* Workout summary */}
@@ -212,7 +212,7 @@ const WorkoutPostItem = () => {
         </View>
       </Pressable>
 
-      <CommentsSheet ref={commentsSheetRef} postId={workoutData.id} />
+      {/* <CommentsSheet ref={commentsSheetRef} postId={workoutData.id} /> */}
     </>
   );
 };

@@ -9,8 +9,6 @@ import { Pressable } from 'react-native';
 export default function AuthLayout() {
   const { colors } = useTheme();
   const { lightHaptic } = useHaptics();
-  /* ---------------------------------- back ---------------------------------- */
-
   /* --------------------------------- return --------------------------------- */
   return (
     <Stack>

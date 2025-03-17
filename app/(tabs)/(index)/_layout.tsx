@@ -1,10 +1,6 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
-export const unstable_settings = {
-  initialRouteName: 'index',
-};
-
 export default function HomeLayout() {
   /* --------------------------------- return --------------------------------- */
   return (
@@ -13,7 +9,7 @@ export default function HomeLayout() {
         name="index"
         options={{
           title: 'Home',
-
+          headerLargeTitle: true,
           headerLargeStyle: {
             backgroundColor: 'transparent',
           },
