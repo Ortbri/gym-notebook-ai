@@ -7,6 +7,8 @@ const config = getDefaultConfig(__dirname, {
   isCSSEnabled: true,
 });
 
+// turned this on for better auth
+config.resolver.unstable_enablePackageExports = true;
 // add nice web support with optimizing compiler + CSS extraction
 const { withTamagui } = require('@tamagui/metro-plugin');
 module.exports = withTamagui(config, {
