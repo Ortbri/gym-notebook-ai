@@ -8,11 +8,12 @@
     "icon": "./src/assets/images/faxtionsApp.png",
     "scheme": "faxtions",
     "userInterfaceStyle": "automatic",
+    "backgroundColor": "#000",
     "newArchEnabled": true,
     "splash": {
       "image": "./src/assets/images/faxtionsLogo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1a1a1a"
+      "backgroundColor": "#000"
     },
     "ios": {
       "supportsTablet": true,
@@ -21,13 +22,13 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/faxtionsApp.png",
-        "backgroundColor": "#1a1a1a"
+        "backgroundColor": "#000"
       },
       "package": "com.ortbit02.faxtions"
     },
     "web": {
-      "output": "server",
       "bundler": "metro",
+      "output": "server",
       "favicon": "./src/assets/images/faxtionsLogo.png"
     },
     "plugins": [
@@ -49,8 +50,8 @@
       ["expo-font"]
     ],
     "experiments": {
-      "reactServerFunctions": true,
-      "typedRoutes": true
+      "typedRoutes": true,
+      "reactServerFunctions": true
     },
     "extra": {
       "router": {
