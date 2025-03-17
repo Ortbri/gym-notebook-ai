@@ -1,6 +1,5 @@
 import useHaptics from '@/hooks/useHaptics';
 import { useTheme } from '@react-navigation/native';
-import { BlurView } from 'expo-blur';
 
 import { Stack, router } from 'expo-router';
 import React from 'react';
@@ -26,7 +25,6 @@ export default function AuthLayout() {
                 height: 5,
                 backgroundColor: 'rgba(0,0,0,0.3)',
                 borderRadius: 2.5,
-                // marginTop: 8,
               }}
             />
           ),

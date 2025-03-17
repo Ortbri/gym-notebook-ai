@@ -1,12 +1,19 @@
+import '../tamagui-web.css';
 import { AIBaseContextProvider } from '@/providers/AIProvider';
 import { BaseContextProvider } from '@/providers/BaseProvider';
-import ThemeProvider from '@/providers/ThemeProvider';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider as NavigationThemeProvider,
+} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
+import { SplashScreen } from 'expo-router';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useColorScheme } from 'react-native';
+import { TamaguiProvider } from 'tamagui';
+import { tamaguiConfig } from '../tamagui.config';
 // error boundary
 export { ErrorBoundary } from 'expo-router';
 
@@ -18,8 +25,13 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
+  const colorScheme = useColorScheme();
+
   /* ---------------------------------- fonts --------------------------------- */
-  const [loaded, error] = useFonts({});
+  const [loaded, error] = useFonts({
+    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
+    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
+  });
 
   useEffect(() => {
     if (loaded || error) {
@@ -30,10 +42,11 @@ export default function RootLayout() {
   if (!loaded && !error) {
     return null;
   }
+
   /* --------------------------------- return --------------------------------- */
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider>
+    <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || 'light'}>
+      <NavigationThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <BaseContextProvider>
           <AIBaseContextProvider>
             <Stack>
@@ -43,11 +56,11 @@ export default function RootLayout() {
                 options={{ headerShown: false, presentation: 'fullScreenModal' }}
               />
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
             </Stack>
           </AIBaseContextProvider>
         </BaseContextProvider>
-      </ThemeProvider>
-      {/* portal provider */}
-    </GestureHandlerRootView>
+      </NavigationThemeProvider>
+    </TamaguiProvider>
   );
 }

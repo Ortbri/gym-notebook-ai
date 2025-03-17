@@ -3,165 +3,111 @@ import { useTheme } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Button, ScrollView, Text, View, XStack, YStack } from 'tamagui';
 
 export default function Profile() {
   const router = useRouter();
   const { colors } = useTheme();
-  const styles = createStyles(colors);
+
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <YStack ai="center" py="$5">
         <Image
           source={{ uri: 'https://picsum.photos/200/300' }}
           contentFit="cover"
-          style={styles.profileImage}
+          style={{
+            height: 120,
+            width: 120,
+            // borderRadius: 60,
+            // marginBottom: 12,
+          }}
         />
-        <Text style={[styles.name, { color: colors.text }]}>John Doe</Text>
-        <Text style={[styles.handle, { color: colors.text }]}>@johndoe</Text>
-      </View>
+        <Text fontSize="$6" fontWeight="$6" mb="$1">
+          John Doe
+        </Text>
+        <Text fontSize="$4" mb="$4" opacity={0.8}>
+          @johndoe
+        </Text>
+      </YStack>
 
-      <View style={styles.statsContainer}>
-        <View style={styles.statItem}>
-          <Text style={[styles.statNumber, { color: colors.text }]}>124</Text>
-          <Text style={[styles.statLabel, { color: colors.text }]}>Workouts</Text>
-        </View>
-        <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
-        <View style={styles.statItem}>
-          <Text style={[styles.statNumber, { color: colors.text }]}>48</Text>
-          <Text style={[styles.statLabel, { color: colors.text }]}>AI Plans</Text>
-        </View>
-        <View style={[styles.statDivider, { backgroundColor: colors.border }]} />
-        <View style={styles.statItem}>
-          <Text style={[styles.statNumber, { color: colors.text }]}>892</Text>
-          <Text style={[styles.statLabel, { color: colors.text }]}>Hours</Text>
-        </View>
-      </View>
+      <XStack
+        jc="center"
+        py="$4"
+        borderTopWidth={1}
+        borderBottomWidth={1}
+        borderColor="$borderColor"
+      >
+        <YStack f={1} ai="center">
+          <Text fontSize="$5" fontWeight="$6">
+            124
+          </Text>
+          <Text fontSize="$3" mt="$1">
+            Workouts
+          </Text>
+        </YStack>
+        <View width={1} bg="$borderColor" />
+        <YStack f={1} ai="center">
+          <Text fontSize="$5" fontWeight="$6">
+            48
+          </Text>
+          <Text fontSize="$3" mt="$1">
+            AI Plans
+          </Text>
+        </YStack>
+        <View width={1} bg="$borderColor" />
+        <YStack f={1} ai="center">
+          <Text fontSize="$5" fontWeight="$6">
+            892
+          </Text>
+          <Text fontSize="$3" mt="$1">
+            Hours
+          </Text>
+        </YStack>
+      </XStack>
 
-      <View style={styles.section}>
-        <Text style={[styles.bio, { color: colors.text }]}>
+      <YStack p="$4">
+        <Text fontSize="$4" textAlign="center" lineHeight="$5">
           Fitness Enthusiast | 5x/week | Strength & HIIT Training
         </Text>
-      </View>
+      </YStack>
 
-      <View style={styles.achievementsContainer}>
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Recent Achievements</Text>
-        <View style={styles.achievements}>
-          <View style={[styles.achievement, { backgroundColor: colors.card }]}>
-            <Text style={[styles.achievementTitle, { color: colors.text }]}>30 Day Streak</Text>
-            <Text style={[styles.achievementDesc, { color: colors.text }]}>
+      <YStack p="$4">
+        <Text fontSize="$5" fontWeight="$6" mb="$3">
+          Recent Achievements
+        </Text>
+        <YStack gap="$3">
+          <YStack p="$4" borderRadius="$3" bg="$backgroundHover">
+            <Text fontSize="$4" fontWeight="$6" mb="$1">
+              30 Day Streak
+            </Text>
+            <Text fontSize="$3" opacity={0.8}>
               Completed workouts consistently
             </Text>
-          </View>
-          <View style={[styles.achievement, { backgroundColor: colors.card }]}>
-            <Text style={[styles.achievementTitle, { color: colors.text }]}>Personal Best</Text>
-            <Text style={[styles.achievementDesc, { color: colors.text }]}>
+          </YStack>
+          <YStack p="$4" borderRadius="$3" bg="$backgroundHover">
+            <Text fontSize="$4" fontWeight="$6" mb="$1">
+              Personal Best
+            </Text>
+            <Text fontSize="$3" opacity={0.8}>
               Bench Press: 225lbs
             </Text>
-          </View>
-        </View>
-      </View>
+          </YStack>
+        </YStack>
+      </YStack>
 
-      <View style={styles.section}>
-        <Pressable
+      <YStack p="$4">
+        <Button
           onPress={() => router.navigate('/(tabs)/(profile)/settings')}
-          style={[styles.settingsButton, { backgroundColor: colors.primary }]}
+          bg="$blue9"
+          color="white"
+          // borderradius="$3"
+          py="$3"
+          fontWeight="$6"
+          fontSize="$4"
         >
-          <Text style={styles.settingsButtonText}>Edit Profile</Text>
-        </Pressable>
-      </View>
+          Edit Profile
+        </Button>
+      </YStack>
     </ScrollView>
   );
 }
-
-const createStyles = (colors) =>
-  StyleSheet.create({
-    container: {
-      // flex: 1,
-      // backgroundColor: colors.background,
-    },
-    header: {
-      alignItems: 'center',
-      paddingVertical: 20,
-    },
-    profileImage: {
-      height: 120,
-      width: 120,
-      borderRadius: 60,
-      marginBottom: 12,
-    },
-    name: {
-      fontSize: 24,
-      fontWeight: '600',
-      marginBottom: 4,
-    },
-    handle: {
-      fontSize: 16,
-      marginBottom: 16,
-    },
-    statsContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      paddingVertical: 16,
-      borderTopWidth: StyleSheet.hairlineWidth,
-      borderBottomWidth: StyleSheet.hairlineWidth,
-      borderColor: colors.border,
-    },
-    statItem: {
-      alignItems: 'center',
-      flex: 1,
-    },
-    statNumber: {
-      fontSize: 18,
-      fontWeight: '600',
-    },
-    statLabel: {
-      fontSize: 14,
-      marginTop: 4,
-    },
-    statDivider: {
-      width: StyleSheet.hairlineWidth,
-    },
-    section: {
-      padding: 16,
-    },
-    bio: {
-      fontSize: 16,
-      textAlign: 'center',
-      lineHeight: 22,
-    },
-    achievementsContainer: {
-      padding: 16,
-    },
-    sectionTitle: {
-      fontSize: 18,
-      fontWeight: '600',
-      marginBottom: 12,
-    },
-    achievements: {
-      gap: 12,
-    },
-    achievement: {
-      padding: 16,
-      borderRadius: 8,
-    },
-    achievementTitle: {
-      fontSize: 16,
-      fontWeight: '600',
-      marginBottom: 4,
-    },
-    achievementDesc: {
-      fontSize: 14,
-      opacity: 0.8,
-    },
-    settingsButton: {
-      borderRadius: 8,
-      paddingVertical: 12,
-      alignItems: 'center',
-    },
-    settingsButtonText: {
-      color: '#fff',
-      fontSize: 16,
-      fontWeight: '600',
-    },
-  });
