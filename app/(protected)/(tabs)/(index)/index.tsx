@@ -2,11 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
-import { Button, ScrollView, Text, XStack } from 'tamagui';
+import { Button, ScrollView, Text, View, XStack } from 'tamagui';
 
 export default function Home() {
   return (
     <ScrollView
+      // theme={'accent'}
+      // theme={'accent'}
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={{
         bg: '$color1',
@@ -19,8 +21,10 @@ export default function Home() {
         grow: 1,
       }}
     >
+      <View height={100} width={100} bg={'$accent8'} />
       <XStack gap={10}>
         <Button
+          // theme={'$accent4'}
           flex={1}
           animation={'100ms'}
           rounded={24}
