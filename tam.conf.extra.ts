@@ -104,7 +104,6 @@ const generatedThemes = createThemes({
     // for values we don't want being inherited onto sub-themes
     extra: {
       light: {
-        ...Colors.blue,
         ...Colors.green,
         ...Colors.red,
         ...Colors.yellow,
@@ -115,7 +114,6 @@ const generatedThemes = createThemes({
         shadowColor: lightShadows.shadow1,
       },
       dark: {
-        ...Colors.blueDark,
         ...Colors.greenDark,
         ...Colors.redDark,
         ...Colors.yellowDark,
@@ -176,10 +174,10 @@ const generatedThemes = createThemes({
       },
     },
 
-    blue: {
+    purple: {
       palette: {
-        dark: Object.values(Colors.blueDark),
-        light: Object.values(Colors.blue),
+        dark: Object.values(Colors.purpleDark),
+        light: Object.values(Colors.purple),
       },
     },
     red: {

@@ -11,7 +11,7 @@ export default function Home() {
       // theme={'accent'}
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={{
-        bg: '$color1',
+        // bg: '$color1',
         gap: 4,
         px: 14,
         pt: 14,
@@ -21,7 +21,16 @@ export default function Home() {
         grow: 1,
       }}
     >
-      <View height={100} width={100} bg={'$accent8'} />
+      <View
+        height={100}
+        width={100}
+        bg={'$accent4'}
+        enterStyle={{
+          x: -100,
+        }}
+        animation={'bouncy'}
+        animationDelay={'2000'}
+      />
       <XStack gap={10}>
         <Button
           // theme={'$accent4'}

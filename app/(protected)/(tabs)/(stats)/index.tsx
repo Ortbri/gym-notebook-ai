@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Link, router } from 'expo-router';
+
 import React from 'react';
 import { Platform } from 'react-native';
 import { Button, ScrollView, Text, XStack } from 'tamagui';
@@ -9,7 +9,6 @@ export default function Stats() {
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={{
-        bg: '$color1',
         gap: 4,
         px: 14,
         pt: 14,

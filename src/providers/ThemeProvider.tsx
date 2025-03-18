@@ -1,5 +1,7 @@
 import { DarkTheme, DefaultTheme, ThemeProvider as RNTheme } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
+import { TamaguiProvider } from 'tamagui';
+import { tamaguiConfig } from '../../tamagui.config';
 
 const customDefaultTheme = {
   ...DefaultTheme,
@@ -11,6 +13,7 @@ const customDefaultTheme = {
     text: 'rgb(28, 28, 30)',
     border: 'rgb(216, 216, 216)',
     notification: 'rgb(255, 59, 48)',
+    // custom v
     secondary: '#5856D6',
     success: '#34C759',
     warning: '#FF9500',
@@ -26,12 +29,14 @@ const customDefaultTheme = {
 const customDarkTheme = {
   ...DarkTheme,
   colors: {
+    // ...DarkTheme.colors,
     primary: 'rgb(10, 132, 255)',
     background: 'rgb(1, 1, 1)',
     card: 'rgb(18, 18, 18)',
     text: 'rgb(229, 229, 231)',
     border: 'rgb(39, 39, 41)',
     notification: 'rgb(255, 69, 58)',
+    // custom v
     secondary: '#5E5CE6',
     success: '#30D158',
     warning: '#FF9F0A',
@@ -44,11 +49,16 @@ const customDarkTheme = {
   },
 };
 
-export default function ThemeProvider(props: { children: React.ReactNode }) {
+export default function ThemeProvider(props: {
+  children: React.ReactNode;
+}) {
   const colorScheme = useColorScheme();
+
   return (
-    <RNTheme value={colorScheme === 'dark' ? customDarkTheme : customDefaultTheme}>
-      {props.children}
-    </RNTheme>
+    <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || 'light'}>
+      <RNTheme value={colorScheme === 'dark' ? customDarkTheme : customDefaultTheme}>
+        {props.children}
+      </RNTheme>
+    </TamaguiProvider>
   );
 }
