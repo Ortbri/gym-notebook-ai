@@ -2,7 +2,10 @@ import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
-
+/**
+ * technically not working --- our main route is only working becuase its the first index.tsx on tabs route
+ * if we wrong (tabs)/(ai)/index.tsx this would show first
+ */
 export const unstable_settings = {
   // Ensure any route can link back to `/`
   initialRouteName: '(tabs)/(index)',

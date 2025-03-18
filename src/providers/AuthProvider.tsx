@@ -1,14 +1,8 @@
 // AuthContext.tsx - Handles Firebase authentication state and caching with MMKV
 import { useRouter } from 'expo-router';
-import {
-  type PropsWithChildren,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { type PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 
+// biome-ignore lint/complexity/noBannedTypes: <explanation>
 type AuthProps = {};
 
 /* -------------------------------------------------------------------------- */
@@ -34,9 +28,10 @@ export function useAuth() {
 /* -------------------------------------------------------------------------- */
 export function AuthProvider({ children }: PropsWithChildren) {
   /* ---------------------------------- hooks --------------------------------- */
-  const router = useRouter();
+  // const router = useRouter();
   /* ---------------------------------- state --------------------------------- */
-  const [session, setSession] = useState<Session | null>(null);
+  const [session, setSession] = useState<null>(null);
+  setSession(null);
   /* ----------------------------- auth listener ------------------------------ */
   // useEffect(() => {
   //   supabase.auth.getSession().then(({ data: { session } }) => {

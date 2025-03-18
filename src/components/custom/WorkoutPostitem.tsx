@@ -1,5 +1,5 @@
-import { ThemedText } from '@/components/ui/ThemedText';
-import { useThemeColor } from '@/hooks/useThemeColor';
+import { ThemedText } from '@/components/ui/rnUi/ThemedText';
+import { useThemeColor } from '@/hooks/rnTheme/useThemeColor';
 import formatDistanceToNow from '@/utils/formatDistanceToNow';
 import { Ionicons } from '@expo/vector-icons';
 // import { BottomSheetModal } from '@gorhom/bottom-sheet';
