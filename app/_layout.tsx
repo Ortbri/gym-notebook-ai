@@ -7,7 +7,7 @@ import {
   ThemeProvider as NavigationThemeProvider,
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Slot, Stack } from 'expo-router';
 import { SplashScreen } from 'expo-router';
 import * as React from 'react';
 import { useEffect } from 'react';
@@ -19,10 +19,6 @@ export { ErrorBoundary } from 'expo-router';
 
 // Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();
-
-export const unstable_settings = {
-  initialRouteName: '(tabs)',
-};
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -49,10 +45,7 @@ export default function RootLayout() {
       <NavigationThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <BaseContextProvider>
           <AIBaseContextProvider>
-            <Stack>
-              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            </Stack>
+            <Slot />
           </AIBaseContextProvider>
         </BaseContextProvider>
       </NavigationThemeProvider>

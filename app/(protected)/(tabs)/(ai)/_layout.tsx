@@ -2,18 +2,14 @@ import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import React from 'react';
 
-export const unstable_settings = {
-  initialRouteName: 'index',
-};
-
-export default function CommunityLayout() {
+export default function AIStack() {
   const { colors } = useTheme();
   return (
     <Stack>
       <Stack.Screen
         name="index"
         options={{
-          title: 'Community',
+          title: 'Gym ai',
           headerLargeTitle: true,
           headerLargeTitleShadowVisible: false,
           headerLargeStyle: {
