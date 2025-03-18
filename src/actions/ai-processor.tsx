@@ -15,6 +15,7 @@ async function askLLMAsync(message: string) {
     messages: [{ role: 'user', content: message }],
     stream: true,
     max_tokens: 400,
+    // too
   });
 
   // Convert OpenAI stream to Web API ReadableStream

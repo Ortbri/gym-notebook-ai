@@ -19,7 +19,6 @@ export default function AI() {
         grow: 1,
       }}
     >
-      <Text>hello</Text>
       <XStack gap={10}>
         <Button
           flex={1}
@@ -30,7 +29,7 @@ export default function AI() {
             scale: 0.98,
           }}
         >
-          Hello there
+          MESSAGE ROOMS
         </Button>
 
         <Button

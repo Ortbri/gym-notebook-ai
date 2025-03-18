@@ -8,7 +8,7 @@ export default function AIStack() {
   return (
     <Stack>
       <Stack.Screen
-        name="index"
+        name="messageRooms"
         options={{
           title: 'Gym ai',
           headerLargeTitle: true,
