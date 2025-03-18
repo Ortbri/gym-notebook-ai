@@ -21,7 +21,7 @@ function TabBarIcon(props: {
       <SymbolView name={props.iosSymbol} size={30} tintColor={props.color} style={iconStyle} />
     );
   }
-  return <Ionicons size={22} style={iconStyle} {...props} />;
+  return <Ionicons size={20} style={iconStyle} {...props} />;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -51,8 +51,16 @@ export default function TabLayout() {
             backgroundColor: colors.background,
             ...(Platform.OS === 'web'
               ? {
-                  width: 60, // Set a smaller width for the sidebar
+                  // gap: 24,
+                  // flex: 1,
+                  width: 48, // Smaller width for the sidebar
+                  minWidth: 60, // Ensure minimum width
+                  // maxWidth: 55, // Ensure maximum width
                   alignItems: 'center',
+                  // position: 'fixed', // Ensure it stays fixed on web
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
                 }
               : {}),
           },
@@ -60,15 +68,14 @@ export default function TabLayout() {
         tabBarItemStyle: Platform.select({
           web: {
             padding: 0,
-            borderRadius: 0,
-            marginVertical: 2,
-            height: 40,
+            borderRadius: 24,
             minHeight: 40,
             width: '100%', // Make items fill the sidebar width
           },
           ios: { padding: 0, borderRadius: 0, marginVertical: 0 },
           android: { padding: 0, borderRadius: 0, marginVertical: 0 },
         }),
+
         tabBarLabelStyle: Platform.select({
           web: {
             fontSize: 10,
@@ -78,11 +85,8 @@ export default function TabLayout() {
           ios: { fontSize: 12, fontWeight: '500' },
           android: { fontSize: 12, fontWeight: '500' },
         }),
-        tabBarActiveTintColor: Platform.select({
-          web: colors.text,
-          default: colorScheme === 'dark' ? '#800080' : '#DA70D6', // Using purple colors
-        }),
-        tabBarInactiveTintColor: colorScheme === 'dark' ? '#808080' : '#D3D3D3',
+        tabBarActiveTintColor: colorScheme === 'dark' ? '#9B59B6' : '#A75D9B', // More vibrant purple colors
+        tabBarInactiveTintColor: colorScheme === 'dark' ? '#4B4B4B' : '#C5B0D8', // Darker gray for inactive state, almost not seen
         tabBarActiveBackgroundColor: Platform.select({
           web: colors.card,
           ios: undefined, // Added colors for light and dark themes
@@ -90,6 +94,7 @@ export default function TabLayout() {
         tabBarIconStyle: Platform.select({
           web: { backdropFilter: 'blur(10px)' },
         }),
+
         animation: 'fade',
         transitionSpec: {
           animation: 'timing',

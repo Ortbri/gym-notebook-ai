@@ -1,7 +1,10 @@
+import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import React from 'react';
 
 export default function HomeLayout() {
+  const { colors } = useTheme();
+
   /* --------------------------------- return --------------------------------- */
   return (
     <Stack screenOptions={{}}>
@@ -12,6 +15,9 @@ export default function HomeLayout() {
           headerLargeTitle: true,
           headerLargeStyle: {
             backgroundColor: 'transparent',
+          },
+          headerStyle: {
+            backgroundColor: colors.background,
           },
         }}
       />

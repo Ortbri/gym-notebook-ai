@@ -15,6 +15,9 @@ export default function StatsLayout() {
           headerLargeStyle: {
             backgroundColor: colors.background,
           },
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
         }}
       />
     </Stack>
