@@ -1,6 +1,7 @@
 import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import React from 'react';
+import { Platform } from 'react-native';
 
 export default function AIStack() {
   const { colors } = useTheme();
@@ -18,6 +19,7 @@ export default function AIStack() {
           headerStyle: {
             backgroundColor: colors.background,
           },
+          headerShadowVisible: Platform.OS !== 'web',
         }}
       />
     </Stack>

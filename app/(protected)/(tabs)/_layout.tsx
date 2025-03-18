@@ -51,27 +51,20 @@ export default function TabLayout() {
             backgroundColor: colors.background,
             ...(Platform.OS === 'web'
               ? {
-                  // gap: 24,
-                  // flex: 1,
-                  width: 48, // Smaller width for the sidebar
-                  minWidth: 60, // Ensure minimum width
-                  // maxWidth: 55, // Ensure maximum width
+                  width: 48,
+                  minWidth: 60,
                   alignItems: 'center',
-                  // position: 'fixed', // Ensure it stays fixed on web
                   left: 0,
                   top: 0,
                   bottom: 0,
+                  borderColor: 'transparent',
                 }
               : {}),
           },
         ],
+
         tabBarItemStyle: Platform.select({
-          web: {
-            padding: 0,
-            borderRadius: 24,
-            minHeight: 40,
-            width: '100%', // Make items fill the sidebar width
-          },
+          web: {},
           ios: { padding: 0, borderRadius: 0, marginVertical: 0 },
           android: { padding: 0, borderRadius: 0, marginVertical: 0 },
         }),
@@ -88,13 +81,12 @@ export default function TabLayout() {
         tabBarActiveTintColor: colorScheme === 'dark' ? '#9B59B6' : '#A75D9B', // More vibrant purple colors
         tabBarInactiveTintColor: colorScheme === 'dark' ? '#4B4B4B' : '#C5B0D8', // Darker gray for inactive state, almost not seen
         tabBarActiveBackgroundColor: Platform.select({
-          web: colors.card,
+          web: colors.background,
           ios: undefined, // Added colors for light and dark themes
         }),
         tabBarIconStyle: Platform.select({
-          web: { backdropFilter: 'blur(10px)' },
+          web: {},
         }),
-
         animation: 'fade',
         transitionSpec: {
           animation: 'timing',
@@ -134,6 +126,7 @@ export default function TabLayout() {
         name="(index)"
         options={{
           title: 'Home',
+
           tabBarIcon: ({ focused, color }) => (
             <TabBarIcon
               name={focused ? 'flame' : 'flame-outline'}
