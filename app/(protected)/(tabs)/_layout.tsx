@@ -1,6 +1,7 @@
 import useHaptics from '@/hooks/useHaptics';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useTheme } from '@react-navigation/native';
+
 import { Tabs, router } from 'expo-router';
 import { SymbolView, type SymbolViewProps } from 'expo-symbols';
 import { Platform, useColorScheme } from 'react-native';
@@ -31,6 +32,7 @@ function TabBarIcon(props: {
 export default function TabLayout() {
   const { lightHaptic, warningHaptic } = useHaptics();
   const { colors } = useTheme();
+
   const colorScheme = useColorScheme();
   return (
     <Tabs
@@ -58,6 +60,7 @@ export default function TabLayout() {
                   top: 0,
                   bottom: 0,
                   borderColor: 'transparent',
+                  // borderWidth: 0,
                 }
               : {}),
           },
@@ -78,10 +81,10 @@ export default function TabLayout() {
           ios: { fontSize: 12, fontWeight: '500' },
           android: { fontSize: 12, fontWeight: '500' },
         }),
-        tabBarActiveTintColor: colorScheme === 'dark' ? '#9B59B6' : '#A75D9B', // More vibrant purple colors
-        tabBarInactiveTintColor: colorScheme === 'dark' ? '#4B4B4B' : '#C5B0D8', // Darker gray for inactive state, almost not seen
+        tabBarInactiveTintColor: colorScheme === 'dark' ? '#2A2A2A' : '#D0D0D0', // Adjusted colors for better contrast
+        tabBarActiveTintColor: colorScheme === 'dark' ? '#f2f2f2' : '#050505', // Darker gray for inactive state, almost not seen
         tabBarActiveBackgroundColor: Platform.select({
-          web: colors.background,
+          web: colors.border,
           ios: undefined, // Added colors for light and dark themes
         }),
         tabBarIconStyle: Platform.select({

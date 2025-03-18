@@ -7,8 +7,11 @@ import { Button, ScrollView, Text, XStack } from 'tamagui';
 export default function Stats() {
   return (
     <ScrollView
+      // theme={'accent'}
+      // theme={'accent'}
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={{
+        // bg: '$color1',
         gap: 4,
         px: 14,
         pt: 14,
