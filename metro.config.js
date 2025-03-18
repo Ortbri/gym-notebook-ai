@@ -7,6 +7,12 @@ const config = getDefaultConfig(__dirname, {
   isCSSEnabled: true,
 });
 
+// metro.config.js
+// ...
+config.resolver.assetExts.push('pte');
+config.resolver.assetExts.push('bin');
+// ...
+
 // turned this on for better auth
 config.resolver.unstable_enablePackageExports = true;
 // add nice web support with optimizing compiler + CSS extraction
