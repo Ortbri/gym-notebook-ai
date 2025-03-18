@@ -206,8 +206,6 @@ export default function Chat() {
           }
         }
       />
-      {/* <View style={{ flex: 1 }}> */}
-      {/* just a small ui feature here */}
 
       <Animated.FlatList
         // contentInset={{
@@ -224,7 +222,8 @@ export default function Chat() {
         contentContainerStyle={{
           gap: 24,
           // TOP
-          paddingBottom: headerHeight + 10,
+          // paddingBottom: headerHeight + 10,
+          paddingBottom: 14,
           // BOTTOM
           paddingTop: insets.bottom + 46 + 8 + 10,
         }}
@@ -243,12 +242,12 @@ export default function Chat() {
         }
       />
 
-      <ChatInput
+      {/* <ChatInput
         value={prompt}
         setValue={setPrompt}
         // keyboardHeight={keyboardHeight}
         onSubmit={handleSubmit}
-      />
+      /> */}
     </>
   );
 }

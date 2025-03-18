@@ -116,7 +116,7 @@ const createStyles = (colors: any) =>
       // marginBottom: 40,
     },
     inputContainer: {
-      backgroundColor: 'red',
+      // backgroundColor: 'red',
       flex: 1,
       // minHeight: 46,
     },
