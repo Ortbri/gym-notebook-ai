@@ -8,7 +8,7 @@ import { Platform } from 'react-native';
  */
 export const unstable_settings = {
   // Ensure any route can link back to `/`
-  initialRouteName: '(tabs)/(index)',
+  initialRouteName: '(tabs)',
 };
 
 export default function ProfileLayout() {
