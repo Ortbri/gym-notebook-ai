@@ -40,8 +40,9 @@ export default function Home() {
           pressStyle={{
             scale: 0.98,
           }}
+          onPress={() => router.navigate('/test')}
         >
-          HOME
+          TEST
         </Button>
 
         <Button

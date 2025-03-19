@@ -12,9 +12,13 @@ import { SplashScreen } from 'expo-router';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
+/* --------------------------------- tamagui -------------------------------- */
 import { TamaguiProvider } from 'tamagui';
 import { tamaguiConfig } from '../tamagui.config';
-// error boundary
+/* -------------------------------- tinybase -------------------------------- */
+import { Provider as TinyBaseProvder } from 'tinybase/ui-react';
+
+/* ----------------------------- error boundary ----------------------------- */
 export { ErrorBoundary } from 'expo-router';
 
 // Prevent the splash screen from auto-hiding before getting the color scheme.
@@ -41,17 +45,19 @@ export default function RootLayout() {
 
   /* --------------------------------- return --------------------------------- */
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || 'light'}>
-      <NavigationThemeProvider
-        value={colorScheme === 'dark' ? customDarkTheme : customDefaultTheme}
-      >
-        <BaseContextProvider>
-          <AIBaseContextProvider>
-            <Slot />
-          </AIBaseContextProvider>
-        </BaseContextProvider>
-      </NavigationThemeProvider>
-    </TamaguiProvider>
+    <TinyBaseProvder>
+      <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || 'light'}>
+        <NavigationThemeProvider
+          value={colorScheme === 'dark' ? customDarkTheme : customDefaultTheme}
+        >
+          <BaseContextProvider>
+            <AIBaseContextProvider>
+              <Slot />
+            </AIBaseContextProvider>
+          </BaseContextProvider>
+        </NavigationThemeProvider>
+      </TamaguiProvider>
+    </TinyBaseProvder>
   );
 }
 

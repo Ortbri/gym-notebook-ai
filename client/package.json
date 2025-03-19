@@ -22,7 +22,6 @@
   "dependencies": {
     "@bacons/apple-colors": "^0.0.7",
     "@expo/vector-icons": "^14.0.2",
-    "@gorhom/bottom-sheet": "^5.1.2",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/elements": "^2.2.5",
     "@react-navigation/native": "^7.0.0",
@@ -43,6 +42,7 @@
     "expo-navigation-bar": "^4.0.6",
     "expo-router": "~4.0.19",
     "expo-splash-screen": "~0.29.18",
+    "expo-sqlite": "^15.1.2",
     "expo-status-bar": "~2.0.0",
     "expo-symbols": "~0.2.0",
     "expo-system-ui": "~4.0.6",
@@ -63,6 +63,7 @@
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
     "tamagui": "^1.125.26",
+    "tinybase": "^5.4.9",
     "zod": "^3.23.8"
   },
   "devDependencies": {
