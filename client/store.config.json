@@ -1,4 +1,16 @@
 {
-  "configVersion": 0,
-  "apple": {}
+  "configVersion": 1,
+  "apple": {
+    "info": {
+      "en-US": {
+        "title": "Gym Notebook AI",
+        "subtitle": "Gym Notebook with AI",
+        "description": "The ultimate app for tracking your workouts and progress.",
+        "keywords": ["fitness", "workout", "tracker", "app"],
+        "marketingUrl": "https://gymnotebook.app/promo",
+        "supportUrl": "https://gymnotebook.app/support",
+        "privacyPolicyUrl": "https://gymnotebook.app/privacy"
+      }
+    }
+  }
 }

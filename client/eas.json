@@ -8,7 +8,8 @@
       "node": "20.11.0",
       "developmentClient": true,
       "distribution": "internal",
-      "channel": "development"
+      "channel": "development",
+      "environment": "development"
     },
     "development-simulator": {
       "extends": "development",
@@ -22,7 +23,22 @@
     },
     "production": {
       "channel": "production",
+      "environment": "production",
       "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "metadataPath": "./store.config.json",
+        "appleId": "brian.ort02@icloud.com",
+        "ascAppId": "BHZZN22RM5",
+        "appleTeamId": "6504421989"
+      },
+      "android": {
+        "track": "production",
+        "releaseStatus": "completed"
+      }
     }
   }
 }

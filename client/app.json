@@ -3,6 +3,7 @@
     "name": "faxtions",
     "slug": "faxtions",
     "version": "1.0.0",
+    "description": "Gym Notebook with AI",
     "orientation": "portrait",
     "owner": "colony-apps",
     "icon": "./assets/images/faxtionsApp.png",
@@ -32,6 +33,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/faxtionsApp.png",
+        "monochromeImage": "./assets/images/faxtionsApp.png",
         "backgroundColor": "#000"
       },
       "package": "com.ortbit02.faxtions"
@@ -57,7 +59,9 @@
           "backgroundColor": "#1a1a1a"
         }
       ],
-      ["expo-font"]
+      [
+        "expo-font"
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
