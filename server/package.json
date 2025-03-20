@@ -12,5 +12,8 @@
 		"@cloudflare/workers-types": "^4.20250319.0",
 		"typescript": "^5.5.2",
 		"wrangler": "^4.2.0"
+	},
+	"dependencies": {
+		"tinybase": "^5.4.9"
 	}
 }

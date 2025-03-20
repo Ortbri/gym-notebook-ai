@@ -1,101 +1,121 @@
-import * as SQLite from 'expo-sqlite';
-import React from 'react';
-import { FlatList } from 'react-native';
-import { Button, H1, Text, View, XStack } from 'tamagui';
-import { createMergeableStore } from 'tinybase/mergeable-store';
+import React from "react";
+import { FlatList, Platform } from "react-native";
+import { Button, H1, Text, View, XStack } from "tamagui";
+import { createMergeableStore } from "tinybase/mergeable-store";
 import {
-  useCreateMergeableStore,
-  useCreatePersister,
-  useProvideStore,
-  useRowIds,
-  useSortedRowIds,
-  useStore,
-} from 'tinybase/ui-react';
-import { createExpoSqlitePersister } from 'tinybase/persisters/persister-expo-sqlite';
+	useCreateMergeableStore,
+	useCreatePersister,
+	useCreateSynchronizer,
+	useProvideStore,
+	useRowIds,
+	useSortedRowIds,
+	useStore,
+} from "tinybase/ui-react";
+import { createIndexedDbPersister } from "tinybase/persisters/persister-indexed-db";
+import { createWsSynchronizer } from "tinybase/synchronizers/synchronizer-ws-client";
 /* ---------------------------- tiny base testing --------------------------- */
-const TABLE_NAME = 'tasks';
-const TEXT_CELL = 'text';
-const DONE_CELL = 'done';
+const TABLE_NAME = "tasks";
+const TEXT_CELL = "text";
+const DONE_CELL = "done";
 
 function AddTask() {
-  const store = useStore(TABLE_NAME);
-  function handleTask() {
-    // console.log('trying 1');
-    store?.addRow(TABLE_NAME, {
-      [TEXT_CELL]: getRandomTask(),
-      [DONE_CELL]: false,
-    });
-  }
-  return <Button onPress={handleTask}>STORE</Button>;
+	const store = useStore(TABLE_NAME);
+	function handleTask() {
+		// console.log('trying 1');
+		store?.addRow(TABLE_NAME, {
+			[TEXT_CELL]: getRandomTask(),
+			[DONE_CELL]: false,
+		});
+	}
+	return <Button onPress={handleTask}>STORE</Button>;
 }
 
 function TaskList() {
-  const store = useStore(TABLE_NAME);
-  // console.log(useSortedRowIds(TABLE_NAME, DONE_CELL));
-  // console.log(store?.getRowIds(TABLE_NAME), store);
-  const sortedRowIds = useRowIds(TABLE_NAME, store);
-  return (
-    <FlatList
-      contentContainerStyle={{
-        alignItems: 'center',
-        paddingBottom: 100,
-        gap: 8,
-      }}
-      data={sortedRowIds}
-      renderItem={({ item: id }) => {
-        const task = store?.getRow(TABLE_NAME, id);
-        return (
-          <XStack gap={'$3'} onPress={() => store?.delRow(TABLE_NAME, id)}>
-            <Text>{id}</Text>
-            <Text>{task?.[TEXT_CELL]}</Text>
-            <Text>{task?.[DONE_CELL]}</Text>
-          </XStack>
-        );
-      }}
-    />
-  );
+	const store = useStore(TABLE_NAME);
+	// console.log(useSortedRowIds(TABLE_NAME, DONE_CELL));
+	// console.log(store?.getRowIds(TABLE_NAME), store);
+	const sortedRowIds = useRowIds(TABLE_NAME, store);
+	return (
+		<FlatList
+			contentContainerStyle={{
+				alignItems: "center",
+				paddingBottom: 100,
+				gap: 8,
+			}}
+			data={sortedRowIds}
+			renderItem={({ item: id }) => {
+				const task = store?.getRow(TABLE_NAME, id);
+				return (
+					<XStack gap={"$3"} onPress={() => store?.delRow(TABLE_NAME, id)}>
+						<Text>{id}</Text>
+						<Text>{task?.[TEXT_CELL]}</Text>
+						<Text>{task?.[DONE_CELL]}</Text>
+					</XStack>
+				);
+			}}
+		/>
+	);
 }
 
 export default function Test() {
-  const store = useCreateMergeableStore(() => createMergeableStore());
-  useCreatePersister(
-    store,
-    (store) => createExpoSqlitePersister(store, SQLite.openDatabaseSync('tasks.db')),
-    [],
-    // @ts-ignore
-    (persister) => persister.load().then(persister.startAutoSave),
-  );
-  useProvideStore(TABLE_NAME, store);
+	const store = useCreateMergeableStore(() => createMergeableStore());
+	useCreatePersister(
+		store,
+		(store) => {
+			if (Platform.OS === "web") {
+				return createIndexedDbPersister(store, "tasks-db");
+			} else {
+				return createExpoSqlitePersister(
+					store,
+					SQLite.openDatabaseSync("tasks.db"),
+				);
+			}
+		},
+		[],
+		async (persister) => {
+			await persister.load();
+			await persister.startAutoSave();
+		},
+	);
+	useCreateSynchronizer(store, async (store) => {
+		const sync = await createWsSynchronizer(
+			store,
+			new WebSocket("ws://localhost:8787/"),
+		);
+		await sync.startSync();
+		return sync;
+	});
+	useProvideStore(TABLE_NAME, store);
 
-  return (
-    <View flex={1}>
-      <View items={'center'} pb={'$4'}>
-        <H1 text={'center'} fontWeight={'900'}>
-          Local Storage
-        </H1>
-        <AddTask />
-      </View>
+	return (
+		<View flex={1}>
+			<View items={"center"} pb={"$4"}>
+				<H1 text={"center"} fontWeight={"900"}>
+					Local Storage
+				</H1>
+				<AddTask />
+			</View>
 
-      <TaskList />
-    </View>
-  );
+			<TaskList />
+		</View>
+	);
 }
 
 function getRandomTask() {
-  const tasks = [
-    'Walk the dog',
-    'Read a book',
-    'Do the laundry',
-    'Write a blog post',
-    'Go for a run',
-    'Cook a new recipe',
-    'Learn a new skill',
-    'Organize your workspace',
-    'Call a friend',
-    'Watch a documentary',
-  ];
-  const randomIndex = Math.floor(Math.random() * tasks.length);
-  return tasks[randomIndex];
+	const tasks = [
+		"Walk the dog",
+		"Read a book",
+		"Do the laundry",
+		"Write a blog post",
+		"Go for a run",
+		"Cook a new recipe",
+		"Learn a new skill",
+		"Organize your workspace",
+		"Call a friend",
+		"Watch a documentary",
+	];
+	const randomIndex = Math.floor(Math.random() * tasks.length);
+	return tasks[randomIndex];
 }
 
 // import Ionicons from '@expo/vector-icons/Ionicons';
