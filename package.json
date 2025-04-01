@@ -4,15 +4,18 @@
   "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client",
+    
     "ios": "expo run:ios",
     "android": "expo run:android",
     "build:dev": "eas build --profile development",
     "build:preview": "eas build --profile preview",
     "build:prod": "eas build --profile production",
     "prebuild": "expo prebuild",
+    "prebuild:clean": "expo prebuild --clean",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "clean:proj": "rm -rf .expo && rm -rf node_modules && rm -rf pnpm-lock.yaml && rm -rf ios && rm -rf android"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
