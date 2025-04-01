@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import { useUnistyles } from 'react-native-unistyles';
 
-import { TabBarIcon } from '../../components/TabBarIcon';
+import { TabBarIcon } from '../../TabBarIcon';
 
 export default function TabLayout() {
   const { theme } = useUnistyles();
