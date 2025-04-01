@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "gym-notebook-ai",
-    "slug": "gym-notebook-ai",
+    "name": "gym-notebook",
+    "slug": "gym-notebook",
     "version": "1.0.0",
     "newArchEnabled": true,
-    "scheme": "gym-notebook-ai",
+    "scheme": "gym-notebook",
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
@@ -21,7 +21,8 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "tsconfigPaths": true
+      "tsconfigPaths": true,
+      "reactServerFunctions": true
     },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -36,23 +37,32 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ortbit02.gymnotebookai"
+      "bundleIdentifier": "com.ortbit02.gymnotebook",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ortbit02.gymnotebookai"
+      "package": "com.ortbit02.gymnotebook"
     },
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "d8640f3c-e8c7-4496-abf7-b0cc7f3002ea"
+        "projectId": "719d1bcf-7ef8-4105-a14a-c67a13fe845a"
       }
     },
-    "owner": "colony-apps"
+    "updates": {
+      "url": "https://u.expo.dev/719d1bcf-7ef8-4105-a14a-c67a13fe845a"
+    },
+    "owner": "colony-apps",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "cesVersion": "2.14.3",
-  "projectName": "gym-notebook-ai",
+  "projectName": "gym-notebook",
   "packages": [
     {
       "name": "expo-router",
