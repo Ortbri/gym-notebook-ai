@@ -17,11 +17,11 @@ const styles = StyleSheet.create((theme) => ({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.bg.primary,
   },
   text: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: theme.colors.typography,
+    color: theme.colors.text.primary,
   },
 }));
