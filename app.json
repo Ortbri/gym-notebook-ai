@@ -3,9 +3,7 @@
     "name": "gym-notebook-ai",
     "slug": "gym-notebook-ai",
     "version": "1.0.0",
-
     "newArchEnabled": true,
-
     "scheme": "gym-notebook-ai",
     "web": {
       "bundler": "metro",
@@ -23,29 +21,38 @@
     ],
     "experiments": {
       "typedRoutes": true,
-
       "tsconfigPaths": true
     },
-
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-
     "userInterfaceStyle": "automatic",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ortbit02.gymnotebookai"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.ortbit02.gymnotebookai"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d8640f3c-e8c7-4496-abf7-b0cc7f3002ea"
       }
-    }
+    },
+    "owner": "colony-apps"
   }
 }
