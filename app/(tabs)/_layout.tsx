@@ -18,6 +18,7 @@ export default function TabLayout() {
         },
         tabBarActiveTintColor: theme.colors.astral,
         tabBarStyle: {
+          borderColor: 'transparent',
           backgroundColor: theme.colors.background,
         },
       }}>
@@ -25,19 +26,21 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <HeaderButton />
-            </Link>
-          ),
+          headerShown: false,
+          // tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          // headerRight: () => (
+          //   <Link href="/modal" asChild>
+          //     <HeaderButton iconName="address-book" />
+          //   </Link>
+          // ),
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
           title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: false,
+          // tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
     </Tabs>

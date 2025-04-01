@@ -1,15 +1,13 @@
 import { Stack } from 'expo-router';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
-
-import { ScreenContent } from '~/components/ScreenContent';
 
 export default function Home() {
   return (
     <>
       <Stack.Screen options={{ title: 'Tab Two' }} />
       <View style={styles.container}>
-        <ScreenContent path="app/(tabs)/two.tsx" title="Tab Two" />
+        <Text style={styles.text}>Hello</Text>
       </View>
     </>
   );
@@ -20,5 +18,10 @@ const styles = StyleSheet.create((theme) => ({
     flex: 1,
     padding: 24,
     backgroundColor: theme.colors.background,
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: theme.colors.typography,
   },
 }));
