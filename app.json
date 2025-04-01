@@ -50,9 +50,6 @@
       "package": "com.ortbit02.gymnotebook"
     },
     "extra": {
-      "router": {
-        "origin": false
-      },
       "eas": {
         "projectId": "719d1bcf-7ef8-4105-a14a-c67a13fe845a"
       }
