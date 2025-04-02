@@ -1,6 +1,7 @@
-import { ClerkLoaded, ClerkProvider } from '@clerk/clerk-expo';
+import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
-import { Stack } from 'expo-router';
+import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
+import { useEffect } from 'react';
 import { useUnistyles } from 'react-native-unistyles';
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
@@ -10,13 +11,32 @@ if (!publishableKey) {
 }
 
 const InitLayout = () => {
+  const router = useRouter();
   const { theme } = useUnistyles();
+  const { isSignedIn, isLoaded } = useAuth();
+  const segments = useSegments();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    const isInMain = segments[0] === '(main)';
+
+    if (isSignedIn && !isInMain) {
+      router.replace('/(main)/(tabs)/calendar');
+    } else if (!isSignedIn && pathname === '/') {
+      router.replace('/');
+    }
+  }, [isSignedIn, isLoaded]);
 
   return (
     <Stack
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: theme.colors.bg.primary },
+        contentStyle: {
+          // backgroundColor: theme.colors.bg.primary,
+          // paddingTop: 20,
+        },
       }}>
       <Stack.Screen name="index" />
     </Stack>
