@@ -4,21 +4,25 @@ import * as Sentry from '@sentry/react-native';
 import { Toaster } from 'burnt/web';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
-import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
+import { Stack, useNavigationContainerRef, usePathname, useRouter, useSegments } from 'expo-router';
 import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite';
 import { Suspense, useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useUnistyles } from 'react-native-unistyles';
 
 import migrations from '../drizzle/migrations';
 
 import { addDummyData } from '~/utils/addDummyData';
 // import { LogBox } from 'react-native';
+const navigationIntegration = Sentry.reactNavigationIntegration({
+  enableTimeToInitialDisplay: true,
+});
 
 Sentry.init({
   dsn: 'https://32f899dfbf5bdcac1549ca8e6f5442c9@o4508489595813888.ingest.us.sentry.io/4509085649993728',
   attachScreenshot: true,
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0, // prod may change
   replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0, // in prod to lower value
   replaysOnErrorSampleRate: 1.0,
   integrations: [
@@ -27,6 +31,8 @@ Sentry.init({
       maskAllText: true,
       maskAllVectors: true,
     }),
+    navigationIntegration,
+    Sentry.spotlightIntegration(),
   ],
   // uncomment the line below to enable Spotlight (https://spotlightjs.com)
   // spotlight: __DEV__,
@@ -71,6 +77,11 @@ const InitLayout = () => {
 };
 
 export default Sentry.wrap(function RootLayout() {
+  const ref = useNavigationContainerRef();
+  useEffect(() => {
+    navigationIntegration.registerNavigationContainer(ref);
+  }, [ref]);
+
   const expoDB = openDatabaseSync('notebook');
   const db = drizzle(expoDB);
   const { success, error } = useMigrations(db, migrations);
@@ -98,6 +109,7 @@ export default Sentry.wrap(function RootLayout() {
     </ClerkProvider>
   );
 });
+
 function Fallback() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
