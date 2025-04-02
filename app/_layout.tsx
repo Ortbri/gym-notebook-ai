@@ -1,12 +1,18 @@
 import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { Toaster } from 'burnt/web';
+import { drizzle } from 'drizzle-orm/expo-sqlite';
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
-import { SQLiteProvider } from 'expo-sqlite';
+import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite';
 import { Suspense, useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useUnistyles } from 'react-native-unistyles';
+
+import migrations from '../drizzle/migrations';
+
+import { addDummyData } from '~/utils/addDummyData';
 // import { LogBox } from 'react-native';
 // LogBox.ignoreLogs(['Clerk: Clker has been loaded with development keys']);
 
@@ -47,12 +53,25 @@ const InitLayout = () => {
     </Stack>
   );
 };
+
 export default function RootLayout() {
+  const expoDB = openDatabaseSync('notebook');
+  const db = drizzle(expoDB);
+  const { success, error } = useMigrations(db, migrations);
+
+  useEffect(() => {
+    if (!success) return;
+    addDummyData(db);
+  }, [success, error]);
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ClerkLoaded>
         <Suspense fallback={<Fallback />}>
-          <SQLiteProvider databaseName="notebook">
+          <SQLiteProvider
+            databaseName="notebook"
+            options={{
+              enableChangeListener: true,
+            }}>
             <GestureHandlerRootView style={{ flex: 1 }}>
               <InitLayout />
               <Toaster position="bottom-right" />
