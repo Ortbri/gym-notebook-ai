@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react-native';
 import { format } from 'date-fns';
 import { eq } from 'drizzle-orm';
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
@@ -8,6 +9,7 @@ import { Text, RefreshControl, View, SectionList } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import TaskRow from '~/components/TaskRow';
+import Button from '~/components/ui/Button';
 import Fab from '~/components/ui/Fab';
 import { projects, todos } from '~/db/schema';
 import { Todo } from '~/types/interfaces';
@@ -78,6 +80,11 @@ const Page = () => {
     }
     setRefreshing(false);
   };
+
+  const testError = () => {
+    // throw new Error('Test error');
+    Sentry.captureException(new Error('Test error'));
+  };
   return (
     <>
       <View style={styles.wrapper} />
@@ -95,6 +102,17 @@ const Page = () => {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadTasks} />}
         contentContainerStyle={styles.contentContainer}
       />
+      <View style={styles.btnContainer}>
+        <Button
+          onPress={() => {
+            Sentry.captureMessage('Hello from Sentry');
+          }}>
+          <Text>Click me</Text>
+        </Button>
+        <Button onPress={testError}>
+          <Text>Click me</Text>
+        </Button>
+      </View>
 
       <Fab />
     </>
@@ -105,9 +123,6 @@ export default Page;
 const styles = StyleSheet.create((theme, rt) => ({
   wrapper: {
     height: rt.insets.top + 30,
-    // flex: 1,
-    // top: rt.insets.top,
-    // backgroundColor: theme.colors.bg.primary,
   },
   container: {
     flex: 1,
@@ -129,5 +144,8 @@ const styles = StyleSheet.create((theme, rt) => ({
   contentContainer: {
     paddingBottom: rt.insets.bottom + 100,
     gap: 14,
+  },
+  btnContainer: {
+    marginBottom: rt.insets.bottom + 50,
   },
 }));

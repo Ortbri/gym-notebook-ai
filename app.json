@@ -18,9 +18,7 @@
           "launchMode": "most-recent"
         }
       ],
-      [
-        "react-native-bottom-tabs"
-      ],
+      ["react-native-bottom-tabs"],
       [
         "expo-build-properties",
         {
@@ -30,7 +28,15 @@
           }
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "gym-notebook",
+          "organization": "colony"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
@@ -45,9 +51,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ortbit02.gymnotebook",

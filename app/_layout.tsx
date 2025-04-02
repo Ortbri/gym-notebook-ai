@@ -1,5 +1,6 @@
 import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
+import * as Sentry from '@sentry/react-native';
 import { Toaster } from 'burnt/web';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
@@ -14,6 +15,22 @@ import migrations from '../drizzle/migrations';
 
 import { addDummyData } from '~/utils/addDummyData';
 // import { LogBox } from 'react-native';
+
+Sentry.init({
+  dsn: 'https://32f899dfbf5bdcac1549ca8e6f5442c9@o4508489595813888.ingest.us.sentry.io/4509085649993728',
+  attachScreenshot: true,
+  replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0, // in prod to lower value
+  replaysOnErrorSampleRate: 1.0,
+  integrations: [
+    Sentry.mobileReplayIntegration({
+      maskAllImages: true,
+      maskAllText: true,
+      maskAllVectors: true,
+    }),
+  ],
+  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+  // spotlight: __DEV__,
+});
 // LogBox.ignoreLogs(['Clerk: Clker has been loaded with development keys']);
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
@@ -24,7 +41,6 @@ if (!publishableKey) {
 
 const InitLayout = () => {
   const router = useRouter();
-  const { theme } = useUnistyles();
   const { isSignedIn, isLoaded } = useAuth();
   const segments = useSegments();
   const pathname = usePathname();
@@ -54,7 +70,7 @@ const InitLayout = () => {
   );
 };
 
-export default function RootLayout() {
+export default Sentry.wrap(function RootLayout() {
   const expoDB = openDatabaseSync('notebook');
   const db = drizzle(expoDB);
   const { success, error } = useMigrations(db, migrations);
@@ -81,7 +97,7 @@ export default function RootLayout() {
       </ClerkLoaded>
     </ClerkProvider>
   );
-}
+});
 function Fallback() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
