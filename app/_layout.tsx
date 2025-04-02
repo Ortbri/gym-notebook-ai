@@ -24,7 +24,7 @@ const InitLayout = () => {
 
     if (isSignedIn && !isInMain) {
       router.replace('/(main)/(tabs)/calendar');
-    } else if (!isSignedIn && pathname === '/') {
+    } else if (!isSignedIn && pathname !== '/') {
       router.replace('/');
     }
   }, [isSignedIn, isLoaded]);
@@ -33,6 +33,7 @@ const InitLayout = () => {
     <Stack
       screenOptions={{
         headerShown: false,
+        animation: 'fade',
         contentStyle: {
           // backgroundColor: theme.colors.bg.primary,
           // paddingTop: 20,

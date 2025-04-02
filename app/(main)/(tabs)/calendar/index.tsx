@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 const Calendar = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentInsetAdjustmentBehavior="automatic">
       <Text style={styles.text}>Calendar</Text>
-    </View>
+    </ScrollView>
   );
 };
 

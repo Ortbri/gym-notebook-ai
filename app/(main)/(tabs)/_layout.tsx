@@ -9,7 +9,7 @@ const TabsLayout = () => {
     <Tabs
       // ignoresTopSafeAreas
       hapticFeedbackEnabled
-      scrollEdgeAppearance="default"
+      scrollEdgeAppearance="transparent"
       screenOptions={{
         tabBarActiveTintColor: theme.colors.text.primary,
       }}>

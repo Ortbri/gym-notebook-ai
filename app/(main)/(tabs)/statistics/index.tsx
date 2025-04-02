@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 const Statistics = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Statistics</Text>
-    </View>
+    <ScrollView style={styles.container} contentInsetAdjustmentBehavior="automatic">
+      <Text style={styles.text}>Calendar</Text>
+    </ScrollView>
   );
 };
 
@@ -13,7 +13,7 @@ export default Statistics;
 
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
-    flex: 1,
+    // flex: 1,
     padding: 24,
     backgroundColor: theme.colors.bg.primary,
   },
