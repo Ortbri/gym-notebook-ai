@@ -1,8 +1,12 @@
 import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
+import { Toaster } from 'burnt/web';
 import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useUnistyles } from 'react-native-unistyles';
+// import { LogBox } from 'react-native';
+// LogBox.ignoreLogs(['Clerk: Clker has been loaded with development keys']);
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -34,10 +38,8 @@ const InitLayout = () => {
       screenOptions={{
         headerShown: false,
         animation: 'fade',
-        contentStyle: {
-          // backgroundColor: theme.colors.bg.primary,
-          // paddingTop: 20,
-        },
+        animationDuration: 100,
+        contentStyle: {},
       }}>
       <Stack.Screen name="index" />
     </Stack>
@@ -47,7 +49,10 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ClerkLoaded>
-        <InitLayout />
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <InitLayout />
+          <Toaster position="bottom-right" />
+        </GestureHandlerRootView>
       </ClerkLoaded>
     </ClerkProvider>
   );

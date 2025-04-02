@@ -2,11 +2,16 @@ import React from 'react';
 import { ScrollView, Text } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
+import Fab from '~/components/ui/Fab';
+
 const Calendar = () => {
   return (
-    <ScrollView style={styles.container} contentInsetAdjustmentBehavior="automatic">
-      <Text style={styles.text}>Calendar</Text>
-    </ScrollView>
+    <>
+      <ScrollView style={styles.container} contentInsetAdjustmentBehavior="automatic">
+        <Text style={styles.text}>Calendar</Text>
+      </ScrollView>
+      <Fab />
+    </>
   );
 };
 
