@@ -18,4 +18,8 @@ config.resolver.sourceExts.push('mjs');
 config.resolver.sourceExts.push('cjs');
 // --- end burnt ---
 
+// --- sqlite ---
+config.resolver.sourceExts.push('sql');
+// --- end sqlite ---
+
 module.exports = config;

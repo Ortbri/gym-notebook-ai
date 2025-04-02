@@ -2,7 +2,9 @@ import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { Toaster } from 'burnt/web';
 import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
-import { useEffect } from 'react';
+import { SQLiteProvider } from 'expo-sqlite';
+import { Suspense, useEffect } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useUnistyles } from 'react-native-unistyles';
 // import { LogBox } from 'react-native';
@@ -49,12 +51,23 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ClerkLoaded>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <InitLayout />
-          <Toaster position="bottom-right" />
-        </GestureHandlerRootView>
+        <Suspense fallback={<Fallback />}>
+          <SQLiteProvider databaseName="notebook">
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <InitLayout />
+              <Toaster position="bottom-right" />
+            </GestureHandlerRootView>
+          </SQLiteProvider>
+        </Suspense>
       </ClerkLoaded>
     </ClerkProvider>
+  );
+}
+function Fallback() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="white" />
+    </View>
   );
 }
 
