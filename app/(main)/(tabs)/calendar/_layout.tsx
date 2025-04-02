@@ -2,6 +2,8 @@ import { Stack } from 'expo-router';
 import React from 'react';
 import { useUnistyles } from 'react-native-unistyles';
 
+import MoreButton from '~/components/ui/MoreButton';
+
 const CalendarLayout = () => {
   const { theme } = useUnistyles();
   return (
@@ -15,7 +17,14 @@ const CalendarLayout = () => {
         },
         headerShadowVisible: false,
       }}>
-      <Stack.Screen name="index" options={{ title: 'Today', headerLargeTitle: true }} />
+      <Stack.Screen
+        name="index"
+        options={{
+          title: 'Today',
+          headerLargeTitle: true,
+          headerRight: () => <MoreButton pageName="Calendar" />,
+        }}
+      />
     </Stack>
   );
 };

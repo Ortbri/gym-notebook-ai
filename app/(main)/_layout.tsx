@@ -12,7 +12,7 @@ const MainLayout = () => {
       }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
-        name="settings"
+        name="settings/current"
         options={{
           presentation: 'formSheet',
           headerShadowVisible: false,
@@ -20,6 +20,30 @@ const MainLayout = () => {
           sheetCornerRadius: theme.spacing.xl,
           contentStyle: {
             backgroundColor: theme.colors.bg.primary,
+          },
+          headerStyle: {
+            backgroundColor: theme.colors.bg.primary,
+          },
+          headerTitleStyle: {
+            color: theme.colors.text.primary,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="chat/current"
+        options={{
+          presentation: 'formSheet',
+          headerShadowVisible: false,
+          sheetGrabberVisible: true,
+          sheetCornerRadius: theme.spacing.xl,
+          contentStyle: {
+            backgroundColor: theme.colors.bg.primary,
+          },
+          headerStyle: {
+            backgroundColor: theme.colors.bg.primary,
+          },
+          headerTitleStyle: {
+            color: theme.colors.text.primary,
           },
         }}
       />

@@ -26,7 +26,7 @@ const HeaderRight = () => {
   const { user } = useUser();
   const router = useRouter();
   return (
-    <Pressable onPress={() => router.push('/settings')}>
+    <Pressable onPress={() => router.push('/settings/current')}>
       <Image source={{ uri: user?.imageUrl }} style={styles.headerRight} />
     </Pressable>
   );

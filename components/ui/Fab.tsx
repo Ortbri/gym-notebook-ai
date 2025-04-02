@@ -1,5 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as Burnt from 'burnt';
+import * as Haptics from 'expo-haptics';
+import { useRouter } from 'expo-router';
 import { SymbolView, SymbolViewProps, SFSymbol } from 'expo-symbols';
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
@@ -10,46 +12,52 @@ import { StyleSheet, withUnistyles } from 'react-native-unistyles';
 
 const UniSymbolView = withUnistyles(SymbolView);
 
-const toggleIcon = () => {
-  //   setIcon(icon === 'add' ? 'remove' : 'add');
-  Burnt.toast({
-    title: 'Congrats!', // required
+// const toggleIcon = () => {
+//   //   setIcon(icon === 'add' ? 'remove' : 'add');
+//   Burnt.toast({
+//     title: 'Congrats!', // required
 
-    preset: 'done', // or "error", "none", "custom"
+//     preset: 'done', // or "error", "none", "custom"
 
-    message: '', // optional
+//     message: '', // optional
 
-    haptic: 'none', // or "success", "warning", "error"
+//     haptic: 'none', // or "success", "warning", "error"
 
-    duration: 2, // duration in seconds
+//     duration: 2, // duration in seconds
 
-    shouldDismissByDrag: true,
+//     shouldDismissByDrag: true,
 
-    from: 'top', // "top" or "bottom"
+//     from: 'top', // "top" or "bottom"
 
-    // optionally customize layout
-    // layout: {
-    //   iconSize: {
-    //     height: 14,
-    //     width: 14,
-    //   },
-    // },
-    // icon: {
-    //   ios: {
-    //     // SF Symbol. For a full list, see https://developer.apple.com/sf-symbols/.
-    //     name: 'checkmark.seal',
-    //     color: '#1D9BF0',
-    //   },
-    //   web: <Ionicons name="add" size={24} color="white" />,
-    // },
-  });
-};
+//     // optionally customize layout
+//     // layout: {
+//     //   iconSize: {
+//     //     height: 14,
+//     //     width: 14,
+//     //   },
+//     // },
+//     // icon: {
+//     //   ios: {
+//     //     // SF Symbol. For a full list, see https://developer.apple.com/sf-symbols/.
+//     //     name: 'checkmark.seal',
+//     //     color: '#1D9BF0',
+//     //   },
+//     //   web: <Ionicons name="add" size={24} color="white" />,
+//     // },
+//   });
+// };
 
 export default function Fab() {
+  const router = useRouter();
   //   const [icon, setIcon] = useState('add');
 
   return (
-    <Pressable style={styles.container} onPress={toggleIcon}>
+    <Pressable
+      style={styles.container}
+      onPress={() => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        router.push('/chat/current');
+      }}>
       <Ionicons name="add" size={24} color="white" />
       {/* <UniSymbolView name="dumbbell.fill" size={24} style={styles.icon} /> */}
     </Pressable>
