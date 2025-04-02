@@ -17,10 +17,12 @@
     "clean:proj": "rm -rf .expo && rm -rf node_modules && rm -rf pnpm-lock.yaml && rm -rf ios && rm -rf android"
   },
   "dependencies": {
+    "@bottom-tabs/react-navigation": "^0.9.0",
     "@clerk/clerk-expo": "^2.9.6",
     "@expo/vector-icons": "^14.0.0",
     "@react-navigation/native": "^7.0.3",
     "expo": "^52.0.42",
+    "expo-build-properties": "~0.13.2",
     "expo-constants": "~17.0.8",
     "expo-dev-client": "~5.0.4",
     "expo-dev-launcher": "^5.0.17",
@@ -34,14 +36,15 @@
     "expo-web-browser": "~14.0.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.8",
+    "react-native": "0.77.2",
+    "react-native-bottom-tabs": "^0.9.0",
     "react-native-edge-to-edge": "1.4.3",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-nitro-modules": "0.24.1",
-    "react-native-reanimated": "3.16.2",
+    "react-native-reanimated": "3.17.2",
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.4.0",
-    "react-native-unistyles": "3.0.0-beta.8",
+    "react-native-unistyles": "3.0.0-nightly-20250326",
     "react-native-web": "~0.19.10"
   },
   "devDependencies": {
