@@ -5,8 +5,8 @@ import { projects, todos } from '../db/schema';
 
 export const addDummyData = async (db: ExpoSQLiteDatabase) => {
   const value = AsyncStorage.getItemSync('initialized');
-  // console.log('a', value);
   if (value) return;
+  // console.log('a', value);
   console.log('Adding dummy data');
 
   await db.insert(projects).values([

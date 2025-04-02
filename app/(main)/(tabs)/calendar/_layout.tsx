@@ -16,6 +16,9 @@ const CalendarLayout = () => {
           color: theme.colors.text.primary,
         },
         headerShadowVisible: false,
+        contentStyle: {
+          backgroundColor: theme.colors.bg.primary,
+        },
       }}>
       <Stack.Screen
         name="index"

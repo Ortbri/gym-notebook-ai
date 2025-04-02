@@ -1,41 +1,133 @@
-import { useLiveQuery, drizzle } from 'drizzle-orm/expo-sqlite';
+import { format } from 'date-fns';
+import { eq } from 'drizzle-orm';
+import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
 import { useSQLiteContext } from 'expo-sqlite';
-import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { useState, useEffect } from 'react';
+import { Text, RefreshControl, View, SectionList } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
+import TaskRow from '~/components/TaskRow';
 import Fab from '~/components/ui/Fab';
-import { todos } from '~/db/schema';
+import { projects, todos } from '~/db/schema';
+import { Todo } from '~/types/interfaces';
 
-const Calendar = () => {
+interface Section {
+  title: string;
+  data: Todo[];
+}
+
+const Page = () => {
   const db = useSQLiteContext();
-  const drizzleDb = drizzle(db);
   useDrizzleStudio(db);
+  const today = format(new Date(), 'd MMM · eee');
+  const [refreshing, setRefreshing] = useState(false);
+  const drizzleDb = drizzle(db);
+  const [sectionListData, setSectionListData] = useState<Section[]>([]);
+  const { data } = useLiveQuery(
+    drizzleDb
+      .select()
+      .from(todos)
+      .leftJoin(projects, eq(todos.project_id, projects.id))
+      .where(eq(todos.completed, 0))
+  );
 
-  const { data } = useLiveQuery(drizzleDb.select().from(todos));
-  console.log('data', JSON.stringify(data, null, 2));
+  useEffect(() => {
+    const formatedData = data?.map((item) => ({
+      ...item.todos,
+      project_name: item.projects?.name,
+      project_color: item.projects?.color,
+    }));
+
+    // Group tasks by day
+    const groupedByDay = formatedData?.reduce((acc: { [key: string]: Todo[] }, task) => {
+      const day = format(new Date(task.due_date || new Date()), 'd MMM · eee');
+      if (!acc[day]) {
+        acc[day] = [];
+      }
+      acc[day].push(task);
+      return acc;
+    }, {});
+
+    // Convert grouped data to sections array
+    const listData: Section[] = Object.entries(groupedByDay || {}).map(([day, tasks]) => ({
+      title: day,
+      data: tasks,
+    }));
+
+    // Sort sections by date
+    listData.sort((a, b) => {
+      const dateA = new Date(a.data[0].due_date || new Date());
+      const dateB = new Date(b.data[0].due_date || new Date());
+      return dateA.getTime() - dateB.getTime();
+    });
+
+    setSectionListData(listData);
+  }, [data]);
+
+  const loadTasks = async () => {
+    const tasks = await db.getAllAsync<Todo>(`
+      SELECT todos.*, projects.name as project_name
+      FROM todos
+      LEFT JOIN projects ON todos.project_id = projects.id
+      WHERE todos.completed = 0
+    `);
+    if (tasks) {
+      const listData = [{ title: today, data: tasks }];
+      setSectionListData(listData);
+    }
+    setRefreshing(false);
+  };
   return (
     <>
-      <ScrollView style={styles.container} contentInsetAdjustmentBehavior="automatic">
-        <Text style={styles.text}>Calendar</Text>
-      </ScrollView>
+      <View style={styles.wrapper} />
+      <SectionList
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="automatic"
+        sections={sectionListData}
+        renderSectionHeader={({ section }) => (
+          <View style={styles.sectionHeader}>
+            <Text style={styles.headerText}>{section.title}</Text>
+          </View>
+        )}
+        renderItem={({ item }) => <TaskRow task={item} />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadTasks} />}
+        contentContainerStyle={styles.contentContainer}
+      />
+
       <Fab />
     </>
   );
 };
-
-export default Calendar;
+export default Page;
 
 const styles = StyleSheet.create((theme, rt) => ({
+  wrapper: {
+    height: rt.insets.top + 30,
+    // flex: 1,
+    // top: rt.insets.top,
+    // backgroundColor: theme.colors.bg.primary,
+  },
   container: {
     flex: 1,
-    padding: 24,
-    backgroundColor: theme.colors.bg.primary,
   },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: theme.colors.text.primary,
+  sectionHeader: {
+    backgroundColor: theme.colors.bg.primary,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: theme.colors.border.light,
+  },
+  headerText: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: theme.colors.text.secondary,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  contentContainer: {
+    paddingBottom: rt.insets.bottom + 100,
+    gap: 14,
   },
 }));
