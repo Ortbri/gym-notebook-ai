@@ -1,15 +1,14 @@
-import * as Sentry from '@sentry/react-native';
 import { format } from 'date-fns';
 import { eq } from 'drizzle-orm';
 import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';
 import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
+import { useRouter } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useState, useEffect } from 'react';
 import { Text, RefreshControl, View, SectionList } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import TaskRow from '~/components/TaskRow';
-import Button from '~/components/ui/Button';
 import Fab from '~/components/ui/Fab';
 import { projects, todos } from '~/db/schema';
 import { Todo } from '~/types/interfaces';
@@ -19,8 +18,15 @@ interface Section {
   data: Todo[];
 }
 
+// const platformSpecificStyle = Platform.select({
+//   web: { maxWidth: 600 },
+//   ios: { shadowColor: 'black' },
+//   android: { elevation: 4 },
+// });
+
 const Page = () => {
   const db = useSQLiteContext();
+  const router = useRouter();
   useDrizzleStudio(db);
   const today = format(new Date(), 'd MMM · eee');
   const [refreshing, setRefreshing] = useState(false);
@@ -81,10 +87,10 @@ const Page = () => {
     setRefreshing(false);
   };
 
-  const testError = () => {
-    // throw new Error('Test error');
-    Sentry.captureException(new Error('Test error'));
-  };
+  // const testError = () => {
+  //   // throw new Error('Test error');
+  //   Sentry.captureException(new Error('Test error'));
+  // };
   return (
     <>
       <View style={styles.wrapper} />
@@ -102,7 +108,7 @@ const Page = () => {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadTasks} />}
         contentContainerStyle={styles.contentContainer}
       />
-      <View style={styles.btnContainer}>
+      {/* <View style={styles.btnContainer}>
         <Button
           onPress={() => {
             Sentry.captureMessage('Hello from Sentry');
@@ -112,9 +118,9 @@ const Page = () => {
         <Button onPress={testError}>
           <Text>Click me</Text>
         </Button>
-      </View>
+      </View> */}
 
-      <Fab />
+      <Fab onPress={() => router.navigate('/(main)/chat/current')} />
     </>
   );
 };

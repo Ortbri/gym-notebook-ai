@@ -47,7 +47,7 @@ const UniSymbolView = withUnistyles(SymbolView);
 //   });
 // };
 
-export default function Fab() {
+export default function Fab({ onPress }: { onPress: () => void }) {
   const router = useRouter();
   //   const [icon, setIcon] = useState('add');
 
@@ -56,7 +56,7 @@ export default function Fab() {
       style={styles.container}
       onPress={() => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        router.push('/chat/current');
+        onPress();
       }}>
       <Ionicons name="add" size={24} color="white" />
       {/* <UniSymbolView name="dumbbell.fill" size={24} style={styles.icon} /> */}

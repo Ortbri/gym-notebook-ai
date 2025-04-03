@@ -18,6 +18,7 @@ const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: true,
 });
 
+// TODO: source maps for sentry? https://docs.sentry.io/platforms/javascript/sourcemaps/
 Sentry.init({
   dsn: 'https://32f899dfbf5bdcac1549ca8e6f5442c9@o4508489595813888.ingest.us.sentry.io/4509085649993728',
   attachScreenshot: true,

@@ -9,13 +9,31 @@ const StatisticsLayout = () => {
   return (
     <Stack
       screenOptions={{
-        headerStyle: { backgroundColor: theme.colors.bg.primary },
-        headerTitleStyle: { color: theme.colors.text.primary },
+        headerStyle: {
+          backgroundColor: theme.colors.bg.primary,
+        },
+        headerTitleStyle: {
+          color: theme.colors.text.primary,
+        },
         headerShadowVisible: false,
+        contentStyle: {
+          backgroundColor: theme.colors.bg.primary,
+        },
+        // headerStyle: { backgroundColor: theme.colors.bg.primary },
+        // headerTitleStyle: { color: theme.colors.text.primary },
+        // headerShadowVisible: false,
       }}>
+      <Stack.Screen name="index" options={{ title: 'Statistics', headerRight: HeaderRight }} />
       <Stack.Screen
-        name="index"
-        options={{ title: 'Statistics', headerLargeTitle: true, headerRight: HeaderRight }}
+        name="newProj"
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+          // presentation: 'formSheet',
+          // headerShadowVisible: false,
+          sheetGrabberVisible: true,
+          sheetCornerRadius: theme.spacing.xl,
+        }}
       />
     </Stack>
   );
