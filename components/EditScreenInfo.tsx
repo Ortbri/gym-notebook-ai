@@ -29,13 +29,13 @@ const styles = StyleSheet.create((theme) => ({
     marginHorizontal: 50,
   },
   text: {
-    color: theme.colors.typography,
+    color: theme.colors.text.primary,
   },
   getStartedText: {
     fontSize: 17,
     lineHeight: 24,
     textAlign: 'center',
-    color: theme.colors.typography,
+    color: theme.colors.text.primary,
   },
   helpContainer: {
     alignItems: 'center',

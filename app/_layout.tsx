@@ -1,4 +1,4 @@
-import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import * as Sentry from '@sentry/react-native';
 import { Toaster } from 'burnt/web';
@@ -93,20 +93,19 @@ export default Sentry.wrap(function RootLayout() {
   }, [success, error]);
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <ClerkLoaded>
-        <Suspense fallback={<Fallback />}>
-          <SQLiteProvider
-            databaseName="notebook"
-            options={{
-              enableChangeListener: true,
-            }}>
-            <GestureHandlerRootView style={{ flex: 1 }}>
-              <InitLayout />
-              <Toaster position="bottom-right" />
-            </GestureHandlerRootView>
-          </SQLiteProvider>
-        </Suspense>
-      </ClerkLoaded>
+      {/* <ClerkLoaded></ClerkLoaded> */}
+      <Suspense fallback={<Fallback />}>
+        <SQLiteProvider
+          databaseName="notebook"
+          options={{
+            enableChangeListener: true,
+          }}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <InitLayout />
+            <Toaster position="bottom-right" />
+          </GestureHandlerRootView>
+        </SQLiteProvider>
+      </Suspense>
     </ClerkProvider>
   );
 });

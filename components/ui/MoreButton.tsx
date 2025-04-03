@@ -3,7 +3,7 @@ import * as Clipboard from 'expo-clipboard';
 import { useRouter } from 'expo-router';
 import { SymbolView } from 'expo-symbols';
 import React, { useState } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import * as DropdownMenu from 'zeego/dropdown-menu';
 type MoreButtonProps = {
@@ -83,9 +83,6 @@ export default function MoreButton({ pageName }: MoreButtonProps) {
 }
 
 const styles = StyleSheet.create((theme, rt) => ({
-  //   container: {
-  //     flex: 1,
-  //   },
   trigger: {
     // padding: 10,
     borderRadius: 10,

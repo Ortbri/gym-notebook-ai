@@ -26,17 +26,17 @@ const styles = StyleSheet.create((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.bg.primary,
   },
   separator: {
     height: 1,
     marginVertical: 30,
     width: '80%',
-    backgroundColor: theme.colors.limedSpruce,
+    backgroundColor: theme.colors.border.regular,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: theme.colors.typography,
+    color: theme.colors.text.primary,
   },
 }));

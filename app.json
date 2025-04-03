@@ -18,7 +18,9 @@
           "launchMode": "most-recent"
         }
       ],
-      ["react-native-bottom-tabs"],
+      [
+        "react-native-bottom-tabs"
+      ],
       [
         "expo-build-properties",
         {
@@ -40,8 +42,7 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "tsconfigPaths": true,
-      "reactServerFunctions": true
+      "tsconfigPaths": true
     },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -51,7 +52,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ortbit02.gymnotebook",
