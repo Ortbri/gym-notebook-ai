@@ -18,7 +18,8 @@
     "clean:proj": "rm -rf .expo && rm -rf node_modules && rm -rf pnpm-lock.yaml && rm -rf ios && rm -rf android",
     "db:gen": "drizzle-kit generate",
     "db:mig": "drizzle-kit migrate",
-    "testflight": "npx testflight"
+    "testflight": "npx testflight",
+    "submit": "eas submit --profile production"
   },
   "dependencies": {
     "@bottom-tabs/react-navigation": "^0.9.0",

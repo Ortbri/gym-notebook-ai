@@ -32,8 +32,8 @@
       "ios": {
         "metadataPath": "./store.config.json",
         "appleId": "brian.ort02@icloud.com",
-        "ascAppId": "BHZZN22RM5",
-        "appleTeamId": "6504421989"
+        "appleTeamId": "BHZZN22RM5",
+        "ascAppId": "6504421989"
       },
       "android": {
         "track": "production",
