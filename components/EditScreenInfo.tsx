@@ -1,5 +1,4 @@
-import { Text, View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { Text, View, StyleSheet } from 'react-native';
 
 export const EditScreenInfo = ({ path }: { path: string }) => {
   const title = 'Open up the code for this screen:';
@@ -19,7 +18,7 @@ export const EditScreenInfo = ({ path }: { path: string }) => {
   );
 };
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create({
   codeHighlightContainer: {
     borderRadius: 3,
     paddingHorizontal: 4,
@@ -29,13 +28,13 @@ const styles = StyleSheet.create((theme) => ({
     marginHorizontal: 50,
   },
   text: {
-    color: theme.colors.text.primary,
+    color: '#000', // Default text color, adjust as needed
   },
   getStartedText: {
     fontSize: 17,
     lineHeight: 24,
     textAlign: 'center',
-    color: theme.colors.text.primary,
+    color: '#000', // Default text color, adjust as needed
   },
   helpContainer: {
     alignItems: 'center',
@@ -51,4 +50,4 @@ const styles = StyleSheet.create((theme) => ({
   homeScreenFilename: {
     marginVertical: 7,
   },
-}));
+});

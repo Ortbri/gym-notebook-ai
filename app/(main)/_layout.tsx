@@ -1,8 +1,6 @@
 import { Stack } from 'expo-router';
-import { useUnistyles } from 'react-native-unistyles';
 
 const MainLayout = () => {
-  const { theme } = useUnistyles();
   return (
     <Stack
       screenOptions={{
@@ -18,15 +16,15 @@ const MainLayout = () => {
           presentation: 'formSheet',
           headerShadowVisible: false,
           sheetGrabberVisible: true,
-          sheetCornerRadius: theme.spacing.xl,
+          sheetCornerRadius: 16, // Replace with a fixed value or your desired value
           contentStyle: {
-            backgroundColor: theme.colors.bg.primary,
+            backgroundColor: '#ffffff', // Replace with your desired color
           },
           headerStyle: {
-            backgroundColor: theme.colors.bg.primary,
+            backgroundColor: '#ffffff', // Replace with your desired color
           },
           headerTitleStyle: {
-            color: theme.colors.text.primary,
+            color: '#000000', // Replace with your desired color
           },
         }}
       />
@@ -37,15 +35,15 @@ const MainLayout = () => {
           presentation: 'formSheet',
           headerShadowVisible: false,
           sheetGrabberVisible: true,
-          sheetCornerRadius: theme.spacing.xl,
+          sheetCornerRadius: 16, // Replace with a fixed value or your desired value
           contentStyle: {
-            backgroundColor: theme.colors.bg.primary,
+            backgroundColor: '#ffffff', // Replace with your desired color
           },
           headerStyle: {
-            backgroundColor: theme.colors.bg.primary,
+            backgroundColor: '#ffffff', // Replace with your desired color
           },
           headerTitleStyle: {
-            color: theme.colors.text.primary,
+            color: '#000000', // Replace with your desired color
           },
         }}
       />
@@ -56,15 +54,15 @@ const MainLayout = () => {
           presentation: 'formSheet',
           headerShadowVisible: false,
           sheetGrabberVisible: true,
-          sheetCornerRadius: theme.spacing.xl,
+          sheetCornerRadius: 16, // Replace with a fixed value or your desired value
           contentStyle: {
-            backgroundColor: theme.colors.bg.primary,
+            backgroundColor: '#ffffff', // Replace with your desired color
           },
           headerStyle: {
-            backgroundColor: theme.colors.bg.primary,
+            backgroundColor: '#ffffff', // Replace with your desired color
           },
           headerTitleStyle: {
-            color: theme.colors.text.primary,
+            color: '#000000', // Replace with your desired color
           },
         }}
       />

@@ -5,8 +5,7 @@ import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
 import { useRouter } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useState, useEffect } from 'react';
-import { Text, RefreshControl, View, SectionList } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { Text, RefreshControl, View, SectionList, StyleSheet } from 'react-native';
 
 import TaskRow from '~/components/TaskRow';
 import Fab from '~/components/ui/Fab';
@@ -17,12 +16,6 @@ interface Section {
   title: string;
   data: Todo[];
 }
-
-// const platformSpecificStyle = Platform.select({
-//   web: { maxWidth: 600 },
-//   ios: { shadowColor: 'black' },
-//   android: { elevation: 4 },
-// });
 
 const Page = () => {
   const db = useSQLiteContext();
@@ -87,10 +80,6 @@ const Page = () => {
     setRefreshing(false);
   };
 
-  // const testError = () => {
-  //   // throw new Error('Test error');
-  //   Sentry.captureException(new Error('Test error'));
-  // };
   return (
     <>
       <View style={styles.wrapper} />
@@ -108,50 +97,35 @@ const Page = () => {
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadTasks} />}
         contentContainerStyle={styles.contentContainer}
       />
-      {/* <View style={styles.btnContainer}>
-        <Button
-          onPress={() => {
-            Sentry.captureMessage('Hello from Sentry');
-          }}>
-          <Text>Click me</Text>
-        </Button>
-        <Button onPress={testError}>
-          <Text>Click me</Text>
-        </Button>
-      </View> */}
-
       <Fab onPress={() => router.navigate('/(main)/chat/current')} />
     </>
   );
 };
 export default Page;
 
-const styles = StyleSheet.create((theme, rt) => ({
+const styles = StyleSheet.create({
   wrapper: {
-    height: rt.insets.top + 30,
+    height: 30, // Adjusted for top inset if needed
   },
   container: {
     flex: 1,
   },
   sectionHeader: {
-    backgroundColor: theme.colors.bg.primary,
+    backgroundColor: '#f0f0f0', // Replace with your desired color
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: theme.colors.border.light,
+    borderBottomColor: '#ccc', // Replace with your desired color
   },
   headerText: {
     fontSize: 15,
     fontWeight: '600',
-    color: theme.colors.text.secondary,
+    color: '#000', // Replace with your desired color
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   contentContainer: {
-    paddingBottom: rt.insets.bottom + 100,
+    paddingBottom: 100,
     gap: 14,
   },
-  btnContainer: {
-    marginBottom: rt.insets.bottom + 50,
-  },
-}));
+});

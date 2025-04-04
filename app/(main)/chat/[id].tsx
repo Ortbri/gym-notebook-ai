@@ -1,7 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { View, Text } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function CurrentChat() {
   const { id } = useLocalSearchParams();
@@ -13,13 +12,13 @@ export default function CurrentChat() {
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
   typography: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: theme.colors.text.primary,
+    color: '#000', // Default color since theme is not used
   },
-}));
+});

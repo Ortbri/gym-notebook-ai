@@ -1,27 +1,21 @@
 import { useUser } from '@clerk/clerk-expo';
 import { Stack, useRouter } from 'expo-router';
-import React from 'react';
-import { Image, Pressable } from 'react-native';
-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
-const StatisticsLayout = () => {
-  const { theme } = useUnistyles();
+import { Image, Pressable, StyleSheet } from 'react-native';
 
+const StatisticsLayout = () => {
   return (
     <Stack
       screenOptions={{
         headerStyle: {
-          backgroundColor: theme.colors.bg.primary,
+          backgroundColor: '#ffffff', // Replace with your desired color
         },
         headerTitleStyle: {
-          color: theme.colors.text.primary,
+          color: '#000000', // Replace with your desired color
         },
         headerShadowVisible: false,
         contentStyle: {
-          backgroundColor: theme.colors.bg.primary,
+          backgroundColor: '#ffffff', // Replace with your desired color
         },
-        // headerStyle: { backgroundColor: theme.colors.bg.primary },
-        // headerTitleStyle: { color: theme.colors.text.primary },
-        // headerShadowVisible: false,
       }}>
       <Stack.Screen name="index" options={{ title: 'Statistics', headerRight: HeaderRight }} />
       <Stack.Screen
@@ -29,10 +23,8 @@ const StatisticsLayout = () => {
         options={{
           headerShown: false,
           presentation: 'modal',
-          // presentation: 'formSheet',
-          // headerShadowVisible: false,
           sheetGrabberVisible: true,
-          sheetCornerRadius: theme.spacing.xl,
+          sheetCornerRadius: 16, // Replace with your desired value
         }}
       />
     </Stack>
@@ -50,12 +42,12 @@ const HeaderRight = () => {
   );
 };
 
-const styles = StyleSheet.create((theme, rt) => ({
+const styles = StyleSheet.create({
   headerRight: {
     width: 30,
     height: 30,
     borderRadius: 15,
   },
-}));
+});
 
 export default StatisticsLayout;

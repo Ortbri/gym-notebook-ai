@@ -1,6 +1,5 @@
 import { Link, Stack } from 'expo-router';
-import { Text, View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { Text, View, StyleSheet } from 'react-native';
 
 export default function NotFoundScreen() {
   return (
@@ -16,7 +15,7 @@ export default function NotFoundScreen() {
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
@@ -33,6 +32,6 @@ const styles = StyleSheet.create((theme) => ({
   },
   linkText: {
     fontSize: 14,
-    color: theme.colors.text.primary,
+    color: '#000', // Default color since theme is not used
   },
-}));
+});

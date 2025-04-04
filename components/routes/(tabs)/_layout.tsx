@@ -1,27 +1,28 @@
 import { Tabs } from 'expo-router';
-import { useUnistyles } from 'react-native-unistyles';
 
 import { TabBarIcon } from '../../TabBarIcon';
 
 export default function TabLayout() {
-  const { theme } = useUnistyles();
+  // const { theme } = useUnistyles();
 
   return (
     <Tabs
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: theme.colors.bg.primary,
-        },
-        headerTitleStyle: {
-          color: theme.colors.text.primary,
-        },
-        tabBarActiveTintColor: theme.colors.accent.regular,
-        tabBarInactiveTintColor: theme.colors.text.tertiary,
-        tabBarStyle: {
-          borderColor: 'transparent',
-          backgroundColor: theme.colors.bg.primary,
-        },
-      }}>
+      screenOptions={
+        {
+          // headerStyle: {
+          //   backgroundColor: theme.colors.bg.primary,
+          // },
+          // headerTitleStyle: {
+          //   color: theme.colors.text.primary,
+          // },
+          // tabBarActiveTintColor: theme.colors.accent.regular,
+          // tabBarInactiveTintColor: theme.colors.text.tertiary,
+          // tabBarStyle: {
+          //   borderColor: 'transparent',
+          //   backgroundColor: theme.colors.bg.primary,
+          // },
+        }
+      }>
       <Tabs.Screen
         name="index"
         options={{

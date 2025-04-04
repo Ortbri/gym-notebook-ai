@@ -1,25 +1,26 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { useUnistyles } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native';
 
 import MoreButton from '~/components/ui/MoreButton';
 
 const CalendarLayout = () => {
-  const { theme } = useUnistyles();
   return (
     <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: theme.colors.bg.primary,
-        },
-        headerTitleStyle: {
-          color: theme.colors.text.primary,
-        },
-        headerShadowVisible: false,
-        contentStyle: {
-          backgroundColor: theme.colors.bg.primary,
-        },
-      }}>
+    // screenOptions={{
+    //   headerStyle: {
+    //     backgroundColor: styles.headerBackgroundColor,
+    //   },
+    //   headerTitleStyle: {
+    //     color: styles.headerTitleColor,
+    //   },
+    //   headerShadowVisible: false,
+    //   contentStyle: {
+    //     backgroundColor: styles.contentBackgroundColor,
+    //   },
+    // }
+    // }
+    >
       <Stack.Screen
         name="index"
         options={{
@@ -31,5 +32,11 @@ const CalendarLayout = () => {
     </Stack>
   );
 };
+
+// const styles = StyleSheet.create({
+//   headerBackgroundColor: '#ffffff', // Replace with your desired color
+//   headerTitleColor: '#000000', // Replace with your desired color
+//   contentBackgroundColor: '#ffffff', // Replace with your desired color
+// });
 
 export default CalendarLayout;

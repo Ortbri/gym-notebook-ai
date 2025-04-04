@@ -2,8 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 
 export const PROJECT_COLORS = [
   '#0079bf',
@@ -28,23 +27,14 @@ const Page = () => {
   };
 
   return (
-    <View style={{ marginTop: headerHeight }}>
-      <View
-        style={{ flexDirection: 'row', flexGrow: 1, flexWrap: 'wrap', justifyContent: 'center' }}>
+    <View style={[styles.container, { marginTop: headerHeight }]}>
+      <View style={styles.colorContainer}>
         {PROJECT_COLORS.map((color) => (
           <TouchableOpacity
             key={color}
-            style={{
-              backgroundColor: color,
-              height: 60,
-              width: 60,
-              margin: 5,
-              borderRadius: 30,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            style={[styles.colorBox, { backgroundColor: color }]}
             onPress={() => onColorSelect(color)}>
-            {selected === color && <Ionicons name="checkmark" size={24} color="#fff" style={{}} />}
+            {selected === color && <Ionicons name="checkmark" size={24} color="#fff" />}
           </TouchableOpacity>
         ))}
       </View>
@@ -52,10 +42,24 @@ const Page = () => {
   );
 };
 
-const styles = StyleSheet.create((theme, rt) => ({
+const styles = StyleSheet.create({
   container: {
-    marginTop: rt.insets.top,
+    flex: 1,
   },
-}));
+  colorContainer: {
+    flexDirection: 'row',
+    flexGrow: 1,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  colorBox: {
+    height: 60,
+    width: 60,
+    margin: 5,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default Page;

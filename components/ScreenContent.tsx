@@ -1,5 +1,4 @@
-import { Text, View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { Text, View, StyleSheet } from 'react-native';
 
 import { EditScreenInfo } from './EditScreenInfo';
 
@@ -20,23 +19,23 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
   );
 };
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
-    backgroundColor: theme.colors.bg.primary,
+    backgroundColor: '#f0f0f0', // Light gray color
   },
   separator: {
     height: 1,
     marginVertical: 30,
     width: '80%',
-    backgroundColor: theme.colors.border.regular,
+    backgroundColor: '#cccccc', // Gray color
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: theme.colors.text.primary,
+    color: '#333333', // Dark gray color
   },
-}));
+});

@@ -1,25 +1,25 @@
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';
-import { Button } from 'react-native';
-import { useUnistyles } from 'react-native-unistyles';
+import { Button, StyleSheet } from 'react-native';
 
 export default function NewProjStack() {
-  const { theme } = useUnistyles();
   const router = useRouter();
   return (
     <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: theme.colors.bg.primary,
-        },
-        headerTitleStyle: {
-          color: theme.colors.text.primary,
-        },
-        headerShadowVisible: false,
-        contentStyle: {
-          backgroundColor: theme.colors.bg.primary,
-        },
-      }}>
+      screenOptions={
+        {
+          // headerStyle: {
+          //   backgroundColor: styles.headerBackgroundColor,
+          // },
+          // headerTitleStyle: {
+          //   color: styles.headerTitleColor,
+          // },
+          // headerShadowVisible: false,
+          // contentStyle: {
+          //   backgroundColor: styles.headerBackgroundColor,
+          // },
+        }
+      }>
       <Stack.Screen
         name="index"
         options={{
@@ -31,3 +31,8 @@ export default function NewProjStack() {
     </Stack>
   );
 }
+
+// const styles = StyleSheet.create({
+//   headerBackgroundColor: '#ffffff', // Replace with your desired color
+//   headerTitleColor: '#000000', // Replace with your desired color
+// });

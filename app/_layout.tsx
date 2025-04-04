@@ -94,18 +94,18 @@ export default Sentry.wrap(function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       {/* <ClerkLoaded></ClerkLoaded> */}
-      <Suspense fallback={<Fallback />}>
-        <SQLiteProvider
+      {/* <Suspense fallback={<Fallback />}> */}
+      {/* <SQLiteProvider
           databaseName="notebook"
           options={{
             enableChangeListener: true,
-          }}>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <InitLayout />
-            <Toaster position="bottom-right" />
-          </GestureHandlerRootView>
-        </SQLiteProvider>
-      </Suspense>
+          }}> */}
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <InitLayout />
+        <Toaster position="bottom-right" />
+      </GestureHandlerRootView>
+      {/* </SQLiteProvider> */}
+      {/* </Suspense> */}
     </ClerkProvider>
   );
 });

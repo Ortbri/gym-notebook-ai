@@ -4,8 +4,7 @@ import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { Link, useRouter, useGlobalSearchParams, Stack } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useState, useEffect } from 'react';
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { StyleSheet, useUnistyles } from 'react-native-unistyles';
+import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { projects } from '~/db/schema';
 
@@ -23,7 +22,6 @@ export const PROJECT_COLORS = [
 
 const Page = () => {
   const [projectName, setProjectName] = useState('');
-  const { theme } = useUnistyles();
   const router = useRouter();
   const { bg } = useGlobalSearchParams<{ bg?: string }>();
   const [selectedColor, setSelectedColor] = useState<string>('#000000');
@@ -70,10 +68,10 @@ const Page = () => {
 
         <Link href="/(main)/(tabs)/statistics/newProj/color-select" asChild>
           <TouchableOpacity style={styles.btnItem}>
-            <Ionicons name="color-palette-outline" size={24} color={theme.colors.text.primary} />
+            <Ionicons name="color-palette-outline" size={24} color="#000" />
             <Text style={styles.btnItemText}>Color</Text>
             <View style={[styles.colorPreview, { backgroundColor: selectedColor }]} />
-            <Ionicons name="chevron-forward" size={22} color={theme.colors.text.primary} />
+            <Ionicons name="chevron-forward" size={22} color="#000" />
           </TouchableOpacity>
         </Link>
       </View>
@@ -81,27 +79,28 @@ const Page = () => {
   );
 };
 export default Page;
-const styles = StyleSheet.create((theme) => ({
+
+const styles = StyleSheet.create({
   btnTextDisabled: {
     fontSize: 18,
     fontWeight: '500',
-    color: theme.colors.text.secondary,
+    color: '#A9A9A9', // Assuming a disabled color
   },
   btnText: {
     fontSize: 18,
     fontWeight: '500',
-    color: theme.colors.text.primary,
+    color: '#000', // Assuming a primary text color
   },
   container: {
     marginHorizontal: 20,
-    backgroundColor: theme.colors.bg.secondary,
+    backgroundColor: '#FFFFFF', // Assuming a secondary background color
     borderRadius: 12,
     overflow: 'hidden',
   },
   input: {
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.colors.border.regular,
+    borderColor: '#CCCCCC', // Assuming a border color
     padding: 12,
     paddingHorizontal: 12,
     fontSize: 16,
@@ -110,10 +109,9 @@ const styles = StyleSheet.create((theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 12,
-    backgroundColor: theme.colors.bg.secondary,
+    backgroundColor: '#FFFFFF', // Assuming a secondary background color
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
-    gap: 12,
   },
   btnItemText: {
     fontSize: 16,
@@ -125,4 +123,4 @@ const styles = StyleSheet.create((theme) => ({
     height: 24,
     borderRadius: 12,
   },
-}));
+});

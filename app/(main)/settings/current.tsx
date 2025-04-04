@@ -1,7 +1,7 @@
 import { useClerk } from '@clerk/clerk-expo';
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
 export default function Settings() {
   const { signOut } = useClerk();
   return (
@@ -17,8 +17,8 @@ export default function Settings() {
   );
 }
 
-const styles = StyleSheet.create((theme, rt) => ({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-}));
+});
