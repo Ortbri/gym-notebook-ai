@@ -4,29 +4,8 @@ import { Image, Pressable, StyleSheet } from 'react-native';
 
 const StatisticsLayout = () => {
   return (
-    <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#ffffff', // Replace with your desired color
-        },
-        headerTitleStyle: {
-          color: '#000000', // Replace with your desired color
-        },
-        headerShadowVisible: false,
-        contentStyle: {
-          backgroundColor: '#ffffff', // Replace with your desired color
-        },
-      }}>
+    <Stack screenOptions={{}}>
       <Stack.Screen name="index" options={{ title: 'Statistics', headerRight: HeaderRight }} />
-      <Stack.Screen
-        name="newProj"
-        options={{
-          headerShown: false,
-          presentation: 'modal',
-          sheetGrabberVisible: true,
-          sheetCornerRadius: 16, // Replace with your desired value
-        }}
-      />
     </Stack>
   );
 };

@@ -1,26 +1,11 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { StyleSheet } from 'react-native';
 
 import MoreButton from '~/components/ui/MoreButton';
 
 const CalendarLayout = () => {
   return (
-    <Stack
-    // screenOptions={{
-    //   headerStyle: {
-    //     backgroundColor: styles.headerBackgroundColor,
-    //   },
-    //   headerTitleStyle: {
-    //     color: styles.headerTitleColor,
-    //   },
-    //   headerShadowVisible: false,
-    //   contentStyle: {
-    //     backgroundColor: styles.contentBackgroundColor,
-    //   },
-    // }
-    // }
-    >
+    <Stack>
       <Stack.Screen
         name="index"
         options={{

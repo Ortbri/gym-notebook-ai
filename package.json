@@ -24,10 +24,11 @@
     "@clerk/clerk-expo": "^2.9.6",
     "@expo/vector-icons": "^14.0.0",
     "@react-navigation/native": "^7.0.3",
+    "@sentry/react-native": "^6.10.0",
     "@tamagui/babel-plugin": "^1.125.26",
     "@tamagui/config": "^1.125.26",
     "@tamagui/metro-plugin": "^1.125.26",
-    "@sentry/react-native": "^6.10.0",
+    "@tamagui/toast": "^1.125.32",
     "babel-plugin-inline-import": "^3.0.0",
     "burnt": "^0.13.0",
     "expo": "^52.0.42",
@@ -61,10 +62,9 @@
     "react-native-screens": "4.10.0",
     "react-native-web": "~0.19.10",
     "tamagui": "^1.125.26",
-    "zeego": "^3.0.6",
     "tinybase": "^5.4.9",
+    "zeego": "^3.0.6",
     "zod": "^3.23.8"
-
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

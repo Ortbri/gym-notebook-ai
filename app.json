@@ -12,14 +12,13 @@
     },
     "plugins": [
       "expo-router",
+      "react-native-bottom-tabs",
+      "expo-sqlite",
       [
         "expo-dev-launcher",
         {
           "launchMode": "most-recent"
         }
-      ],
-      [
-        "react-native-bottom-tabs"
       ],
       [
         "expo-build-properties",
@@ -30,7 +29,6 @@
           }
         }
       ],
-      "expo-sqlite",
       [
         "@sentry/react-native/expo",
         {

@@ -32,6 +32,9 @@ importers:
       '@tamagui/metro-plugin':
         specifier: ^1.125.26
         version: 1.125.32(@swc/helpers@0.5.15)(react-dom@18.3.1(react@18.3.1))(react-native-reanimated@3.17.2(@babel/core@7.26.10)(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@4.12.0(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)
+      '@tamagui/toast':
+        specifier: ^1.125.32
+        version: 1.125.32(react-dom@18.3.1(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
       babel-plugin-inline-import:
         specifier: ^3.0.0
         version: 3.0.0
@@ -2479,6 +2482,11 @@ packages:
 
   '@tamagui/timer@1.125.32':
     resolution: {integrity: sha512-jMBvd6yjMdD2dT4vum4mSzVQYnbzy6Clvc7ly+6ZzaWIHz1XpPk6FWAIYWiXXCaF1zKmeJpxpOl58/Z27MFbFQ==}
+
+  '@tamagui/toast@1.125.32':
+    resolution: {integrity: sha512-2/xUxdvQW5qg7+gSUlD05EYxcIueB/ae3EA3gA46rDNmGJTCtAwd8F4M8bapRKysrXx5tuEBokcxAlLKo54LOg==}
+    peerDependencies:
+      react: '*'
 
   '@tamagui/toggle-group@1.125.32':
     resolution: {integrity: sha512-my6Tnl+7+5pd97xs/kpRNkNwOuSVznaKIjIrTDH3GRZdFh0Qi8IBo/yE1DXepgorzYYNGCv2IwMtcalVPZxn4Q==}
@@ -10166,6 +10174,27 @@ snapshots:
       - react-dom
 
   '@tamagui/timer@1.125.32': {}
+
+  '@tamagui/toast@1.125.32(react-dom@18.3.1(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@tamagui/animate-presence': 1.125.32(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@tamagui/compose-refs': 1.125.32(react@18.3.1)
+      '@tamagui/constants': 1.125.32(react@18.3.1)
+      '@tamagui/core': 1.125.32(react-dom@18.3.1(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
+      '@tamagui/create-context': 1.125.32(react@18.3.1)
+      '@tamagui/dismissable': 1.125.32(react-dom@18.3.1(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
+      '@tamagui/helpers': 1.125.32(react@18.3.1)
+      '@tamagui/polyfill-dev': 1.125.32
+      '@tamagui/portal': 1.125.32(react-dom@18.3.1(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
+      '@tamagui/stacks': 1.125.32(react-dom@18.3.1(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
+      '@tamagui/start-transition': 1.125.32
+      '@tamagui/text': 1.125.32(react-dom@18.3.1(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
+      '@tamagui/use-controllable-state': 1.125.32(react@18.3.1)
+      '@tamagui/visually-hidden': 1.125.32(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+    transitivePeerDependencies:
+      - react-dom
+      - react-native
 
   '@tamagui/toggle-group@1.125.32(react-dom@18.3.1(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)':
     dependencies:

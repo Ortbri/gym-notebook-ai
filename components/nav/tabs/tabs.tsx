@@ -2,7 +2,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { RevenueCatProvider } from '~/providers/RevenueCat';
+import { RevenueCatProvider } from '~/providers/RevenueCatProvider';
 
 const TabsLayout = () => {
   return (

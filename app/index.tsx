@@ -1,11 +1,12 @@
 import { useClerk, useSSO } from '@clerk/clerk-expo';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import * as AuthSession from 'expo-auth-session';
 import * as Linking from 'expo-linking';
 import { Link } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import React, { useCallback, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+
+// import Button from '~/components/ui/Button';
 
 export const useWarmUpBrowser = () => {
   useEffect(() => {
@@ -61,18 +62,19 @@ export default function Home() {
       <Text style={styles.title}>Welcome</Text>
       <View style={styles.emptyCont} />
 
-      <Pressable style={styles.btnContainer} onPress={() => onPress('google')}>
+      {/* <Pressable style={styles.btnContainer} onPress={() => onPress('google')}>
         <Ionicons name="logo-google" size={18} />
         <Text style={styles.btnText}>Sign in w/ google</Text>
-      </Pressable>
-      <Pressable style={styles.btnContainer} onPress={() => onPress('apple')}>
+      </Pressable> */}
+      {/* <Pressable style={styles.btnContainer} onPress={() => onPress('apple')}>
         <Ionicons name="logo-apple" size={18} />
         <Text style={styles.btnText}>Sign in w/ apples</Text>
-      </Pressable>
-      <Pressable style={styles.btnContainer} onPress={openLink}>
+      </Pressable> */}
+      {/* <Button>Testing</Button> */}
+      {/* <Pressable style={styles.btnContainer} onPress={openLink}>
         <Ionicons name="mail" size={18} />
         <Text style={styles.btnText}>Continue w/ email</Text>
-      </Pressable>
+      </Pressable> */}
 
       <Text style={styles.text}>
         By continuing, you agree to our{' '}

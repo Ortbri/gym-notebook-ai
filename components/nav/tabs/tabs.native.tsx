@@ -1,7 +1,7 @@
 import React from 'react';
 
 import NativeTabs from '~/components/nav/Tabs';
-import { RevenueCatProvider } from '~/providers/RevenueCat';
+import { RevenueCatProvider } from '~/providers/RevenueCatProvider';
 
 const TabsLayout = () => {
   return (

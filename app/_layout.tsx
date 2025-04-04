@@ -3,16 +3,18 @@ import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/nati
 import * as Sentry from '@sentry/react-native';
 import { useFonts } from 'expo-font';
 import { Stack, SplashScreen } from 'expo-router';
-import * as React from 'react';
+
 import { useEffect } from 'react';
 import { TamaguiProvider, Theme, ThemeName } from 'tamagui';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 
-import { ThemeProvider, useTheme } from '../providers/Theme';
+import { ThemeProvider, useTheme } from '../providers/ThemeProvider';
 import { tamaguiConfig } from '../tamagui.config';
 
 import { NAVIGATION_THEMES } from '~/constants/nav-themes';
 import { ClerkProvider } from '@clerk/clerk-expo';
+import { CustomToast } from '~/components/CustomToast';
+import { ToastViewport } from '@tamagui/toast';
 
 // Initialize Sentry
 const navigationIntegration = Sentry.reactNavigationIntegration({
@@ -63,14 +65,14 @@ function ThemedApp() {
         <Theme name={validColorTheme as ThemeName}>
           <Stack>
             <Stack.Screen
-              name="(tabs)"
+              name="(main)"
               options={{
                 headerShown: false,
               }}
             />
-            <Stack.Screen name="chat/index" />
-            <Stack.Screen name="test" />
           </Stack>
+          <CustomToast />
+          <ToastViewport top={'$10'} left={0} right={0} />
         </Theme>
       </NavigationThemeProvider>
     </TamaguiProvider>
