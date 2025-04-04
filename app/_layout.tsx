@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 import { Stack, SplashScreen } from 'expo-router';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { TamaguiProvider, Theme } from 'tamagui';
+import { TamaguiProvider, Theme, ThemeName } from 'tamagui';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 
 import { ThemeProvider, useTheme } from '../providers/ThemeContext';
@@ -59,7 +59,7 @@ function ThemedApp() {
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme={tamaguiTheme}>
       <NavigationThemeProvider value={navigationTheme}>
-        <Theme name={validColorTheme}>
+        <Theme name={validColorTheme as ThemeName}>
           <Stack>
             <Stack.Screen
               name="(tabs)"

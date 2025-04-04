@@ -1,6 +1,5 @@
 import { Stack } from 'expo-router';
-import { Text, View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { Text, View, StyleSheet } from 'react-native';
 
 export default function Home() {
   return (
@@ -13,15 +12,15 @@ export default function Home() {
   );
 }
 
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: theme.colors.bg.primary,
+    backgroundColor: '#ffffff', // Default background color
   },
   text: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: theme.colors.text.primary,
+    color: '#000000', // Default text color
   },
-}));
+});

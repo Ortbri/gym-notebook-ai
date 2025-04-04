@@ -215,6 +215,7 @@ export const themes: TamaguiThemes =
 
 // Configuration:
 
+// @ts-ignore
 export const selectionStyles = (theme) =>
   theme.color5
     ? {
