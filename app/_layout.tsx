@@ -1,9 +1,10 @@
 import '../tamagui-web.css';
+import { ClerkProvider } from '@clerk/clerk-expo';
 import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native';
 import * as Sentry from '@sentry/react-native';
+import { ToastViewport } from '@tamagui/toast';
 import { useFonts } from 'expo-font';
 import { Stack, SplashScreen } from 'expo-router';
-
 import { useEffect } from 'react';
 import { TamaguiProvider, Theme, ThemeName } from 'tamagui';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
@@ -11,10 +12,8 @@ import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 import { ThemeProvider, useTheme } from '../providers/ThemeProvider';
 import { tamaguiConfig } from '../tamagui.config';
 
-import { NAVIGATION_THEMES } from '~/constants/nav-themes';
-import { ClerkProvider } from '@clerk/clerk-expo';
 import { CustomToast } from '~/components/CustomToast';
-import { ToastViewport } from '@tamagui/toast';
+import { NAVIGATION_THEMES } from '~/constants/nav-themes';
 
 // Initialize Sentry
 const navigationIntegration = Sentry.reactNavigationIntegration({
@@ -72,7 +71,7 @@ function ThemedApp() {
             />
           </Stack>
           <CustomToast />
-          <ToastViewport top={'$10'} left={0} right={0} />
+          <ToastViewport top="$10" left={0} right={0} />
         </Theme>
       </NavigationThemeProvider>
     </TamaguiProvider>
