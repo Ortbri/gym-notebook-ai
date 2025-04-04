@@ -19,7 +19,7 @@ export const RevenueCatProvider = ({ children }: any) => {
   const [isReady, setIsReady] = useState(false);
   const [isPro, setIsPro] = useState(false);
   const [currentOffering, setCurrentOffering] = useState<PurchasesOffering | null>(null);
-  // console.log(JSON.stringify(currentOffering, null, 2));
+  console.log(JSON.stringify(currentOffering, null, 2));
 
   // Update user state based on previous purchases
 
