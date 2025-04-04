@@ -1,31 +1,30 @@
-import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
-import { tokenCache } from '@clerk/clerk-expo/token-cache';
+import '../tamagui-web.css';
+import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native';
 import * as Sentry from '@sentry/react-native';
-import { Toaster } from 'burnt/web';
-import { drizzle } from 'drizzle-orm/expo-sqlite';
-import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
-import { Stack, useNavigationContainerRef, usePathname, useRouter, useSegments } from 'expo-router';
-import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite';
-import { Suspense, useEffect } from 'react';
-import { ActivityIndicator, View } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useFonts } from 'expo-font';
+import { Stack, SplashScreen } from 'expo-router';
+import * as React from 'react';
+import { useEffect } from 'react';
+import { TamaguiProvider, Theme } from 'tamagui';
+import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 
-import migrations from '../drizzle/migrations';
+import { ThemeProvider, useTheme } from '../providers/ThemeContext';
+import { tamaguiConfig } from '../tamagui.config';
 
-import { addDummyData } from '~/utils/addDummyData';
-// import { LogBox } from 'react-native';
+import { NAVIGATION_THEMES } from '~/constants/nav-themes';
+
+// Initialize Sentry
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: true,
 });
 
-// TODO: source maps for sentry? https://docs.sentry.io/platforms/javascript/sourcemaps/
 Sentry.init({
   dsn: 'https://32f899dfbf5bdcac1549ca8e6f5442c9@o4508489595813888.ingest.us.sentry.io/4509085649993728',
   attachScreenshot: true,
   tracesSampleRate: 1.0,
-  profilesSampleRate: 1.0, // prod may change
-  replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 0, // Disabled in development
-  replaysOnErrorSampleRate: process.env.NODE_ENV === 'production' ? 1.0 : 0, // Disabled in development
+  profilesSampleRate: 1.0,
+  replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 0,
+  replaysOnErrorSampleRate: process.env.NODE_ENV === 'production' ? 1.0 : 0,
   integrations: [
     Sentry.mobileReplayIntegration({
       maskAllImages: true,
@@ -35,93 +34,69 @@ Sentry.init({
     navigationIntegration,
     Sentry.spotlightIntegration(),
   ],
-  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
-  // spotlight: __DEV__,
 });
-// LogBox.ignoreLogs(['Clerk: Clker has been loaded with development keys']);
 
-const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+export { ErrorBoundary } from 'expo-router';
 
-if (!publishableKey) {
-  throw new Error('Missing Publishable Key');
+// Prevent the splash screen from auto-hiding before getting the color scheme.
+SplashScreen.preventAutoHideAsync();
+
+function ThemedApp() {
+  const { colorTheme, isDarkMode } = useTheme();
+
+  // Default to 'red' if colorTheme is invalid
+  const validColorTheme = ['red', 'blue', 'green', 'yellow'].includes(colorTheme)
+    ? colorTheme
+    : 'red';
+
+  // Determine base theme for Tamagui
+  const tamaguiTheme = isDarkMode ? 'dark' : 'light';
+
+  // Get the appropriate navigation theme based on mode and color
+  const mode = isDarkMode ? 'dark' : 'light';
+  const navigationTheme = NAVIGATION_THEMES[mode][validColorTheme];
+
+  return (
+    <TamaguiProvider config={tamaguiConfig} defaultTheme={tamaguiTheme}>
+      <NavigationThemeProvider value={navigationTheme}>
+        <Theme name={validColorTheme}>
+          <Stack>
+            <Stack.Screen
+              name="(tabs)"
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="chat/index" />
+            <Stack.Screen name="test" />
+          </Stack>
+        </Theme>
+      </NavigationThemeProvider>
+    </TamaguiProvider>
+  );
 }
 
-const InitLayout = () => {
-  const router = useRouter();
-  const { isSignedIn, isLoaded } = useAuth();
-  const segments = useSegments();
-  const pathname = usePathname();
+export default function RootLayout() {
+  const [loaded, error] = useFonts({
+    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
+    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
+  });
 
   useEffect(() => {
-    if (!isLoaded) return;
-
-    const isInMain = segments[0] === '(main)';
-
-    if (isSignedIn && !isInMain) {
-      router.replace('/(main)/(tabs)/calendar');
-    } else if (!isSignedIn && pathname !== '/') {
-      router.replace('/');
+    if (loaded || error) {
+      SplashScreen.hideAsync();
     }
-  }, [isSignedIn, isLoaded]);
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-        animation: 'fade',
-        animationDuration: 100,
-        contentStyle: {},
-      }}>
-      <Stack.Screen name="index" />
-    </Stack>
-  );
-};
-
-export default Sentry.wrap(function RootLayout() {
-  const ref = useNavigationContainerRef();
-  useEffect(() => {
-    navigationIntegration.registerNavigationContainer(ref);
-  }, [ref]);
-
-  const expoDB = openDatabaseSync('notebook');
-  const db = drizzle(expoDB);
-  const { success, error } = useMigrations(db, migrations);
-
-  useEffect(() => {
-    if (!success) return;
-    addDummyData(db);
-  }, [success, error]);
-  return (
-    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      {/* <ClerkLoaded></ClerkLoaded> */}
-      {/* <Suspense fallback={<Fallback />}> */}
-      {/* <SQLiteProvider
-          databaseName="notebook"
-          options={{
-            enableChangeListener: true,
-          }}> */}
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <InitLayout />
-        <Toaster position="bottom-right" />
-      </GestureHandlerRootView>
-      {/* </SQLiteProvider> */}
-      {/* </Suspense> */}
-    </ClerkProvider>
-  );
-});
-
-function Fallback() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" color="white" />
-    </View>
+    <TinyBaseProvider>
+      <ThemeProvider>
+        <ThemedApp />
+      </ThemeProvider>
+    </TinyBaseProvider>
   );
 }
-
-// only for web
-// useEffect(() => {
-//   if (Platform.OS === 'web') {
-//     document.body.style.backgroundColor = theme.colors.bg.primary;
-//     document.documentElement.style.backgroundColor = theme.colors.bg.primary;
-//   }
-// }, [theme]);
