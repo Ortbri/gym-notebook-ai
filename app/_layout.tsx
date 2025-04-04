@@ -8,10 +8,11 @@ import { useEffect } from 'react';
 import { TamaguiProvider, Theme, ThemeName } from 'tamagui';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 
-import { ThemeProvider, useTheme } from '../providers/ThemeContext';
+import { ThemeProvider, useTheme } from '../providers/Theme';
 import { tamaguiConfig } from '../tamagui.config';
 
 import { NAVIGATION_THEMES } from '~/constants/nav-themes';
+import { ClerkProvider } from '@clerk/clerk-expo';
 
 // Initialize Sentry
 const navigationIntegration = Sentry.reactNavigationIntegration({
@@ -93,10 +94,12 @@ export default function RootLayout() {
   }
 
   return (
-    <TinyBaseProvider>
-      <ThemeProvider>
-        <ThemedApp />
-      </ThemeProvider>
-    </TinyBaseProvider>
+    <ClerkProvider>
+      <TinyBaseProvider>
+        <ThemeProvider>
+          <ThemedApp />
+        </ThemeProvider>
+      </TinyBaseProvider>
+    </ClerkProvider>
   );
 }

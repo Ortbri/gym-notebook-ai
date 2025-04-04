@@ -1,5 +1,7 @@
+import { defaultConfig } from '@tamagui/config/v4';
 import { createTamagui } from 'tamagui';
-import { defaultConfig } from './tam.conf.extra';
+
+// import { defaultConfig } from './tam.conf.extra'; // can look up to see base styling
 
 export const tamaguiConfig = createTamagui(defaultConfig);
 
