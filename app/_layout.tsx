@@ -24,8 +24,8 @@ Sentry.init({
   attachScreenshot: true,
   tracesSampleRate: 1.0,
   profilesSampleRate: 1.0, // prod may change
-  replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0, // in prod to lower value
-  replaysOnErrorSampleRate: 1.0,
+  replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 0, // Disabled in development
+  replaysOnErrorSampleRate: process.env.NODE_ENV === 'production' ? 1.0 : 0, // Disabled in development
   integrations: [
     Sentry.mobileReplayIntegration({
       maskAllImages: true,
