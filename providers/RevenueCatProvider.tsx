@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import Purchases, { LOG_LEVEL, CustomerInfo, PurchasesOffering } from 'react-native-purchases';
 
@@ -12,10 +12,14 @@ interface RevenueCatProps {
   isPro: boolean;
 }
 
+interface ProviderProps {
+  children: React.ReactNode;
+}
+
 const RevenueCatContext = createContext<RevenueCatProps | null>(null);
 
 // Provide RevenueCat functions to our app
-export const RevenueCatProvider = ({ children }: any) => {
+export const RevenueCatProvider = ({ children }: ProviderProps) => {
   const [isReady, setIsReady] = useState(false);
   const [isPro, setIsPro] = useState(false);
   const [currentOffering, setCurrentOffering] = useState<PurchasesOffering | null>(null);

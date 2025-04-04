@@ -69,9 +69,9 @@ function ThemedApp() {
                 headerShown: false,
               }}
             />
-          </Stack>
           <CustomToast />
           <ToastViewport top="$10" left={0} right={0} />
+          </Stack>
         </Theme>
       </NavigationThemeProvider>
     </TamaguiProvider>

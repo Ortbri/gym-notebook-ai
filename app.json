@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "gym-notebook",
+    "name": "Gym Notebook",
     "slug": "gym-notebook",
     "version": "1.0.0",
     "newArchEnabled": true,
@@ -48,9 +48,11 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1a1a1a"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ortbit02.gymnotebook",
