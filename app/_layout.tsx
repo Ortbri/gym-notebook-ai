@@ -1,10 +1,11 @@
 import '../tamagui-web.css';
-import { ClerkProvider } from '@clerk/clerk-expo';
+import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native';
 import * as Sentry from '@sentry/react-native';
-import { ToastViewport } from '@tamagui/toast';
+import { ToastProvider, ToastViewport } from '@tamagui/toast';
 import { useFonts } from 'expo-font';
-import { Stack, SplashScreen } from 'expo-router';
+import { SplashScreen, useRouter, useSegments, usePathname, Slot } from 'expo-router';
 import { useEffect } from 'react';
 import { TamaguiProvider, Theme, ThemeName } from 'tamagui';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
@@ -43,8 +44,24 @@ export { ErrorBoundary } from 'expo-router';
 // Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();
 
-function ThemedApp() {
+function InitialLayout() {
+  const router = useRouter();
+  const segments = useSegments();
+  const pathname = usePathname();
   const { colorTheme, isDarkMode } = useTheme();
+  const { isSignedIn, isLoaded } = useAuth();
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    const isInMain = segments[0] === '(main)';
+
+    if (isSignedIn && !isInMain) {
+      router.replace('/(main)/(tabs)/calendar');
+    } else if (!isSignedIn && pathname !== '/') {
+      router.replace('/(auth)/auth');
+    }
+  }, [isSignedIn, isLoaded]);
 
   // Default to 'red' if colorTheme is invalid
   const validColorTheme = ['red', 'blue', 'green', 'yellow'].includes(colorTheme)
@@ -53,7 +70,6 @@ function ThemedApp() {
 
   // Determine base theme for Tamagui
   const tamaguiTheme = isDarkMode ? 'dark' : 'light';
-
   // Get the appropriate navigation theme based on mode and color
   const mode = isDarkMode ? 'dark' : 'light';
   const navigationTheme = NAVIGATION_THEMES[mode][validColorTheme];
@@ -61,21 +77,22 @@ function ThemedApp() {
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme={tamaguiTheme}>
       <NavigationThemeProvider value={navigationTheme}>
-        <Theme name={validColorTheme as ThemeName}>
-          <Stack>
-            <Stack.Screen
-              name="(main)"
-              options={{
-                headerShown: false,
-              }}
-            />
-          <CustomToast />
-          <ToastViewport top="$10" left={0} right={0} />
-          </Stack>
-        </Theme>
+        <ToastProvider>
+          <Theme name={validColorTheme as ThemeName}>
+            <Slot />
+            <CustomToast />
+            <ToastViewport top="$10" left={0} right={0} />
+          </Theme>
+        </ToastProvider>
       </NavigationThemeProvider>
     </TamaguiProvider>
   );
+}
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+if (!publishableKey) {
+  throw new Error('Missing Publishable Key');
 }
 
 export default function RootLayout() {
@@ -95,12 +112,14 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider>
-      <TinyBaseProvider>
-        <ThemeProvider>
-          <ThemedApp />
-        </ThemeProvider>
-      </TinyBaseProvider>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <ClerkLoaded>
+        <TinyBaseProvider>
+          <ThemeProvider>
+            <InitialLayout />
+          </ThemeProvider>
+        </TinyBaseProvider>
+      </ClerkLoaded>
     </ClerkProvider>
   );
 }
