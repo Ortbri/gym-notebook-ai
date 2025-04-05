@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Tech Stack
+
+## App Platform
+- Expo SDK 52
+- React Native
+- TypeScript
+
+## Navigation & UI
+- Expo Router
+- React Navigation (tabs/stacks)
+- Unistyles v3 (Tailwind-like styling)
+- Burnt (toast notifications)
+
+## State & Data
+- TinyBase (latest, with SQLite persistence)
+- Zustand (only if needed)
+- Expo SQLite
+- SecureStore for secrets
+
+## Auth
+- Clerk (Expo-compatible, JWT sessions)
+
+## AI / LLM
+- Whisper (voice-to-text for logging)
+- Custom prompt system fed from `llms.txt`
+- Workout suggestion API tools
+
+## Monitoring & Monetization
+- Sentry (crash reporting)
+- RevenueCat (via `react-native-purchases`)
+
+## OTA & Deploy
+- EAS Updates

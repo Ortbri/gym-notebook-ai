@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Database
+
+## Tech
+- TinyBase with SQLite backend
+- Tables:
+  - `workouts`: Each day’s workout log
+  - `sets`: weight, reps, movement
+  - `movements`: metadata (e.g., bench, squat)
+  - `user`: preferences, progress settings
+
+## Persistence
+- Local only for now (SQLite via Expo)
+- Future: optional sync with Supabase or Firebase
+
+## Helpers
+- Views for today's workout
+- Indexes by movement name
+- Relationships: `set -> workout`, `set -> movement`

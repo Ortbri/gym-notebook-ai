@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Subscriptions & RevenueCat
+
+## Product Types
+- Monthly
+- Yearly
+
+## RevenueCat
+- Integrated via `react-native-purchases`
+- Products fetched on mount
+- Purchase + restore available in Settings screen
+
+## Gating
+- Logging = free
+- Workout suggestions = premium
+- Stats = premium
+
+## Local Access
+- Store `isProUser` in TinyBase

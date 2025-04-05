@@ -1,0 +1,158 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Gym Notebook AI – Expo App Project Plan
+
+## App Purpose
+
+A mobile-first gym logbook powered by AI. Users can:
+- 🗣 Log workouts using voice (via Whisper)
+- 🧠 Generate workout suggestions from an LLM + workouts API
+- 📈 Track strength progress realistically over time
+- 🔐 Access premium features via a subscription
+
+---
+
+## Tech Stack Overview
+
+### App Platform
+- **Expo SDK 52**
+- **React Native + TypeScript**
+- **Expo Router** (file-based navigation)
+- **Unistyles v3** (Tailwind-style design system)
+- **Burnt** (toast notifications)
+- **Zod** (validation)
+
+### State & Data
+- **TinyBase** (latest, with SQLite persistence)
+- **SQLite** (via `expo-sqlite`)
+- **SecureStore** for sensitive values
+
+### Authentication
+- **Clerk** (Expo-compatible user management)
+
+### AI & Voice
+- **Whisper** (voice-to-text for set logging)
+- **LLM integration**, using `llms.txt` for prompt grounding
+- **Tools** like `getUserWorkouts()` exposed to the AI
+
+### Subscriptions & Monetization
+- **RevenueCat** (via `react-native-purchases`)
+- Monthly / yearly plans
+- Premium features gated in-app
+
+### Monitoring
+- **Sentry** (error + performance monitoring)
+- **Expo Updates** (OTA delivery via EAS)
+
+---
+
+## Project Structure
+
+app/
+  (app)/
+    sign-in.tsx
+    sign-up.tsx
+      (auth)/
+        auth.tsx           # Voice logging
+      (root)/ // this here is the protected route for payed features
+          (tabs)/ 
+              calendar/ 
+                _layout.tsx           
+                index.tsx           # Todays workout pressing goes to chat [id]
+              statistics/ 
+                _layout.tsx           
+                index.tsx           # charts of progress -- stats on how you are doing
+          chat/ // this here is the protected route for payed features
+            [id].tsx          # Voice logging / generate workout / manual logging 
+
+---
+
+## Development Phases
+
+### ✅ Phase 1: Foundation
+- [x] Setup Expo project + TypeScript
+- [x] Configure Expo Router
+- [x] Install + configure Unistyles v3
+- [x] Integrate Clerk for auth
+- [x] Setup TinyBase with SQLite backend
+- [x] Add Sentry and OTA setup
+
+### 🏋️ Phase 2: Logging (In Progress)
+- [ ] Whisper setup and mic trigger
+- [ ] Parse phrases like “225 for 8 on bench”
+- [ ] Append structured set to today’s log
+- [ ] Confirm accuracy in UI
+
+### 🧠 Phase 3: AI Workouts
+- [ ] Load `llms.txt` as prompt base
+- [ ] Expose tools to LLM
+- [ ] Suggest workouts for selected focus
+- [ ] Review/edit/confirm generated log
+
+### 📈 Phase 4: Stats
+- [ ] Graph lifts over time
+- [ ] Show 1RMs, PRs, volume changes
+- [ ] Adapt graph to experience level
+
+### 💸 Phase 5: Subscriptions
+- [x] RevenueCat setup + product config
+- [ ] Gate premium-only features
+- [ ] Handle restore + upgrades
+- [ ] UI for plan management
+
+### 🚀 Phase 6: Polish & Launch
+- [ ] Final visual polish (dark mode, spacing, feedback)
+- [ ] Analytics
+- [ ] Cross-device QA
+- [ ] App Store + Play Store release
+
+---
+
+## Features Overview
+
+### ✅ Voice Logging
+- Launch Whisper → record → parse to `{ movement, weight, reps }`
+- Auto-append to today’s log
+
+### ✅ Workout Suggestions
+- “I’m doing chest” → returns push-focused workout
+- Can pull from your own history
+- Realistic and periodized outputs
+
+### ✅ Progress Tracking
+- View graph for movement trends (e.g. bench over months)
+- Estimate 1RMs
+- Deload-aware curve fitting
+
+### ✅ Subscription Gating
+- Logging: free
+- Workout Gen: premium
+- Stats/Graphs: premium
+
+---
+
+## Development Guidelines
+
+- Functional components with TypeScript
+- Screens follow Expo Router conventions
+- State with TinyBase + SQLite
+- Gating via `isProUser` stored locally
+- `llms.txt` used as shared prompt source
+- Secure data via SecureStore
+
+---
+
+## Documentation Plan (other `.mdc` files)
+- `stack.mdc`: Stack + library decisions
+- `llm.mdc`: Prompt logic, tools, `llms.txt` reference
+- `auth.mdc`: Clerk logic + session management
+- `subscriptions.mdc`: RevenueCat setup + gating logic
+- `features.mdc`: Per-feature breakdowns
+- `db.mdc`: TinyBase schema + syncing logic
+
+
+
+

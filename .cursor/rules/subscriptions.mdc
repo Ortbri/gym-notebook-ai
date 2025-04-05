@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Subscriptions & Paywall – Gym Notebook AI
+
+## Billing Platform
+- **RevenueCat** via `react-native-purchases`
+- Products defined in RevenueCat dashboard:
+  - `monthly_premium`
+  - `yearly_premium`
+
+## In-App Purchase Flow
+- Purchase flow triggered from settings page
+- `Purchases.getOfferings()` fetches available plans
+- Restore handled via `Purchases.restorePurchases()`
+
+## User State
+- Store result of `Purchases.getCustomerInfo()` locally in TinyBase:
+  ```ts
+  isProUser: boolean
+  subscriptionType: 'monthly' | 'yearly' | null

@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# LLM Integration
+
+## Prompt Sources
+- `llms.txt` is fed into all prompt calls for reference context
+- Includes:
+  - Training methodology
+  - Lifting principles
+  - Workout format standards
+  - Edge cases + expected logic
+
+## Use Cases
+- **Voice Parsing:** Turn "225 for 5" into structured logs
+- **Workout Suggestions:** If user says "I’m doing push today," return list of movement patterns + recommendations
+- **Progress Analysis:** Generate contextual feedback on trends
+
+## Tools
+- `getUserWorkouts()`
+- `getUserProgressGraph()`
+- `getLiftHistory(movement: string)`
+
+## Goals
+- Build realistic plans (no fake strength jumps)
+- Context-aware generation
+- Integrate tools inside prompt chain

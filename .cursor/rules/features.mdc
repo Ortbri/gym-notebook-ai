@@ -1,0 +1,25 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Feature Overview
+
+## Logging (Voice Input)
+- Trigger Whisper via mic button
+- Output parsed as `{ movement, weight, reps }`
+- Save into today's TinyBase log
+
+## Generated Workouts
+- Use selected focus (e.g., "chest")
+- Call LLM with history context
+- Output list of suggested movements with rep/weight ranges
+
+## Progress Tracking
+- Track per movement
+- Volume, PR, 1RM estimates
+- Show realistic strength curves
+
+## Subscription Gating
+- Logging: free
+- Workout gen & stats: premium
