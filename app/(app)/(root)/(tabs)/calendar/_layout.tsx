@@ -20,10 +20,4 @@ const CalendarLayout = () => {
   );
 };
 
-// const styles = StyleSheet.create({
-//   headerBackgroundColor: '#ffffff', // Replace with your desired color
-//   headerTitleColor: '#000000', // Replace with your desired color
-//   contentBackgroundColor: '#ffffff', // Replace with your desired color
-// });
-
 export default CalendarLayout;

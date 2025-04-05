@@ -41,11 +41,61 @@ const Page = () => {
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{ paddingTop: 14 }}>
         <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          {/* <Text style={styles.boxText}>Box 1 {!isPro && '(Pro Only)'}</Text> */}
           <Typography>Box 1 {!isPro && '(Pro Only)'}</Typography>
         </TouchableOpacity>
         <TouchableOpacity style={styles.box} onPress={onBoxPress}>
           <Typography>Box 2 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
         </TouchableOpacity>
         <TouchableOpacity style={styles.box} onPress={onBoxPress}>
           <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
@@ -65,7 +115,7 @@ const styles = StyleSheet.create((theme) => ({
     flex: 1,
 
     padding: 20,
-    backgroundColor: theme.colors.bg.secondary,
+    // backgroundColor: theme.colors.bg.secondary,
   },
   box: {
     backgroundColor: theme.colors.bg.primary,

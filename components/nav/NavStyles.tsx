@@ -38,6 +38,9 @@ const useNavStyle = () => {
 
   const defaultStyling = {
     headerLargeTitleShadowVisible: false,
+    contentStyle: {
+      backgroundColor: theme.colors.bg.primary,
+    },
     headerLargeTitleStyle: {
       fontWeight: '800',
       fontFamily: 'SourGummyBold',
@@ -58,9 +61,9 @@ const useNavStyle = () => {
     // blur settings
     headerBlurSettings: {
       headerLargeStyle: {
-        backgroundColor: 'truansparent',
+        backgroundColor: theme.colors.bg.primary,
       },
-      headerBlurEffect: 'regular' as BlurEffectTypes,
+      headerBlurEffect: 'prominent' as BlurEffectTypes,
       // effectiveTheme === 'dark' ? ('dark' as BlurEffectTypes) : ('light' as BlurEffectTypes),
       headerTransparent: Platform.OS === 'ios',
       // headerStyle: {
@@ -89,9 +92,9 @@ const useNavStyle = () => {
     headerModalSettings: {
       // TODO: could add body color changes
 
-      contentStyle: {
-        backgroundColor: theme.colors.bg.primary, // was card color
-      },
+      // contentStyle: {
+      //   backgroundColor: theme.colors.bg.primary, // was card color
+      // },
       headerStyle: {
         backgroundColor: theme.colors.bg.primary,
       },

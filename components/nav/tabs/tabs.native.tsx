@@ -9,20 +9,29 @@ const TabsLayout = () => {
   return (
     <RevenueCatProvider>
       <NativeTabs
-        tabBarStyle={{
-          fontFamily: 'SourGummyRegular',
-          // fontSize: 24,
-        }}
+        hapticFeedbackEnabled
+        // tabBarStyle={{
+        //   // fontFamily: 'SourGummyRegular',
+        //   fontFamily: 'SourGummyBold',
+        //   fontSize: 33,
+        // }}
         // hapticFeedbackEnabled
+        // labeled={false}
+        tabBarLabelStyle={{
+          // not working right now
+          fontFamily: 'SourGummyRegular',
+          // fontSize: 33,
+        }}
         screenOptions={{
-          tabBarActiveTintColor: theme.colors.accent.strong,
-          tabBarInactiveTintColor: theme.colors.text.tertiary,
+          tabBarActiveTintColor: theme.colors.text.primary,
+          tabBarInactiveTintColor: theme.colors.text.primary,
         }}
         scrollEdgeAppearance="transparent">
         <NativeTabs.Screen
           name="calendar"
           options={{
             title: 'Today',
+            // tabBarLabel
             tabBarIcon: ({ focused }) => ({
               sfSymbol: focused ? 'flame.fill' : 'flame',
             }),
