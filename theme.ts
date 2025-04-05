@@ -86,6 +86,11 @@ const sharedValues = {
   // Utility functions
   gap: (v: number) => v * 8,
   borderRadius: (v: number) => v * 8,
+  fonts: {
+    SourGummy: 'SourGummy',
+    SourGummyBold: 'SourGummyBold',
+    SourGummyRegular: 'SourGummyRegular',
+  },
 };
 
 // Light theme definition

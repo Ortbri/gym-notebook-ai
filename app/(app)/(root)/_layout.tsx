@@ -3,7 +3,12 @@ import { Stack } from 'expo-router';
 // protect routes here
 const AppLayout = () => {
   return (
-    <Stack screenOptions={{}}>
+    <Stack
+      screenOptions={{
+        contentStyle: {
+          backgroundColor: 'blue',
+        },
+      }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="chat/[id]" options={{}} />
     </Stack>

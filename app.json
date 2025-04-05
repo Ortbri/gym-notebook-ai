@@ -30,6 +30,16 @@
         }
       ],
       [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/SourGummy-Bold.ttf",
+            "./assets/fonts/SourGummy-Light.ttf",
+            "./assets/fonts/SourGummy-Regular.ttf",
+          ]
+        }
+      ],
+      [
         "@sentry/react-native/expo",
         {
           "url": "https://sentry.io/",

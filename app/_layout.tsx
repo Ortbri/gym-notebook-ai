@@ -63,7 +63,11 @@ if (!publishableKey) {
 }
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({});
+  const [loaded, error] = useFonts({
+    SourGummy: require('../assets/fonts/SourGummy-Light.ttf'),
+    SourGummyBold: require('../assets/fonts/SourGummy-Bold.ttf'),
+    SourGummyRegular: require('../assets/fonts/SourGummy-Regular.ttf'),
+  });
 
   useEffect(() => {
     if (loaded || error) {

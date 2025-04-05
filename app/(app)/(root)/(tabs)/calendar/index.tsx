@@ -1,7 +1,9 @@
 import { useAuth } from '@clerk/clerk-expo';
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
+import { StyleSheet } from 'react-native-unistyles';
 
+import { Typography } from '~/components/Typography';
 import { useRevenueCat } from '~/providers/RevenueCatProvider';
 
 const Page = () => {
@@ -11,6 +13,7 @@ const Page = () => {
   const goPro = async () => {
     const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
       displayCloseButton: false,
+      fontFamily: 'SourGummy',
     });
 
     switch (paywallResult) {
@@ -33,37 +36,39 @@ const Page = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{ paddingTop: 14 }}>
         <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Text style={styles.boxText}>Box 1 {!isPro && '(Pro Only)'}</Text>
+          {/* <Text style={styles.boxText}>Box 1 {!isPro && '(Pro Only)'}</Text> */}
+          <Typography>Box 1 {!isPro && '(Pro Only)'}</Typography>
         </TouchableOpacity>
         <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Text style={styles.boxText}>Box 2 {!isPro && '(Pro Only)'}</Text>
+          <Typography>Box 2 {!isPro && '(Pro Only)'}</Typography>
         </TouchableOpacity>
         <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Text style={styles.boxText}>Box 3 {!isPro && '(Pro Only)'}</Text>
+          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
         </TouchableOpacity>
         {/* <TouchableOpacity style={styles.logoutButton} onPress={() => signOut()}>
           <Text style={styles.logoutText}>Log Out</Text>
         </TouchableOpacity> */}
       </ScrollView>
-    </View>
+    </>
   );
 };
 
 export default Page;
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   container: {
     flex: 1,
+
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: theme.colors.bg.secondary,
   },
   box: {
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.bg.primary,
     padding: 20,
     borderRadius: 10,
     marginBottom: 15,
@@ -91,4 +96,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#ff3b30',
   },
-});
+}));
