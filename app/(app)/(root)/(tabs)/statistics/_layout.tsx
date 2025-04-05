@@ -5,21 +5,21 @@ import { Image, Pressable, StyleSheet } from 'react-native';
 const StatisticsLayout = () => {
   return (
     <Stack screenOptions={{}}>
-      <Stack.Screen name="index" options={{ title: 'Statistics', headerRight: HeaderRight }} />
+      <Stack.Screen name="index" options={{ title: 'Statistics' }} />
     </Stack>
   );
 };
 
 // later route to setting modal
-const HeaderRight = () => {
-  const { user } = useUser();
-  const router = useRouter();
-  return (
-    <Pressable onPress={() => router.push('/settings/current')}>
-      <Image source={{ uri: user?.imageUrl }} style={styles.headerRight} />
-    </Pressable>
-  );
-};
+// const HeaderRight = () => {
+//   const { user } = useUser();
+//   const router = useRouter();
+//   return (
+//     <Pressable onPress={() => router.navigate('/')}>
+//       <Image source={{ uri: user?.imageUrl }} style={styles.headerRight} />
+//     </Pressable>
+//   );
+// };
 
 const styles = StyleSheet.create({
   headerRight: {
