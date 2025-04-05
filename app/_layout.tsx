@@ -1,20 +1,11 @@
-import '../tamagui-web.css';
 import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
-import { ThemeProvider as NavigationThemeProvider } from '@react-navigation/native';
 import * as Sentry from '@sentry/react-native';
-import { ToastProvider, ToastViewport } from '@tamagui/toast';
+import { Toaster } from 'burnt/web';
 import { useFonts } from 'expo-font';
 import { SplashScreen, useRouter, useSegments, usePathname, Slot } from 'expo-router';
 import { useEffect } from 'react';
-import { TamaguiProvider, Theme, ThemeName } from 'tamagui';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
-
-import { ThemeProvider, useTheme } from '../providers/ThemeProvider';
-import { tamaguiConfig } from '../tamagui.config';
-
-import { CustomToast } from '~/components/CustomToast';
-import { NAVIGATION_THEMES } from '~/constants/nav-themes';
 
 // Initialize Sentry
 const navigationIntegration = Sentry.reactNavigationIntegration({
@@ -48,45 +39,21 @@ function InitialLayout() {
   const router = useRouter();
   const segments = useSegments();
   const pathname = usePathname();
-  const { colorTheme, isDarkMode } = useTheme();
   const { isSignedIn, isLoaded } = useAuth();
 
   useEffect(() => {
     if (!isLoaded) return;
 
-    const isInMain = segments[0] === '(main)';
+    const isInRoot = segments[1] === '(root)';
 
-    if (isSignedIn && !isInMain) {
-      router.replace('/(main)/(tabs)/calendar');
+    if (isSignedIn && !isInRoot) {
+      router.replace('/(app)/(root)/(tabs)/calendar');
     } else if (!isSignedIn && pathname !== '/') {
-      router.replace('/(auth)/auth');
+      router.replace('/(app)/(auth)/auth');
     }
   }, [isSignedIn, isLoaded]);
 
-  // Default to 'red' if colorTheme is invalid
-  const validColorTheme = ['red', 'blue', 'green', 'yellow'].includes(colorTheme)
-    ? colorTheme
-    : 'red';
-
-  // Determine base theme for Tamagui
-  const tamaguiTheme = isDarkMode ? 'dark' : 'light';
-  // Get the appropriate navigation theme based on mode and color
-  const mode = isDarkMode ? 'dark' : 'light';
-  const navigationTheme = NAVIGATION_THEMES[mode][validColorTheme];
-
-  return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={tamaguiTheme}>
-      <NavigationThemeProvider value={navigationTheme}>
-        <ToastProvider>
-          <Theme name={validColorTheme as ThemeName}>
-            <Slot />
-            <CustomToast />
-            <ToastViewport top="$10" left={0} right={0} />
-          </Theme>
-        </ToastProvider>
-      </NavigationThemeProvider>
-    </TamaguiProvider>
-  );
+  return <Slot />;
 }
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
@@ -96,10 +63,7 @@ if (!publishableKey) {
 }
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
-    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
-  });
+  const [loaded, error] = useFonts({});
 
   useEffect(() => {
     if (loaded || error) {
@@ -115,9 +79,8 @@ export default function RootLayout() {
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ClerkLoaded>
         <TinyBaseProvider>
-          <ThemeProvider>
-            <InitialLayout />
-          </ThemeProvider>
+          <InitialLayout />
+          <Toaster position="bottom-right" />
         </TinyBaseProvider>
       </ClerkLoaded>
     </ClerkProvider>

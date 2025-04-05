@@ -7,7 +7,7 @@ const AppLayout = () => {
   return (
     <Stack screenOptions={{}}>
       <Stack.Screen name="(root)" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{ presentation: 'fullScreenModal' }} />
+      <Stack.Screen name="(auth)/auth" options={{ presentation: 'fullScreenModal' }} />
     </Stack>
   );
 };

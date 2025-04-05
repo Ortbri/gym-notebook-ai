@@ -1,5 +1,6 @@
 import { Stack } from 'expo-router';
 
+// protect routes here
 const AppLayout = () => {
   return (
     <Stack screenOptions={{}}>
