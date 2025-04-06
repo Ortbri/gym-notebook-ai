@@ -5,9 +5,7 @@ const AppLayout = () => {
   return (
     <Stack
       screenOptions={{
-        contentStyle: {
-          backgroundColor: 'blue',
-        },
+        contentStyle: {},
       }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="chat/[id]" options={{}} />

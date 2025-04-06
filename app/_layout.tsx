@@ -35,14 +35,14 @@ export { ErrorBoundary } from 'expo-router';
 // Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();
 
-function InitialLayout() {
+function InitialLayout({ fontsLoaded }: { fontsLoaded: boolean }) {
   const router = useRouter();
   const segments = useSegments();
   const pathname = usePathname();
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn, isLoaded: authLoaded } = useAuth();
 
   useEffect(() => {
-    if (!isLoaded) return;
+    if (!authLoaded || !fontsLoaded) return;
 
     const isInRoot = segments[1] === '(root)';
 
@@ -51,7 +51,12 @@ function InitialLayout() {
     } else if (!isSignedIn && pathname !== '/') {
       router.replace('/(app)/(auth)/auth');
     }
-  }, [isSignedIn, isLoaded]);
+
+    // Slight delay for visual polish
+    setTimeout(() => {
+      SplashScreen.hideAsync();
+    }, 1000);
+  }, [isSignedIn, authLoaded, fontsLoaded]);
 
   return <Slot />;
 }
@@ -63,27 +68,21 @@ if (!publishableKey) {
 }
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     SourGummy: require('../assets/fonts/SourGummy-Light.ttf'),
     SourGummyBold: require('../assets/fonts/SourGummy-Bold.ttf'),
     SourGummyRegular: require('../assets/fonts/SourGummy-Regular.ttf'),
   });
 
-  useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
-
-  if (!loaded && !error) {
-    return null;
+  if (!fontsLoaded && !fontError) {
+    return null; // Keep splash visible
   }
 
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <ClerkLoaded>
         <TinyBaseProvider>
-          <InitialLayout />
+          <InitialLayout fontsLoaded={fontsLoaded} />
           <Toaster position="bottom-right" />
         </TinyBaseProvider>
       </ClerkLoaded>
