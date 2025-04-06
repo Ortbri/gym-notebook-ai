@@ -13,7 +13,7 @@ const CalendarLayout = () => {
         options={{
           title: 'Today',
           headerLargeTitle: true,
-          headerRight: () => <MoreButton pageName="Calendar" />,
+          // headerRight: () => <MoreButton pageName="Calendar" />,
         }}
       />
     </Stack>

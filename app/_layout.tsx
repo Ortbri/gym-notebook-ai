@@ -74,6 +74,8 @@ export default function RootLayout() {
     SourGummyRegular: require('../assets/fonts/SourGummy-Regular.ttf'),
   });
 
+  console.log('Fonts loaded:', fontsLoaded, 'Font error:', fontError);
+
   if (!fontsLoaded && !fontError) {
     return null; // Keep splash visible
   }

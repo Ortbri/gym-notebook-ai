@@ -13,7 +13,7 @@ const Page = () => {
   const goPro = async () => {
     const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
       displayCloseButton: false,
-      fontFamily: 'SourGummy',
+      fontFamily: 'SourGummyRegular',
     });
 
     switch (paywallResult) {
@@ -40,69 +40,13 @@ const Page = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{ paddingTop: 14 }}>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 1 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 2 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.box} onPress={onBoxPress}>
-          <Typography>Box 3 {!isPro && '(Pro Only)'}</Typography>
-        </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.logoutButton} onPress={() => signOut()}>
-          <Text style={styles.logoutText}>Log Out</Text>
-        </TouchableOpacity> */}
+        {Array.from({ length: 8 }).map((item, index) => (
+          <TouchableOpacity key={index} style={styles.box} onPress={onBoxPress}>
+            <Typography>
+              Box {index + 1} {!isPro && '(Pro Only)'}
+            </Typography>
+          </TouchableOpacity>
+        ))}
       </ScrollView>
     </>
   );
@@ -122,13 +66,6 @@ const styles = StyleSheet.create((theme) => ({
     padding: 20,
     borderRadius: 10,
     marginBottom: 15,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 3,
     elevation: 3,
   },
   boxText: {

@@ -1,54 +1,41 @@
 // export { default } from '../../../../components/nav/tabs/tabs';
-
 import React from 'react';
 import { useUnistyles } from 'react-native-unistyles';
 
-import NativeTabs from '~/components/nav/Tabs';
+import Tabs from '~/components/nav/Tabs';
 import { RevenueCatProvider } from '~/providers/RevenueCatProvider';
 
 const TabsLayout = () => {
   const { theme } = useUnistyles();
+
   return (
     <RevenueCatProvider>
-      <NativeTabs
-        hapticFeedbackEnabled
+      <Tabs
         // labeled={false}
-
+        hapticFeedbackEnabled
+        fontFamily="SourGummy"
         screenOptions={{
+          // fontFamily: require('../../../../assets/fonts/SourGummy-Regular.ttf'),
+          fontFamily: 'SourGummy', // <-- pass as a top-level prop
           // tabBarLabelStyle: {
-          //   fontFamily: require('../../../assets/fonts/SourGummy-Bold.ttf'),
+          //   fontFamily: theme.fonts.SourGummy,
           //   fontSize: 12,
           // },
-
-          tabBarLabelStyle: {
-            fontFamily: 'SourGummy', // Your custom font
-            fontSize: 12,
-          },
           tabBarActiveTintColor: theme.colors.text.primary,
           tabBarInactiveTintColor: theme.colors.text.primary,
         }}
         scrollEdgeAppearance="transparent">
-        <NativeTabs.Screen
+        <Tabs.Screen
           name="calendar"
           options={{
-            // tabBarLabel: ({ focused }) => (
-            //   <Text
-            //     style={{
-            //       fontFamily: 'SourGummy',
-            //       fontSize: 12,
-            //       color: focused ? theme.colors.text.primary : theme.colors.text.primary,
-            //     }}>
-            //     Today
-            //   </Text>
-            // ),
-
+            title: 'Today',
             tabBarIcon: ({ focused }) => ({
               sfSymbol: focused ? 'flame.fill' : 'flame',
             }),
           }}
         />
 
-        <NativeTabs.Screen
+        <Tabs.Screen
           name="statistics"
           options={{
             title: 'Statistics',
@@ -57,7 +44,7 @@ const TabsLayout = () => {
             }),
           }}
         />
-      </NativeTabs>
+      </Tabs>
     </RevenueCatProvider>
   );
 };

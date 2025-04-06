@@ -2,9 +2,12 @@ import { useUser } from '@clerk/clerk-expo';
 import { Stack, useRouter } from 'expo-router';
 import { Image, Pressable, StyleSheet } from 'react-native';
 
+import useNavStyle from '~/components/nav/NavStyles';
+
 const StatisticsLayout = () => {
+  const { headerBlurSettings } = useNavStyle();
   return (
-    <Stack screenOptions={{}}>
+    <Stack screenOptions={headerBlurSettings}>
       <Stack.Screen name="index" options={{ title: 'Statistics' }} />
     </Stack>
   );

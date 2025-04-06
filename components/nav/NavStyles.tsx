@@ -49,7 +49,7 @@ const useNavStyle = () => {
     headerTintColor: theme.colors.text.primary,
     headerTitleAlign: 'center' as 'center' | 'left' | undefined,
     headerTitleStyle: {
-      fontFamily: 'SourGummyRegular',
+      fontFamily: 'SourGummyBold',
     } as StyleProp<
       Pick<TextStyle, 'fontWeight' | 'fontFamily' | 'fontSize'> & {
         color?: string | undefined;
