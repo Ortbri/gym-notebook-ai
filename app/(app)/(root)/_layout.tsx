@@ -28,29 +28,29 @@ function AnimatedStack() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Animated.View style={[styles.stackContainer, animatedStyle]}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="chat/[id]"
-            options={{
-              presentation: 'transparentModal',
-              headerShown: false,
-              contentStyle: {
-                backgroundColor: 'transparent',
-              },
-            }}
-          />
-          <Stack.Screen
-            name="test/route"
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack>
+      {/* <Animated.View style={[styles.stackContainer, animatedStyle]}> */}
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="chat/[id]"
+          options={{
+            presentation: 'transparentModal',
+            headerShown: false,
+            contentStyle: {
+              backgroundColor: 'transparent',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="test/route"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack>
 
-        {/* for now the callstack bottom tabs has a context for the bottom tab bar height */}
-        {/* {currentSong && (
+      {/* for now the callstack bottom tabs has a context for the bottom tab bar height */}
+      {/* {currentSong && (
           <MiniPlayer
             song={currentSong}
             isPlaying={isPlaying}
@@ -58,7 +58,7 @@ function AnimatedStack() {
             onPress={() => router.push(`/music/${currentSong.id}`)}
           />
         )} */}
-      </Animated.View>
+      {/* </Animated.View> */}
 
       {/* putting anything here is not scalled down upon modal open */}
     </View>
