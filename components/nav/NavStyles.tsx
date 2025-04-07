@@ -1,42 +1,12 @@
-// import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
-// import { PlatformColor } from 'react-native';
-// import { useUnistyles } from 'react-native-unistyles';
-
-// export const NavStyle = (): NativeStackNavigationOptions => {
-//   const { theme } = useUnistyles();
-
-//   // const base
-//   return {
-//     headerTransparent: true,
-//     headerLargeTitle: true,
-//     headerLargeTitleStyle: {
-//       fontFamily: 'SourGummyBold',
-//     },
-//     headerTitleStyle: {
-//       fontFamily: 'SourGummyRegular',
-//     },
-//     headerBlurEffect: 'prominent',
-//     headerShadowVisible: true,
-//     headerLargeTitleShadowVisible: false,
-//     headerLargeStyle: {
-//       backgroundColor: PlatformColor('systemGroupedBackgroundColor') as unknown as string,
-//     },
-//     headerStyle: {
-//       backgroundColor: theme.colors.bg.primary,
-//     },
-//   };
-// };
-
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { Platform, StyleProp, TextStyle } from 'react-native';
 import { BlurEffectTypes } from 'react-native-screens';
 import { useUnistyles } from 'react-native-unistyles';
 
 const useNavStyle = () => {
-  // const { effectiveTheme } = useTheme()
-  // const tamTheme = useTamTheme()
   const { theme } = useUnistyles();
 
-  const defaultStyling = {
+  const defaultStyling: NativeStackNavigationOptions = {
     headerLargeTitleShadowVisible: false,
     contentStyle: {
       backgroundColor: theme.colors.bg.primary,
@@ -55,6 +25,9 @@ const useNavStyle = () => {
         color?: string | undefined;
       }
     >,
+    headerBackTitleStyle: {
+      fontFamily: 'SourGummyBold',
+    },
   };
 
   return {

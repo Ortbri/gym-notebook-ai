@@ -1,6 +1,5 @@
-import { useAuth } from '@clerk/clerk-expo';
-import { useRouter } from 'expo-router';
-import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { TouchableOpacity, ScrollView } from 'react-native';
 import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
 import { StyleSheet } from 'react-native-unistyles';
 
@@ -8,7 +7,6 @@ import { Typography } from '~/components/Typography';
 import { useRevenueCat } from '~/providers/RevenueCatProvider';
 
 const Page = () => {
-  const { signOut } = useAuth();
   const { isPro } = useRevenueCat();
   const router = useRouter();
 
@@ -31,25 +29,40 @@ const Page = () => {
     }
   };
 
-  const onBoxPress = ({ id }: { id: string }) => {
-    if (!isPro) {
-      goPro();
-      return;
-    }
-    router.navigate(`/(app)/(root)/chat/${id}`);
-  };
+  // const onBoxPress = ({ id }: { id: string }) => {
+  //   if (!isPro) {
+  //     goPro();
+  //     return;
+  //   }
+  //   router.navigate(`/(app)/(root)/chat/${id}`);
+  // };
 
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ paddingTop: 14 }}>
-      {Array.from({ length: 8 }).map((item, index) => (
+      contentContainerStyle={{ paddingTop: 16, paddingHorizontal: 16 }}>
+      {/* {Array.from({ length: 8 }).map((item, index) => (
         <TouchableOpacity key={index} style={styles.box} onPress={() => onBoxPress({ id: index })}>
-          <Typography>
+          <Typography size="subtitle">
             Box {index + 1} {!isPro && '(Pro Only)'}
           </Typography>
         </TouchableOpacity>
-      ))}
+      ))} */}
+      <Link href="/(app)/(root)/chat/1" asChild>
+        <TouchableOpacity style={styles.box}>
+          <Typography size="subtitle">Chat Route</Typography>
+        </TouchableOpacity>
+      </Link>
+      <Link href="/(app)/(root)/settings/menu" asChild>
+        <TouchableOpacity style={styles.box}>
+          <Typography size="subtitle">Settings Route</Typography>
+        </TouchableOpacity>
+      </Link>
+      <Link href="/(app)/(root)/test/1" asChild>
+        <TouchableOpacity style={styles.box}>
+          <Typography size="subtitle">Test Route</Typography>
+        </TouchableOpacity>
+      </Link>
     </ScrollView>
   );
 };
@@ -64,7 +77,7 @@ const styles = StyleSheet.create((theme) => ({
     // backgroundColor: theme.colors.bg.secondary,
   },
   box: {
-    backgroundColor: theme.colors.bg.primary,
+    backgroundColor: theme.colors.bg.secondary,
     padding: 20,
     borderRadius: 10,
     marginBottom: 15,

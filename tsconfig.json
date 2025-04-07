@@ -13,7 +13,8 @@
     "jsx": "react-native",
     "allowJs": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "**/*.ts",

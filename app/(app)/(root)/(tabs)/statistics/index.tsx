@@ -1,21 +1,26 @@
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { View, Text, ScrollView, Pressable } from 'react-native';
+import { ScrollView } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
+
+import { Typography } from '~/components/Typography';
 
 export default function Statistics() {
   const router = useRouter();
   return (
     <ScrollView style={styles.container} contentInsetAdjustmentBehavior="automatic">
-      <Pressable onPress={() => router.push('/chat/1')} style={styles.btn}>
+      {/* <Pressable onPress={() => router.push('/chat/1')} style={styles.btn}>
         <Text style={styles.txt}>index</Text>
-      </Pressable>
+      </Pressable> */}
+      <Typography size="title">Statistics</Typography>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create((theme) => ({
-  container: {},
+  container: {
+    flexGrow: 1,
+  },
   txt: {
     color: theme.colors.text.primary,
   },

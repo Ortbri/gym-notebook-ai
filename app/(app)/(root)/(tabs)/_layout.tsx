@@ -1,4 +1,3 @@
-// export { default } from '../../../../components/nav/tabs/tabs';
 import React from 'react';
 import { useUnistyles } from 'react-native-unistyles';
 
@@ -8,21 +7,16 @@ import { RevenueCatProvider } from '~/providers/RevenueCatProvider';
 const TabsLayout = () => {
   const { theme } = useUnistyles();
 
+  // Only render the avatar when we're sure the user is loaded and available
+
   return (
     <RevenueCatProvider>
       <Tabs
-        // labeled={false}
         hapticFeedbackEnabled
+        // @ts-ignore -- this is a hidden prop
         fontFamily="SourGummy"
         screenOptions={{
-          // fontFamily: require('../../../../assets/fonts/SourGummy-Regular.ttf'),
-          fontFamily: 'SourGummy', // <-- pass as a top-level prop
-          // tabBarLabelStyle: {
-          //   fontFamily: theme.fonts.SourGummy,
-          //   fontSize: 12,
-          // },
           tabBarActiveTintColor: theme.colors.text.primary,
-          tabBarInactiveTintColor: theme.colors.text.primary,
         }}
         scrollEdgeAppearance="transparent">
         <Tabs.Screen
