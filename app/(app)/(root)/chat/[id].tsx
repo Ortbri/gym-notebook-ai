@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { Typography } from '~/components/Typography';
@@ -11,6 +11,7 @@ export default function ChatScreen() {
   return (
     <View style={styles.rootContainer}>
       <Typography>ChatScreen {id}</Typography>
+      <Image source={{ uri: 'https://picsum.photos/200' }} style={{ width: 100, height: 100 }} />
     </View>
   );
 }
