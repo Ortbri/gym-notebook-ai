@@ -5,7 +5,7 @@ import { Toaster } from 'burnt/web';
 import { useFonts } from 'expo-font';
 import { SplashScreen, useRouter, useSegments, usePathname, Slot } from 'expo-router';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { ActivityIndicator, useColorScheme, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 export { ErrorBoundary } from 'expo-router';
@@ -43,6 +43,8 @@ function InitialLayout({ fontsLoaded }: { fontsLoaded: boolean }) {
   const segments = useSegments();
   const pathname = usePathname();
   const { isSignedIn, isLoaded: authLoaded } = useAuth();
+  console.log('is signed in', isSignedIn);
+  console.log('authLoaded', segments, pathname);
 
   useEffect(() => {
     if (!authLoaded || !fontsLoaded) return;
@@ -61,7 +63,19 @@ function InitialLayout({ fontsLoaded }: { fontsLoaded: boolean }) {
     }, 1000);
   }, [isSignedIn, authLoaded, fontsLoaded]);
 
+  if (!fontsLoaded && !authLoaded) {
+    return <Loading />;
+  }
+
   return <Slot />;
+}
+
+function Loading() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ActivityIndicator size="large" color="#0000ff" />
+    </View>
+  );
 }
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
