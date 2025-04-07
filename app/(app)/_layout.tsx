@@ -23,8 +23,8 @@ const AppLayout = () => {
   return (
     <Stack
       screenOptions={{
+        animation: 'fade',
         contentStyle: {
-          // backgroundColor: theme.colors.palette.gray[13],
           backgroundColor: theme.colors.bg.primary,
         },
       }}>

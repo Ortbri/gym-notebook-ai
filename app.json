@@ -7,7 +7,6 @@
     "scheme": "gym-notebook",
     "web": {
       "bundler": "metro",
-      "output": "static",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
@@ -50,7 +49,8 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "tsconfigPaths": true
+      "tsconfigPaths": true,
+      "reactServerFunctions": true
     },
     "orientation": "portrait",
     "icon": "./assets/icon.png",

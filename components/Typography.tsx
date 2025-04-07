@@ -1,14 +1,17 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleProp, TextStyle } from 'react-native';
 import { StyleSheet, UnistylesVariants } from 'react-native-unistyles';
 
-interface TypographyProps extends React.PropsWithChildren, UnistylesVariants<typeof styles> {}
+interface TypographyProps extends React.PropsWithChildren, UnistylesVariants<typeof styles> {
+  style?: StyleProp<TextStyle>;
+}
 
 export const Typography: React.FunctionComponent<TypographyProps> = ({
   children,
   isBold,
   color,
   size,
+  style,
 }) => {
   styles.useVariants({
     isBold,
@@ -16,7 +19,7 @@ export const Typography: React.FunctionComponent<TypographyProps> = ({
     size,
   });
 
-  return <Text style={[styles.baseText, styles.text]}>{children}</Text>;
+  return <Text style={[styles.baseText, styles.text, style]}>{children}</Text>;
 };
 
 const styles = StyleSheet.create((theme) => ({
