@@ -24,7 +24,8 @@ const AppLayout = () => {
     <Stack
       screenOptions={{
         contentStyle: {
-          backgroundColor: theme.colors.palette.gray[13],
+          // backgroundColor: theme.colors.palette.gray[13],
+          backgroundColor: theme.colors.bg.primary,
         },
       }}>
       <Stack.Screen name="(auth)/auth" options={{ headerShown: false }} />

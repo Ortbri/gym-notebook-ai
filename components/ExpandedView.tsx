@@ -1,11 +1,7 @@
-// import { LinearGradient } from 'expo-linear-gradient';
-// import { useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
-// import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { Typography } from './Typography';
-// const { width } = Dimensions.get('window');
+import { ChatContent } from './ChatContent';
 
 interface ExpandedViewProps {
   scrollComponent?: () => React.ReactElement;
@@ -22,12 +18,9 @@ export function ExpandedView({ scrollComponent, backgroundColor = '#000000' }: E
       {scrollComponent ? (
         <View style={styles.scrollView}>{scrollComponent()}</View>
       ) : (
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-          <View style={styles.container}>
-            {/* <Text style={styles.txt}>HELLO WORLD</Text> */}
-            <Typography>HELLO WORLD</Typography>
-          </View>
-        </ScrollView>
+        <View style={styles.scrollView}>
+          <ChatContent />
+        </View>
       )}
     </View>
   );
@@ -39,7 +32,6 @@ const styles = StyleSheet.create((theme, rt) => ({
     paddingTop: rt.insets.top,
     height: '100%',
     width: '100%',
-    // backgroundColor: 'red',
     backgroundColor: theme.colors.bg.primary,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,

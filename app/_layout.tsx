@@ -8,31 +8,32 @@ import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
+export { ErrorBoundary } from 'expo-router';
 
 // Initialize Sentry
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: true,
 });
 
-Sentry.init({
-  dsn: 'https://32f899dfbf5bdcac1549ca8e6f5442c9@o4508489595813888.ingest.us.sentry.io/4509085649993728',
-  attachScreenshot: true,
-  tracesSampleRate: 1.0,
-  profilesSampleRate: 1.0,
-  replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 0,
-  replaysOnErrorSampleRate: process.env.NODE_ENV === 'production' ? 1.0 : 0,
-  integrations: [
-    Sentry.mobileReplayIntegration({
-      maskAllImages: true,
-      maskAllText: true,
-      maskAllVectors: true,
-    }),
-    navigationIntegration,
-    Sentry.spotlightIntegration(),
-  ],
-});
-
-export { ErrorBoundary } from 'expo-router';
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({
+    dsn: 'https://32f899dfbf5bdcac1549ca8e6f5442c9@o4508489595813888.ingest.us.sentry.io/4509085649993728',
+    attachScreenshot: true,
+    tracesSampleRate: 1.0,
+    profilesSampleRate: 1.0,
+    replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 0,
+    replaysOnErrorSampleRate: process.env.NODE_ENV === 'production' ? 1.0 : 0,
+    integrations: [
+      Sentry.mobileReplayIntegration({
+        maskAllImages: true,
+        maskAllText: true,
+        maskAllVectors: true,
+      }),
+      navigationIntegration,
+      Sentry.spotlightIntegration(),
+    ],
+  });
+}
 
 // Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();

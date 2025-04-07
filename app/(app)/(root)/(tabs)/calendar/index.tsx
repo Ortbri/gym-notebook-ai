@@ -40,22 +40,17 @@ const Page = () => {
   };
 
   return (
-    <>
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={{ paddingTop: 14 }}>
-        {Array.from({ length: 8 }).map((item, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.box}
-            onPress={() => onBoxPress({ id: index })}>
-            <Typography>
-              Box {index + 1} {!isPro && '(Pro Only)'}
-            </Typography>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    </>
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={{ paddingTop: 14 }}>
+      {Array.from({ length: 8 }).map((item, index) => (
+        <TouchableOpacity key={index} style={styles.box} onPress={() => onBoxPress({ id: index })}>
+          <Typography>
+            Box {index + 1} {!isPro && '(Pro Only)'}
+          </Typography>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
   );
 };
 
