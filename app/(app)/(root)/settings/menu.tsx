@@ -1,4 +1,5 @@
 import { useAuth, useUser } from '@clerk/clerk-expo';
+import { Link } from 'expo-router';
 import React from 'react';
 import { Text, Pressable } from 'react-native';
 import Animated, {
@@ -67,7 +68,9 @@ export default function Menu() {
 
   return (
     <BodyScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <Typography size="title">Menu</Typography>
+      <Link href="/settings/test">
+        <Typography size="title">Testing Route</Typography>
+      </Link>
       <Typography size="title">{user?.firstName}</Typography>
       <Button onPress={signOut}>Sign Out</Button>
     </BodyScrollView>

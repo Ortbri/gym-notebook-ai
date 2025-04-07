@@ -58,11 +58,6 @@ const Page = () => {
           <Typography size="subtitle">Settings Route</Typography>
         </TouchableOpacity>
       </Link>
-      <Link href="/(app)/(root)/test/1" asChild>
-        <TouchableOpacity style={styles.box}>
-          <Typography size="subtitle">Test Route</Typography>
-        </TouchableOpacity>
-      </Link>
     </ScrollView>
   );
 };

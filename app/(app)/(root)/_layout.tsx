@@ -35,6 +35,14 @@ export default function RootLayout() {
           ...headerBlurSettings,
         }}
       />
+      <Stack.Screen
+        name="settings/test"
+        options={{
+          title: 'Test',
+          headerShown: true,
+          ...headerBlurSettings,
+        }}
+      />
     </Stack>
   );
 }
