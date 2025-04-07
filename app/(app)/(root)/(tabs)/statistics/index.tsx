@@ -1,13 +1,32 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
+import { StyleSheet } from 'react-native-unistyles';
 
-export default function index() {
+export default function Statistics() {
+  const router = useRouter();
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <ScrollView style={styles.container} contentInsetAdjustmentBehavior="automatic">
+      <Pressable onPress={() => router.push('/chat/1')} style={styles.btn}>
+        <Text style={styles.txt}>index</Text>
+      </Pressable>
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create((theme) => ({
+  container: {},
+  txt: {
+    color: theme.colors.text.primary,
+  },
+  btn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.colors.accent.strong,
+    padding: 16,
+    borderRadius: 18,
+  },
+}));
 // import Ionicons from '@expo/vector-icons/Ionicons';
 // import { eq } from 'drizzle-orm';
 // import { drizzle, useLiveQuery } from 'drizzle-orm/expo-sqlite';

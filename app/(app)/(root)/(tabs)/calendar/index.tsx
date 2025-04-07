@@ -1,4 +1,5 @@
 import { useAuth } from '@clerk/clerk-expo';
+import { useRouter } from 'expo-router';
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
 import { StyleSheet } from 'react-native-unistyles';
@@ -9,6 +10,7 @@ import { useRevenueCat } from '~/providers/RevenueCatProvider';
 const Page = () => {
   const { signOut } = useAuth();
   const { isPro } = useRevenueCat();
+  const router = useRouter();
 
   const goPro = async () => {
     const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
@@ -29,10 +31,12 @@ const Page = () => {
     }
   };
 
-  const onBoxPress = () => {
+  const onBoxPress = ({ id }: { id: string }) => {
     if (!isPro) {
       goPro();
+      return;
     }
+    router.navigate(`/(app)/(root)/chat/${id}`);
   };
 
   return (
@@ -41,7 +45,10 @@ const Page = () => {
         contentInsetAdjustmentBehavior="automatic"
         contentContainerStyle={{ paddingTop: 14 }}>
         {Array.from({ length: 8 }).map((item, index) => (
-          <TouchableOpacity key={index} style={styles.box} onPress={onBoxPress}>
+          <TouchableOpacity
+            key={index}
+            style={styles.box}
+            onPress={() => onBoxPress({ id: index })}>
             <Typography>
               Box {index + 1} {!isPro && '(Pro Only)'}
             </Typography>

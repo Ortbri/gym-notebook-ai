@@ -5,6 +5,8 @@ import { Toaster } from 'burnt/web';
 import { useFonts } from 'expo-font';
 import { SplashScreen, useRouter, useSegments, usePathname, Slot } from 'expo-router';
 import { useEffect } from 'react';
+import { useColorScheme } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 
 // Initialize Sentry
@@ -67,7 +69,7 @@ if (!publishableKey) {
   throw new Error('Missing Publishable Key');
 }
 
-export default function RootLayout() {
+export default function AppLayout() {
   const [fontsLoaded, fontError] = useFonts({
     SourGummy: require('../assets/fonts/SourGummy-Light.ttf'),
     SourGummyBold: require('../assets/fonts/SourGummy-Bold.ttf'),
@@ -81,13 +83,15 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <ClerkLoaded>
-        <TinyBaseProvider>
-          <InitialLayout fontsLoaded={fontsLoaded} />
-          <Toaster position="bottom-right" />
-        </TinyBaseProvider>
-      </ClerkLoaded>
-    </ClerkProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+        <ClerkLoaded>
+          <TinyBaseProvider>
+            <InitialLayout fontsLoaded={fontsLoaded} />
+            <Toaster position="bottom-right" />
+          </TinyBaseProvider>
+        </ClerkLoaded>
+      </ClerkProvider>
+    </GestureHandlerRootView>
   );
 }
