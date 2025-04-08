@@ -1,99 +1,79 @@
-import { Link } from 'expo-router';
-import { TouchableOpacity, ScrollView } from 'react-native';
+import { subMonths } from 'date-fns';
+import { memo, useCallback } from 'react';
+import { Platform, View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native-unistyles';
 
-import { Typography } from '~/components/Typography';
+import { Calendar } from '~/components/week-calendar';
+import { useGenerateWeeks } from '~/components/week-calendar/utils';
 
+const defaultHeaderHeight = Platform.OS === 'ios' ? 44 : 56; // Approx values
+
+const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
+  return (
+    <View style={styles.dayContainer}>
+      <Text style={{ textAlign: 'center', fontSize: 16, paddingVertical: 6 }}>
+        {day.toLocaleDateString()}
+      </Text>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontSize: 14,
+          paddingVertical: 6,
+          opacity: 0.5,
+        }}>
+        {isActive ? 'Active' : 'Inactive'}
+      </Text>
+    </View>
+  );
+});
 const Page = () => {
-  // const { isPro } = useRFevenueCat();
-  // const router = useRouter();
+  const weeks = useGenerateWeeks(subMonths(new Date(), 5), new Date());
 
-  // const goPro = async () => {
-  //   const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
-  //     displayCloseButton: false,
-  //     fontFamily: 'SourGummyRegular',
-  //   });
-
-  //   switch (paywallResult) {
-  //     case PAYWALL_RESULT.NOT_PRESENTED:
-  //     case PAYWALL_RESULT.ERROR:
-  //     case PAYWALL_RESULT.CANCELLED:
-  //       return false;
-  //     case PAYWALL_RESULT.PURCHASED:
-  //     case PAYWALL_RESULT.RESTORED:
-  //       return true;
-  //     default:
-  //       return false;
-  //   }
-  // };
-
-  // const onBoxPress = ({ id }: { id: string }) => {
-  //   if (!isPro) {
-  //     goPro();
-  //     return;
-  //   }
-  //   router.navigate(`/(app)/(root)/chat/${id}`);
-  // };
+  const renderDay = ({ day, isActive }: { day: Date; isActive: boolean }) => {
+    return <Day day={day} isActive={isActive} />;
+  };
 
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ paddingTop: 16, paddingHorizontal: 16 }}>
-      {/* {Array.from({ length: 8 }).map((item, index) => (
-        <TouchableOpacity key={index} style={styles.box} onPress={() => onBoxPress({ id: index })}>
-          <Typography size="subtitle">
-            Box {index + 1} {!isPro && '(Pro Only)'}
-          </Typography>
-        </TouchableOpacity>
-      ))} */}
-      <Link href="/(app)/(root)/chat/1" asChild>
-        <TouchableOpacity style={styles.box}>
-          <Typography size="subtitle">Chat Route</Typography>
-        </TouchableOpacity>
-      </Link>
-      <Link href="/(app)/(root)/settings/menu" asChild>
-        <TouchableOpacity style={styles.box}>
-          <Typography size="subtitle">Settings Route</Typography>
-        </TouchableOpacity>
-      </Link>
-      <Link href="/(app)/(root)/settings/test" asChild>
-        <TouchableOpacity style={styles.box}>
-          <Typography size="subtitle">Test Route</Typography>
-        </TouchableOpacity>
-      </Link>
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={styles.text}>Calendar</Text>
+      <Calendar
+        weeks={weeks}
+        offsetPageLimit={7}
+        onDateChange={(date) => {
+          console.log(`New date: ${date.toLocaleDateString()}`);
+        }}
+        dimWeekends
+        initialDate={new Date()}>
+        <Calendar.Strip style={{ paddingTop: 14 }} />
+        <Calendar.Screen containerStyle={styles.calendarScreen} renderDay={renderDay} />
+      </Calendar>
+    </View>
   );
 };
-
-export default Page;
-
-const styles = StyleSheet.create((theme) => ({
+const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
-
-    padding: 20,
-    // backgroundColor: theme.colors.bg.secondary,
+    paddingTop: rt.insets.top + defaultHeaderHeight,
+    // padding: 20,
   },
-  box: {
-    backgroundColor: theme.colors.bg.secondary,
-    padding: 20,
-    borderRadius: 10,
-    marginBottom: 15,
-    elevation: 3,
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: theme.colors.text.primary,
   },
-  boxText: {
-    fontSize: 18,
-    textAlign: 'center',
+  dayContentStyle: {
+    height: 600,
   },
-  logoutButton: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 20,
+  dayContainer: {
+    backgroundColor: theme.colors.bg.primary,
+    height: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  logoutText: {
-    fontSize: 16,
-    color: '#ff3b30',
+  calendarScreen: {
+    height: rt.screen.height - 140,
   },
 }));
+
+export default Page;

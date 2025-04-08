@@ -4,7 +4,7 @@ import type { StyleProp, ViewStyle } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import Animated, { FadeIn, FadeOut, useSharedValue } from 'react-native-reanimated';
 
-import { useCalendar } from './CalendarProvider';
+import { useCalendar } from '../hooks';
 
 const LazyLoadView = memo(
   ({

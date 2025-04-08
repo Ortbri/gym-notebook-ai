@@ -1,16 +1,10 @@
 import { isSameDay } from 'date-fns';
 import { memo, useCallback, useMemo } from 'react';
-import {
-  Dimensions,
-  type StyleProp,
-  StyleSheet,
-  View,
-  type ViewStyle,
-  type ViewToken,
-} from 'react-native';
+import { Dimensions, type StyleProp, View, type ViewStyle, type ViewToken } from 'react-native';
 import Animated, { useSharedValue } from 'react-native-reanimated';
+import { StyleSheet } from 'react-native-unistyles';
 
-import { useCalendar } from './CalendarProvider';
+import { useCalendar } from '../hooks';
 import { CalendarDay } from './calendar-day';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -174,9 +168,9 @@ export const CalendarStrip = ({
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme, rt) => ({
   weekContainer: {
-    width: Dimensions.get('window').width,
+    width: rt.screen.width,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -186,4 +180,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 8,
   },
-});
+}));

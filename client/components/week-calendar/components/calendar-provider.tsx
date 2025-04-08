@@ -1,9 +1,8 @@
-import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
+import { createContext, useCallback, useMemo, useRef, useState } from 'react';
 import type { FlatList } from 'react-native';
-import PagerView from 'react-native-pager-view';
+import { usePagerView } from 'react-native-pager-view';
 
-// import type { CalendarContextValue, CalendarProviderProps } from '../';
-import { CalendarContextValue, CalendarProviderProps } from '~/components/calendar/types';
+import type { CalendarContextValue, CalendarProviderProps } from '../types';
 
 export const CalendarContext = createContext<CalendarContextValue | null>(null);
 
@@ -23,11 +22,9 @@ export const CalendarProvider = ({
 
   /**Initialize refs for the strip and pager */
   const stripRef = useRef<FlatList<Date[]>>(null);
-  const pagerRef = useRef<PagerView>(null);
-  const setPage = useCallback((page: number) => {
-    pagerRef.current?.setPage(page);
-  }, []);
-  // active date and calling the onDataChange */
+  const { ref: pagerRef, setPage } = usePagerView({ pagesAmount: 1 });
+
+  /**Just handles changing the active date and calling the onDataChange */
   const handleInternalDateChange = useCallback(
     (newDate: Date) => {
       setActiveDate(newDate);
@@ -61,12 +58,4 @@ export const CalendarProvider = ({
   );
 
   return <CalendarContext.Provider value={contextValue}>{children}</CalendarContext.Provider>;
-};
-
-export const useCalendar = () => {
-  const context = useContext(CalendarContext);
-  if (!context) {
-    throw new Error('useCalendar must be used within a Calendar provider');
-  }
-  return context;
 };

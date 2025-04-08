@@ -2,18 +2,16 @@ import { Stack } from 'expo-router';
 import React from 'react';
 
 import useNavStyle from '~/components/nav/NavStyles';
-import MoreButton from '~/components/ui/MoreButton';
 
 const CalendarLayout = () => {
-  const { headerBlurSettings } = useNavStyle();
+  const { headerTransparentSettings } = useNavStyle();
   return (
-    <Stack screenOptions={headerBlurSettings}>
+    <Stack screenOptions={headerTransparentSettings}>
       <Stack.Screen
         name="index"
         options={{
-          title: 'Today',
+          title: 'Test',
           headerLargeTitle: true,
-          // headerRight: () => <MoreButton pageName="Calendar" />,
         }}
       />
     </Stack>
