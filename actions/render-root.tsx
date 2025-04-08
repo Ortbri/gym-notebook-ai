@@ -1,7 +1,7 @@
 'use server';
 
-import { AI } from '@/components/ai-context';
-import { ChatUI } from '@/components/chatui';
+import { ChatUI } from '~/components/ChatUI';
+import { AI } from '~/providers/AiProvider';
 
 export async function renderRoot() {
   return (

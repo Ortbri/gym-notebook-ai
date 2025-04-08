@@ -118,17 +118,18 @@ User info:
     tools: {
       ...tools,
       get_media: {
-        description: 'List movies or TV shows today or this week from TMDB',
+        description: 'Get workout from ',
         parameters: z
           .object({
-            time_window: z
-              .enum(['day', 'week'])
-              .describe('time window to search for')
-              .default('day'),
-            media_type: z
+            name: z
+              .enum(['Press', 'week'])
+              .describe('Press will match Dumbell Bench Press')
+              .optional(),
+            type: z
               .enum(['tv', 'movie'])
               .describe('type of media to search for')
-              .default('movie'),
+              .default('movie')
+              .optional(),
             generated_description: z.string().describe('AI-generated description of the tool call'),
             query: z
               .string()
@@ -139,7 +140,7 @@ User info:
           })
           .required(),
         async *generate({ generated_description, time_window, media_type, query }) {
-          yield <WorkoutSkeleton />;
+          yield <WorkoutSkeleeon />;
 
           let url: string;
           if (query) {

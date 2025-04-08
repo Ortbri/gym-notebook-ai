@@ -1,33 +1,33 @@
 import { Link, useRouter } from 'expo-router';
 import { TouchableOpacity, ScrollView } from 'react-native';
-import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
+// import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { Typography } from '~/components/Typography';
 import { useRevenueCat } from '~/providers/RevenueCatProvider';
 
 const Page = () => {
-  const { isPro } = useRevenueCat();
-  const router = useRouter();
+  // const { isPro } = useRFevenueCat();
+  // const router = useRouter();
 
-  const goPro = async () => {
-    const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
-      displayCloseButton: false,
-      fontFamily: 'SourGummyRegular',
-    });
+  // const goPro = async () => {
+  //   const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
+  //     displayCloseButton: false,
+  //     fontFamily: 'SourGummyRegular',
+  //   });
 
-    switch (paywallResult) {
-      case PAYWALL_RESULT.NOT_PRESENTED:
-      case PAYWALL_RESULT.ERROR:
-      case PAYWALL_RESULT.CANCELLED:
-        return false;
-      case PAYWALL_RESULT.PURCHASED:
-      case PAYWALL_RESULT.RESTORED:
-        return true;
-      default:
-        return false;
-    }
-  };
+  //   switch (paywallResult) {
+  //     case PAYWALL_RESULT.NOT_PRESENTED:
+  //     case PAYWALL_RESULT.ERROR:
+  //     case PAYWALL_RESULT.CANCELLED:
+  //       return false;
+  //     case PAYWALL_RESULT.PURCHASED:
+  //     case PAYWALL_RESULT.RESTORED:
+  //       return true;
+  //     default:
+  //       return false;
+  //   }
+  // };
 
   // const onBoxPress = ({ id }: { id: string }) => {
   //   if (!isPro) {
