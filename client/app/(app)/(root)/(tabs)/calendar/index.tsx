@@ -1,10 +1,8 @@
-import { Link, useRouter } from 'expo-router';
+import { Link } from 'expo-router';
 import { TouchableOpacity, ScrollView } from 'react-native';
-// import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { Typography } from '~/components/Typography';
-import { useRevenueCat } from '~/providers/RevenueCatProvider';
 
 const Page = () => {
   // const { isPro } = useRFevenueCat();
@@ -56,6 +54,11 @@ const Page = () => {
       <Link href="/(app)/(root)/settings/menu" asChild>
         <TouchableOpacity style={styles.box}>
           <Typography size="subtitle">Settings Route</Typography>
+        </TouchableOpacity>
+      </Link>
+      <Link href="/(app)/(root)/settings/test" asChild>
+        <TouchableOpacity style={styles.box}>
+          <Typography size="subtitle">Test Route</Typography>
         </TouchableOpacity>
       </Link>
     </ScrollView>

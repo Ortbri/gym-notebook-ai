@@ -19,14 +19,6 @@ export default function RootLayout() {
         }}
       />
       <Stack.Screen
-        name="test/[id]"
-        options={{
-          title: 'Test',
-          headerShown: true,
-          ...headerBlurSettings,
-        }}
-      />
-      <Stack.Screen
         name="settings/menu"
         options={{
           title: 'Settings',

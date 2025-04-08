@@ -5,7 +5,9 @@ import { Toaster } from 'burnt/web';
 import { useFonts } from 'expo-font';
 import { SplashScreen, useRouter, useSegments, usePathname, Slot } from 'expo-router';
 import { useEffect } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native-unistyles';
 import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 export { ErrorBoundary } from 'expo-router';
 
@@ -61,20 +63,28 @@ function InitialLayout({ fontsLoaded }: { fontsLoaded: boolean }) {
     }, 1000);
   }, [isSignedIn, authLoaded, fontsLoaded]);
 
-  // if (!fontsLoaded && !authLoaded) {
-  //   return <Loading />;
-  // }
+  if (!fontsLoaded || !authLoaded) {
+    return <Loading />;
+  }
 
   return <Slot />;
 }
 
-// function Loading() {
-//   return (
-//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//       <ActivityIndicator size="large" color="#0000ff" />
-//     </View>
-//   );
-// }
+function Loading() {
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color="#0000ff" />
+    </View>
+  );
+}
+const styles = StyleSheet.create((theme) => ({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
+  },
+}));
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -97,14 +107,14 @@ export default function AppLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-        <ClerkLoaded>
-          <TinyBaseProvider>
+      <TinyBaseProvider>
+        <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+          <ClerkLoaded>
             <InitialLayout fontsLoaded={fontsLoaded} />
             <Toaster position="bottom-right" />
-          </TinyBaseProvider>
-        </ClerkLoaded>
-      </ClerkProvider>
+          </ClerkLoaded>
+        </ClerkProvider>
+      </TinyBaseProvider>
     </GestureHandlerRootView>
   );
 }
