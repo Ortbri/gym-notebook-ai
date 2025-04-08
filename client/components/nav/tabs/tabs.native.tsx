@@ -12,7 +12,7 @@ const TabsLayout = () => {
     <Tabs
       hapticFeedbackEnabled
       // @ts-ignore -- this is a hidden prop
-      fontFamily="SourGummy"
+      // fontFamily="SourGummy"
       screenOptions={{
         tabBarActiveTintColor: theme.colors.text.primary,
       }}

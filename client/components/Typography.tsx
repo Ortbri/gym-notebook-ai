@@ -19,13 +19,25 @@ export const Typography: React.FunctionComponent<TypographyProps> = ({
     size,
   });
 
-  return <Text style={[styles.baseText, styles.text, style]}>{children}</Text>;
+  return <Text style={[styles.text, style]}>{children}</Text>;
 };
 
 const styles = StyleSheet.create((theme) => ({
-  baseText: {
-    fontFamily: theme.fonts.SourGummyBold,
-  },
+  // baseText: {
+  //   variants: {
+  //     fontFamily: {
+  //       bold: {
+  //         fontFamily: theme.fonts.SourGummyBold,
+  //       },
+  //       regular: {
+  //         fontFamily: theme.fonts.SourGummyRegular,
+  //       },
+  //       light: {
+  //         fontFamily: theme.fonts.SourGummy,
+  //       },
+  //     },
+  //   },
+  // },
   text: {
     // fontFamily: 'SourGummy',
     variants: {

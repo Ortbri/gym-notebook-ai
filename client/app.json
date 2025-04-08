@@ -25,6 +25,9 @@
           "ios": {
             "useFrameworks": "static",
             "deploymentTarget": "15.1"
+          },
+          "android": {
+            "minSdkVersion": 26
           }
         }
       ],
@@ -34,7 +37,7 @@
           "fonts": [
             "./assets/fonts/SourGummy-Bold.ttf",
             "./assets/fonts/SourGummy-Light.ttf",
-            "./assets/fonts/SourGummy-Regular.ttf",
+            "./assets/fonts/SourGummy-Regular.ttf"
           ]
         }
       ],
