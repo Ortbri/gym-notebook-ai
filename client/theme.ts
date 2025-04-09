@@ -20,52 +20,74 @@ const palette = {
     13: '#000000',
   },
 
-  // Your brand color palette
   primary: {
-    1: '#E6F2FF', // Lightest
+    1: '#E6F2FF',
     2: '#CCE5FF',
     3: '#99CBFF',
     4: '#66B2FF',
     5: '#3399FF',
-    6: '#007AFF', // Main brand color
+    6: '#007AFF',
     7: '#0066CC',
     8: '#005299',
     9: '#003D73',
-    10: '#00264D', // Darkest
+    10: '#00264D',
   },
 
-  // Success colors (green)
   success: {
-    1: '#E6F9E6', // Lightest
+    1: '#E6F9E6',
     2: '#CFF4CF',
     3: '#9FE89F',
     4: '#70DD70',
     5: '#40D140',
-    6: '#2EB62C', // Main success color
+    6: '#2EB62C',
     7: '#259A24',
     8: '#1C771C',
     9: '#145814',
-    10: '#0D3A0D', // Darkest
+    10: '#0D3A0D',
   },
 
-  // Error colors (red)
   error: {
-    1: '#FFEBEB', // Lightest
+    1: '#FFEBEB',
     2: '#FFD6D6',
     3: '#FFADAD',
     4: '#FF8585',
     5: '#FF5C5C',
-    6: '#FF3333', // Main error color
+    6: '#FF3333',
     7: '#E62E2E',
     8: '#CC2929',
     9: '#991F1F',
-    10: '#661414', // Darkest
+    10: '#661414',
+  },
+
+  warning: {
+    1: '#FFF7E6',
+    2: '#FFECCC',
+    3: '#FFD999',
+    4: '#FFC266',
+    5: '#FFAD33',
+    6: '#FF9900',
+    7: '#CC7A00',
+    8: '#995C00',
+    9: '#664000',
+    10: '#332100',
+  },
+
+  info: {
+    1: '#E6F0FF',
+    2: '#CCE0FF',
+    3: '#99C2FF',
+    4: '#66A3FF',
+    5: '#3385FF',
+    6: '#0066FF',
+    7: '#0052CC',
+    8: '#003D99',
+    9: '#002966',
+    10: '#001433',
   },
 };
 
 // Shared values across themes
 const sharedValues = {
-  // Spacing system
   spacing: {
     xs: 4,
     sm: 8,
@@ -74,7 +96,7 @@ const sharedValues = {
     xl: 32,
     xxl: 48,
   },
-  // Border radius
+
   radius: {
     xs: 2,
     sm: 4,
@@ -83,49 +105,63 @@ const sharedValues = {
     xl: 24,
     round: 9999,
   },
-  // Utility functions
+
   gap: (v: number) => v * 8,
   borderRadius: (v: number) => v * 8,
+
+  fontSize: {
+    xs: 12,
+    sm: 14,
+    md: 16,
+    lg: 20,
+    xl: 24,
+    xxl: 32,
+  },
+
   fonts: {
     SourGummy: 'SourGummy',
     SourGummyBold: 'SourGummyBold',
     SourGummyRegular: 'SourGummyRegular',
+  },
+
+  shadow: {
+    sm: '0px 1px 2px rgba(0,0,0,0.05)',
+    md: '0px 4px 6px rgba(0,0,0,0.1)',
+    lg: '0px 10px 15px rgba(0,0,0,0.15)',
+  },
+
+  zIndex: {
+    base: 0,
+    dropdown: 10,
+    modal: 100,
+    toast: 1000,
   },
 };
 
 // Light theme definition
 export const lightTheme = {
   colors: {
-    // Background colors
     bg: {
       primary: palette.gray[0],
       secondary: palette.gray[1],
       tertiary: palette.gray[2],
     },
-
-    // Text colors
     text: {
       primary: palette.gray[12],
       secondary: palette.gray[9],
       tertiary: palette.gray[7],
       inverse: palette.gray[1],
     },
-
-    // Border colors
     border: {
       light: palette.gray[3],
       regular: palette.gray[4],
       strong: palette.gray[5],
     },
-
-    // Accent colors
     accent: {
       light: palette.primary[2],
       regular: palette.primary[6],
       strong: palette.primary[8],
     },
-
-    // Status colors
     success: {
       bg: palette.success[1],
       fg: palette.success[8],
@@ -136,8 +172,21 @@ export const lightTheme = {
       fg: palette.error[8],
       main: palette.error[6],
     },
-
-    // Keep the raw palette accessible if needed
+    warning: {
+      bg: palette.warning[1],
+      fg: palette.warning[8],
+      main: palette.warning[6],
+    },
+    info: {
+      bg: palette.info[1],
+      fg: palette.info[8],
+      main: palette.info[6],
+    },
+    disabled: {
+      bg: palette.gray[2],
+      fg: palette.gray[6],
+      border: palette.gray[3],
+    },
     palette,
   },
   ...sharedValues,
@@ -146,36 +195,27 @@ export const lightTheme = {
 // Dark theme definition
 export const darkTheme = {
   colors: {
-    // Background colors
     bg: {
       primary: palette.gray[12],
       secondary: palette.gray[11],
       tertiary: palette.gray[10],
     },
-
-    // Text colors
     text: {
       primary: palette.gray[1],
       secondary: palette.gray[4],
       tertiary: palette.gray[6],
       inverse: palette.gray[12],
     },
-
-    // Border colors
     border: {
       light: palette.gray[9],
       regular: palette.gray[8],
       strong: palette.gray[7],
     },
-
-    // Accent colors
     accent: {
       light: palette.primary[8],
       regular: palette.primary[6],
       strong: palette.primary[4],
     },
-
-    // Status colors
     success: {
       bg: palette.success[9],
       fg: palette.success[3],
@@ -186,8 +226,21 @@ export const darkTheme = {
       fg: palette.error[3],
       main: palette.error[6],
     },
-
-    // Keep the raw palette accessible if needed
+    warning: {
+      bg: palette.warning[9],
+      fg: palette.warning[3],
+      main: palette.warning[6],
+    },
+    info: {
+      bg: palette.info[9],
+      fg: palette.info[3],
+      main: palette.info[6],
+    },
+    disabled: {
+      bg: palette.gray[9],
+      fg: palette.gray[5],
+      border: palette.gray[7],
+    },
     palette,
   },
   ...sharedValues,
