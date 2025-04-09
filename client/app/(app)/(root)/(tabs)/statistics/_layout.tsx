@@ -13,19 +13,31 @@ const StatisticsLayout = () => {
           title: 'Statistics',
         }}
       />
+      <Stack.Screen
+        name="settings/menu"
+        options={{
+          title: 'Settings',
+          headerLargeTitle: true,
+          headerShown: true,
+          ...headerBlurSettings,
+        }}
+      />
+      <Stack.Screen
+        name="settings/test"
+        options={{
+          title: 'Test',
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        name="settings/dbSync"
+        options={{
+          title: 'DB Sync',
+          headerShown: true,
+        }}
+      />
     </Stack>
   );
 };
-
-// later route to setting modal
-// const HeaderRight = () => {
-//   const { user } = useUser();
-//   const router = useRouter();
-//   return (
-//     <Pressable onPress={() => router.navigate('/')}>
-//       <Image source={{ uri: user?.imageUrl }} style={styles.headerRight} />
-//     </Pressable>
-//   );
-// };
 
 export default StatisticsLayout;

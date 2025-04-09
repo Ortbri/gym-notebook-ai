@@ -10,8 +10,8 @@ const CalendarLayout = () => {
       <Stack.Screen
         name="index"
         options={{
-          title: 'Test',
-          headerLargeTitle: true,
+          title: '',
+          // headerLargeTitle: true,
         }}
       />
     </Stack>

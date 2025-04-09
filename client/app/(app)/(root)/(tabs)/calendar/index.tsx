@@ -1,6 +1,7 @@
 import { subMonths } from 'date-fns';
 import { memo, useCallback } from 'react';
 import { Platform, View, Text } from 'react-native';
+import { useBottomTabBarHeight } from 'react-native-bottom-tabs';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native-unistyles';
 
@@ -36,7 +37,7 @@ const Page = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Calendar</Text>
+      <Text style={styles.text}>Today</Text>
       <Calendar
         weeks={weeks}
         offsetPageLimit={7}
@@ -54,13 +55,15 @@ const Page = () => {
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
-    paddingTop: rt.insets.top + defaultHeaderHeight,
-    // padding: 20,
+    paddingTop: rt.insets.top,
+    paddingBottom: rt.insets.bottom,
   },
   text: {
-    fontSize: 20,
+    fontSize: 30,
+    paddingLeft: 16,
     fontWeight: 'bold',
     color: theme.colors.text.primary,
+    fontFamily: theme.fonts.SourGummyBold,
   },
   dayContentStyle: {
     height: 600,

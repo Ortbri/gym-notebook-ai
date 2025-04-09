@@ -10,16 +10,16 @@ const useNavStyle = () => {
     headerLargeTitleShadowVisible: false,
     headerLargeTitleStyle: {
       fontWeight: '800',
-      // fontFamily: 'SourGummyBold',
+      fontFamily: 'SourGummyBold',
     },
     headerShadowVisible: Platform.OS === 'ios',
     headerTintColor: theme.colors.text.primary,
     headerTitleAlign: 'center',
     headerTitleStyle: {
-      // fontFamily: 'SourGummyBold',
+      fontFamily: 'SourGummyBold',
     },
     headerBackTitleStyle: {
-      // fontFamily: 'SourGummyBold',
+      fontFamily: 'SourGummyBold',
     },
     contentStyle: {
       backgroundColor: theme.colors.bg.primary,

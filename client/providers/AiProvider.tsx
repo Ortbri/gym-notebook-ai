@@ -80,7 +80,7 @@ export async function onSubmit(message: string) {
     messages: [
       {
         role: 'system',
-        content: `\
+        content: `
 You are a helpful chatbot workout notebook assistant. You can provide workout recommendations and notes. 
 You have the following tools available:
 - get_workout: Lists or search workout from TMDB.
@@ -115,73 +115,73 @@ User info:
       return <MarkdownText>{content}</MarkdownText>;
     },
     // Define the tools here:
-    tools: {
-      ...tools,
-      get_media: {
-        description: 'Get workout from ',
-        parameters: z
-          .object({
-            name: z
-              .enum(['Press', 'week'])
-              .describe('Press will match Dumbell Bench Press')
-              .optional(),
-            type: z
-              .enum(['tv', 'movie'])
-              .describe('type of media to search for')
-              .default('movie')
-              .optional(),
-            generated_description: z.string().describe('AI-generated description of the tool call'),
-            query: z
-              .string()
-              .describe(
-                'The query to use for searching movies or TV shows. Set to undefined if looking for trending, new, or popular media.'
-              )
-              .optional(),
-          })
-          .required(),
-        async *generate({ generated_description, time_window, media_type, query }) {
-          yield <WorkoutSkeleeon />;
+    // tools: {
+    //   ...tools,
+    //   get_media: {
+    //     description: 'Get workout from ',
+    //     parameters: z
+    //       .object({
+    //         name: z
+    //           .enum(['Press', 'week'])
+    //           .describe('Press will match Dumbell Bench Press')
+    //           .optional(),
+    //         type: z
+    //           .enum(['tv', 'movie'])
+    //           .describe('type of media to search for')
+    //           .default('movie')
+    //           .optional(),
+    //         generated_description: z.string().describe('AI-generated description of the tool call'),
+    //         query: z
+    //           .string()
+    //           .describe(
+    //             'The query to use for searching movies or TV shows. Set to undefined if looking for trending, new, or popular media.'
+    //           )
+    //           .optional(),
+    //       })
+    //       .required(),
+    //     async *generate({ generated_description, time_window, media_type, query }) {
+    //       yield <WorkoutSkeleeon />;
 
-          let url: string;
-          if (query) {
-            url = `https://api.themoviedb.org/3/search/${media_type}?api_key=${
-              process.env.TMDB_API_KEY
-            }&query=${encodeURIComponent(query)}`;
-          } else {
-            url = `https://api.themoviedb.org/3/trending/${media_type}/${time_window}?api_key=${process.env.TMDB_API_KEY}`;
-          }
+    //       let url: string;
+    //       if (query) {
+    //         url = `https://api.themoviedb.org/3/search/${media_type}?api_key=${
+    //           process.env.TMDB_API_KEY
+    //         }&query=${encodeURIComponent(query)}`;
+    //       } else {
+    //         url = `https://api.themoviedb.org/3/trending/${media_type}/${time_window}?api_key=${process.env.TMDB_API_KEY}`;
+    //       }
 
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error('Failed to fetch trending movies');
-          }
-          const data = await response.json();
-          const movies = data.results.map((media: any) => {
-            if (!media.media_type) {
-              media.media_type = media_type;
-            }
-            return media;
-          });
-          return <MoviesCard data={movies} title={generated_description} />;
-        },
-      },
-      //   get_weather: {
-      //     description: 'Get the current weather for a city',
-      //     parameters: z
-      //       .object({
-      //         city: z.string().describe('the city to get the weather for'),
-      //       })
-      //       .required(),
-      //     async *generate({ city }) {
-      //       yield <WeatherCard city={city} />;
-      //       // await new Promise((resolve) => setTimeout(resolve, 5000));
+    //       const response = await fetch(url);
+    //       if (!response.ok) {
+    //         throw new Error('Failed to fetch trending movies');
+    //       }
+    //       const data = await response.json();
+    //       const movies = data.results.map((media: any) => {
+    //         if (!media.media_type) {
+    //           media.media_type = media_type;
+    //         }
+    //         return media;
+    //       });
+    //       return <MoviesCard data={movies} title={generated_description} />;
+    //     },
+    //   },
+    //   //   get_weather: {
+    //   //     description: 'Get the current weather for a city',
+    //   //     parameters: z
+    //   //       .object({
+    //   //         city: z.string().describe('the city to get the weather for'),
+    //   //       })
+    //   //       .required(),
+    //   //     async *generate({ city }) {
+    //   //       yield <WeatherCard city={city} />;
+    //   //       // await new Promise((resolve) => setTimeout(resolve, 5000));
 
-      //       const weatherInfo = await getWeatherAsync(city);
-      //       console.log('weatherInfo', JSON.stringify(weatherInfo));
-      //       return <WeatherCard city={city} data={weatherInfo} />;
-      //     },
-      //   },
-    },
+    //   //       const weatherInfo = await getWeatherAsync(city);
+    //   //       console.log('weatherInfo', JSON.stringify(weatherInfo));
+    //   //       return <WeatherCard city={city} data={weatherInfo} />;
+    //   //     },
+    //   //   },
+    // },
   });
 
   return {

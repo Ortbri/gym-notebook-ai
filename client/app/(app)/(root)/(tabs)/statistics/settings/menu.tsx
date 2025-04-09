@@ -92,7 +92,7 @@ const SettingsItem = ({
     <Pressable
       style={({ pressed }) => [
         stylesheet.settingsItem,
-        pressed && { backgroundColor: theme.colors.bg.secondary },
+        pressed && { backgroundColor: theme.colors.border.light },
         isLastItem && { borderBottomWidth: 0 },
       ]}
       onPress={() => {
@@ -138,7 +138,7 @@ const SettingsGroup = ({ title, children }: SettingsGroupProps) => {
 
   return (
     <View style={stylesheet.settingsGroupContainer}>
-      {title && <Typography style={stylesheet.settingsGroupTitle}>{title}</Typography>}
+      {/* {title && <Text style={stylesheet.settingsGroupTitle}>{title}</Text>} */}
       <View style={stylesheet.settingsGroupContent}>{children}</View>
     </View>
   );
@@ -170,14 +170,8 @@ export default function Menu() {
     }
   };
 
-  // const onBoxPress = () => {
-  //   if (!isPro) {
-  //     goPro();
-  //   }
-  // };
-
   return (
-    <BodyScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 40, gap: 16 }}>
+    <BodyScrollView contentContainerStyle={{ gap: 16 }}>
       <SettingsGroup title="App">
         <SettingsItem
           title="Testing Route"
@@ -185,19 +179,7 @@ export default function Menu() {
           iconColor={theme.colors.accent.regular}
           isLastItem
           onPress={() => {
-            router.push('/settings/test');
-          }}
-        />
-      </SettingsGroup>
-
-      <SettingsGroup title="Database">
-        <SettingsItem
-          title="Database Sync"
-          icon="server.rack"
-          iconColor={theme.colors.accent.regular}
-          isLastItem
-          onPress={() => {
-            router.push('/settings/dbSync');
+            router.navigate('/(app)/(root)/(tabs)/statistics/settings/test');
           }}
         />
       </SettingsGroup>
@@ -236,7 +218,6 @@ export default function Menu() {
           }}
         />
       </SettingsGroup>
-
       <SettingsGroup>
         <SettingsItem
           title="Sign Out"
@@ -260,7 +241,7 @@ const stylesheet = StyleSheet.create((theme) => ({
     alignItems: 'center',
     marginTop: 16,
     borderWidth: 1,
-    borderColor: theme.colors.error.bg,
+    borderColor: theme.colors.border.strong,
   },
   buttonText: {
     fontFamily: theme.fonts.SourGummyBold,
@@ -290,8 +271,6 @@ const stylesheet = StyleSheet.create((theme) => ({
     alignItems: 'center',
     paddingVertical: 12,
     paddingHorizontal: 16,
-    borderBottomWidth: 0.5,
-    borderBottomColor: theme.colors.border.light,
   },
   iconContainer: {
     width: 28,

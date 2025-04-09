@@ -13,9 +13,10 @@ const AppLayout = () => {
       screenOptions={{
         animation: 'fade',
         animationDuration: 50,
+
         contentStyle: {
           // this is the root background color behind the tabs
-          backgroundColor: theme.colors.bg.primary,
+          // backgroundColor: theme.colors.bg.primary,
         },
       }}>
       <Stack.Screen name="(auth)/auth" options={{ headerShown: false }} />
