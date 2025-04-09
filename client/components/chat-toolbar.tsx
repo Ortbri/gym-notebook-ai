@@ -1,6 +1,5 @@
 'use client';
 
-// import * as AC from '@bacons/apple-colors';
 import { useActions, useUIState } from 'ai/rsc';
 // import { BlurView } from 'expo-blur';
 import * as Haptics from 'expo-haptics';
@@ -9,22 +8,24 @@ import {
   NativeSyntheticEvent,
   TextInput,
   TextInputSubmitEditingEventData,
-  useColorScheme,
+  // useColorScheme,
   View,
 } from 'react-native';
 import Animated, { useAnimatedKeyboard, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useUnistyles } from 'react-native-unistyles';
 
-import type { AI } from './ai-context';
+import { IconSymbol } from './IconSymbol';
+import TouchableBounce from './TouchableBounce';
 import { FirstSuggestions } from './first-suggestions';
-import { IconSymbol } from './ui/IconSymbol';
-import TouchableBounce from './ui/TouchableBounce';
 import { UserMessage } from './user-message';
+import type { AI } from '../providers/AiProvider';
 
-import { nanoid } from '@/util/nanoid';
-import { tw } from '@/util/tw';
+// import { nanoid } from '@/util/nanoid';
+// import { tw } from '@/util/tw';
+import { nanoid } from '~/utils/nanoid';
 
-const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+// const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 interface ChatToolbarInnerProps {
   messages: ReturnType<typeof useUIState<typeof AI>>[0];
@@ -39,6 +40,7 @@ export function ChatToolbarInner({
   onSubmit,
   disabled = false,
 }: ChatToolbarInnerProps) {
+  const { theme, rt } = useUnistyles();
   const [inputValue, setInputValue] = useState('');
   const textInput = useRef<TextInput>(null);
   const { bottom } = useSafeAreaInsets();
@@ -102,7 +104,7 @@ export function ChatToolbarInner({
     [onSubmitMessage]
   );
 
-  const theme = useColorScheme();
+  // const theme = useColorScheme();
 
   return (
     <Animated.View
@@ -118,14 +120,15 @@ export function ChatToolbarInner({
         },
         translateStyle,
       ]}>
-      <View style={tw`md:w-[768px] max-w-[768px] md:mx-auto`}>
+      <View style={{ width: '100%', maxWidth: 768, marginHorizontal: 'auto' }}>
         {!disabled && messages.length === 0 && <FirstSuggestions />}
       </View>
 
-      <View // was BLUR VIEW
+      <Animated.View
         // tint={theme === 'light' ? 'systemChromeMaterial' : 'systemChromeMaterialDark'}
         style={[
           {
+            backgroundColor: 'black',
             paddingTop: 8,
             paddingBottom: 8,
             paddingHorizontal: 16,
@@ -141,23 +144,23 @@ export function ChatToolbarInner({
 
               alignItems: 'stretch',
             },
-            tw`md:w-[768px] max-w-[768px] md:mx-auto`,
+            // tw`md:w-[768px] max-w-[768px] md:mx-auto`,
           ]}>
           <TextInput
             ref={textInput}
             onChangeText={setInputValue}
-            keyboardAppearance={theme ?? 'light'}
-            cursorColor={AC.label}
+            keyboardAppearance={rt.themeName === 'light' ? 'light' : 'dark'}
+            // cursorColor={AC.label}
             returnKeyType="send"
             blurOnSubmit={false}
-            selectionHandleColor={AC.label}
-            selectionColor={AC.label}
+            // selectionHandleColor={AC.label}
+            // selectionColor={AC.label}
             style={{
               pointerEvents: disabled ? 'none' : 'auto',
-              color: AC.label,
+              color: theme.colors.text.primary,
               padding: 16,
-              borderColor: AC.separator,
-              backgroundColor: AC.secondarySystemGroupedBackground,
+              borderColor: theme.colors.border.light,
+              backgroundColor: theme.colors.bg.secondary,
               borderWidth: 1,
               borderRadius: 999,
               paddingVertical: 8,
@@ -174,12 +177,13 @@ export function ChatToolbarInner({
 
           <SendButton enabled={!!inputValue.length} onPress={() => onSubmitMessage(inputValue)} />
         </View>
-      </View>
+      </Animated.View>
     </Animated.View>
   );
 }
 
 function SendButton({ enabled, onPress }: { enabled?: boolean; onPress: () => void }) {
+  const { theme } = useUnistyles();
   return (
     <TouchableBounce
       disabled={!enabled}
@@ -200,16 +204,19 @@ function SendButton({ enabled, onPress }: { enabled?: boolean; onPress: () => vo
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
+
+            borderColor: theme.colors.border.light,
             // borderColor: AC.separator,
             borderWidth: 1,
             aspectRatio: 1,
+            backgroundColor: theme.colors.bg.secondary,
             // backgroundColor: AC.label,
             borderRadius: 999,
           },
           !enabled && { opacity: 0.5 },
           // tw`transition-transform hover:scale-95`,
         ]}>
-        <IconSymbol name="arrow.up" size={20} color={AC.systemBackground} />
+        <IconSymbol name="arrow.up" size={20} color="white" />
       </View>
     </TouchableBounce>
   );

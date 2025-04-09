@@ -1,14 +1,11 @@
 import { subMonths } from 'date-fns';
-import { memo, useCallback } from 'react';
-import { Platform, View, Text } from 'react-native';
-import { useBottomTabBarHeight } from 'react-native-bottom-tabs';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet } from 'react-native-unistyles';
+import { useRouter } from 'expo-router';
+import { memo } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { Calendar } from '~/components/week-calendar';
+import { IconSymbol } from '~/components/IconSymbol';
 import { useGenerateWeeks } from '~/components/week-calendar/utils';
-
-const defaultHeaderHeight = Platform.OS === 'ios' ? 44 : 56; // Approx values
 
 const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
   return (
@@ -28,6 +25,52 @@ const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
     </View>
   );
 });
+
+function ChatListItem() {
+  const router = useRouter();
+  const { theme } = useUnistyles();
+  const lastMessage =
+    "I've analyzed your workout routine and have some suggestions to improve your strength gains.";
+  const timestamp = new Date();
+  const unreadCount = 3;
+
+  return (
+    <TouchableOpacity
+      style={styles.chatItemContainer}
+      onPress={() => {
+        router.navigate('/(app)/(root)/chat/1');
+      }}>
+      <View style={styles.avatarContainer}>
+        <View style={styles.avatar}>
+          <IconSymbol
+            // @ts-ignore
+            name="brain.head.profile"
+            size={22}
+            color={theme.colors.text.inverse}
+          />
+          {/* <Text style={styles.avatarText}>AI</Text> */}
+        </View>
+      </View>
+      <View style={styles.chatContentContainer}>
+        <View style={styles.chatHeader}>
+          <Text style={styles.chatTitle}>Gym Assistant</Text>
+          <Text style={styles.chatTimestamp}>
+            {timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </Text>
+        </View>
+        <Text style={styles.chatPreview} numberOfLines={2}>
+          {lastMessage}
+        </Text>
+      </View>
+      {unreadCount > 0 && (
+        <View style={styles.unreadBadge}>
+          <Text style={styles.unreadText}>{unreadCount}</Text>
+        </View>
+      )}
+    </TouchableOpacity>
+  );
+}
+
 const Page = () => {
   const weeks = useGenerateWeeks(subMonths(new Date(), 5), new Date());
 
@@ -38,7 +81,8 @@ const Page = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Today</Text>
-      <Calendar
+      <ChatListItem />
+      {/* <Calendar
         weeks={weeks}
         offsetPageLimit={7}
         onDateChange={(date) => {
@@ -48,7 +92,7 @@ const Page = () => {
         initialDate={new Date()}>
         <Calendar.Strip style={{ paddingTop: 14 }} />
         <Calendar.Screen containerStyle={styles.calendarScreen} renderDay={renderDay} />
-      </Calendar>
+      </Calendar> */}
     </View>
   );
 };
@@ -76,6 +120,76 @@ const styles = StyleSheet.create((theme, rt) => ({
   },
   calendarScreen: {
     height: rt.screen.height - 140,
+  },
+  chatItemContainer: {
+    flexDirection: 'row',
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.sm,
+    backgroundColor: theme.colors.bg.secondary,
+    borderRadius: theme.radius.lg,
+    marginHorizontal: theme.spacing.md,
+    marginTop: theme.spacing.md,
+    alignItems: 'center',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  avatarContainer: {
+    marginRight: theme.spacing.md,
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: theme.colors.accent.regular,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  avatarText: {
+    color: theme.colors.text.inverse,
+    fontSize: theme.fontSize.md,
+    fontWeight: 'bold',
+  },
+  chatContentContainer: {
+    flex: 1,
+  },
+  chatHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: theme.spacing.xs,
+  },
+  chatTitle: {
+    fontSize: theme.fontSize.md,
+    fontWeight: 'bold',
+    color: theme.colors.text.primary,
+  },
+  chatTimestamp: {
+    fontSize: theme.fontSize.xs,
+    color: theme.colors.text.tertiary,
+  },
+  chatPreview: {
+    fontSize: theme.fontSize.sm,
+    color: theme.colors.text.secondary,
+    lineHeight: 20,
+  },
+  unreadBadge: {
+    backgroundColor: theme.colors.accent.regular,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: theme.spacing.sm,
+  },
+  unreadText: {
+    color: theme.colors.text.inverse,
+    fontSize: theme.fontSize.xs,
+    fontWeight: 'bold',
   },
 }));
 

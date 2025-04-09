@@ -1,33 +1,39 @@
-import { useLocalSearchParams } from 'expo-router';
+/// <reference types="react/canary" />
+
+// import { renderRoot } from "@/actions/render-root";
+// import { AnimatedLogo } from "@/components/animated-logo";
+// import { ChatContainer } from "@/components/chat-container";
+// import { ChatToolbarInner } from "@/components/chat-toolbar";
 import React from 'react';
-import { View } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { View, Text } from 'react-native';
 
-import { Typography } from '~/components/Typography';
+import { renderRoot } from '~/actions/render-root';
 
-export default function ChatScreen() {
-  const { id } = useLocalSearchParams();
+export { ErrorBoundary } from 'expo-router';
 
+export default function Index() {
+  return <React.Suspense fallback={<Loading />}>{renderRoot()}</React.Suspense>;
+}
+
+function Loading() {
   return (
-    <View style={styles.rootContainer}>
-      <Typography>ChatScreen {id}</Typography>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text>Loading...</Text>
+      {/* <AnimatedLogo /> */}
+      {/* <ChatToolbarInner
+        disabled
+        messages={[]}
+        setMessages={() => {}}
+        onSubmit={async () => ({
+          id: Math.random().toString(36).slice(2),
+          display: <></>,
+        })}
+      /> */}
     </View>
   );
 }
-
-const styles = StyleSheet.create((theme, rt) => ({
-  rootContainer: {
-    flex: 1,
-  },
-  dragHandleContainer: {
-    paddingBottom: 14,
-  },
-  dragHandle: {
-    width: 40,
-    height: 5,
-    backgroundColor: theme.colors.bg.tertiary,
-    borderRadius: 5,
-    alignSelf: 'center',
-    marginTop: 10,
-  },
-}));

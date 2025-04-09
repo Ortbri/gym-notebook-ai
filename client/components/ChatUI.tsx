@@ -1,6 +1,6 @@
 'use client';
 
-import * as AC from '@bacons/apple-colors';
+// import * as AC from '@bacons/apple-colors';
 import { useActions, useAIState, useUIState } from 'ai/rsc';
 import { Stack } from 'expo-router';
 import React from 'react';
@@ -8,10 +8,13 @@ import { TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { IconSymbol } from './IconSymbol';
-import { AI } from './ai-context';
-import { AnimatedLogo } from './animated-logo';
+// import { AnimatedLogo } from './animated-logo';
 import { ChatToolbarInner } from './chat-toolbar';
+// import { KeyboardFriendlyScrollView } from './keyboard-friendly-scrollview';
 import { KeyboardFriendlyScrollView } from './keyboard-friendly-scrollview';
+import { AI } from '../providers/AiProvider';
+
+import { nanoid } from '~/utils/nanoid';
 // import { HeaderButton } from './ui/Header';
 
 // import { nanoid } from '~/util/nanoid';
@@ -29,7 +32,7 @@ function MessagesScrollView() {
   return (
     <>
       <KeyboardFriendlyScrollView
-        style={[{ flex: 1 }, tw`md:w-[768px] max-w-[768px] md:mx-auto`]}
+        style={[{ flex: 1 }]}
         contentInsetAdjustmentBehavior="automatic"
         keyboardDismissMode="interactive"
         keyboardShouldPersistTaps="handled"
@@ -47,7 +50,7 @@ function MessagesScrollView() {
           ))
         }
       </KeyboardFriendlyScrollView>
-      {messages.length === 0 && <AnimatedLogo />}
+      {/* {messages.length === 0 && <AnimatedLogo />} */}
     </>
   );
 }
@@ -84,8 +87,12 @@ export function ChatUI() {
                 //   }}>
                 //   <IconSymbol name="square.and.pencil" color={AC.label} />
                 // </HeaderButton>
-                <TouchableOpacity>
-                  <IconSymbol name="square.and.pencil" color={AC.label} />
+                <TouchableOpacity
+                  onPress={() => {
+                    setAIState({ chatId: nanoid(), messages: [] });
+                    setMessages([]);
+                  }}>
+                  <IconSymbol name="square.and.pencil" color="white" />
                 </TouchableOpacity>
               )}
             </>

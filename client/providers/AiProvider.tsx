@@ -7,8 +7,8 @@ import type { CoreMessage } from 'ai';
 import { createAI, getMutableAIState, streamUI } from 'ai/rsc';
 
 // Skeleton and display components
-import { unstable_headers } from 'expo-router/rsc/headers';
-import { z } from 'zod';
+// import { unstable_headers } from 'expo-router/rsc/headers';
+// import { z } from 'zod';
 
 import MarkdownText from '~/components/Markdown';
 
@@ -41,9 +41,9 @@ export async function onSubmit(message: string) {
   });
 
   //
-  const headers = await unstable_headers();
+  // const headers = await unstable_headers();
 
-  const tools: Record<string, any> = {};
+  // const tools: Record<string, any> = {};
 
   // The map feature is native only for now.
   //   if (process.env.EXPO_OS !== 'web') {
