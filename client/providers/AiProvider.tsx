@@ -1,4 +1,4 @@
-// import { unstable_headers } from "expo-router/rsc/headers";
+import { unstable_headers } from 'expo-router/rsc/headers';
 
 import 'server-only';
 import { openai } from '@ai-sdk/openai';
@@ -9,6 +9,8 @@ import { createAI, getMutableAIState, streamUI } from 'ai/rsc';
 // Skeleton and display components
 // import { unstable_headers } from 'expo-router/rsc/headers';
 // import { z } from 'zod';
+
+import { z } from 'zod';
 
 import MarkdownText from '~/components/Markdown';
 
@@ -41,9 +43,9 @@ export async function onSubmit(message: string) {
   });
 
   //
-  // const headers = await unstable_headers();
+  const headers = await unstable_headers();
 
-  // const tools: Record<string, any> = {};
+  const tools: Record<string, any> = {};
 
   // The map feature is native only for now.
   //   if (process.env.EXPO_OS !== 'web') {
@@ -115,73 +117,73 @@ User info:
       return <MarkdownText>{content}</MarkdownText>;
     },
     // Define the tools here:
-    // tools: {
-    //   ...tools,
-    //   get_media: {
-    //     description: 'Get workout from ',
-    //     parameters: z
-    //       .object({
-    //         name: z
-    //           .enum(['Press', 'week'])
-    //           .describe('Press will match Dumbell Bench Press')
-    //           .optional(),
-    //         type: z
-    //           .enum(['tv', 'movie'])
-    //           .describe('type of media to search for')
-    //           .default('movie')
-    //           .optional(),
-    //         generated_description: z.string().describe('AI-generated description of the tool call'),
-    //         query: z
-    //           .string()
-    //           .describe(
-    //             'The query to use for searching movies or TV shows. Set to undefined if looking for trending, new, or popular media.'
-    //           )
-    //           .optional(),
-    //       })
-    //       .required(),
-    //     async *generate({ generated_description, time_window, media_type, query }) {
-    //       yield <WorkoutSkeleeon />;
+    tools: {
+      ...tools,
+      get_media: {
+        description: 'Get workout from ',
+        parameters: z
+          .object({
+            name: z
+              .enum(['Press', 'week'])
+              .describe('Press will match Dumbell Bench Press')
+              .optional(),
+            type: z
+              .enum(['tv', 'movie'])
+              .describe('type of media to search for')
+              .default('movie')
+              .optional(),
+            generated_description: z.string().describe('AI-generated description of the tool call'),
+            query: z
+              .string()
+              .describe(
+                'The query to use for searching movies or TV shows. Set to undefined if looking for trending, new, or popular media.'
+              )
+              .optional(),
+          })
+          .required(),
+        async *generate({ generated_description, time_window, media_type, query }) {
+          yield <div>Loading...</div>;
 
-    //       let url: string;
-    //       if (query) {
-    //         url = `https://api.themoviedb.org/3/search/${media_type}?api_key=${
-    //           process.env.TMDB_API_KEY
-    //         }&query=${encodeURIComponent(query)}`;
-    //       } else {
-    //         url = `https://api.themoviedb.org/3/trending/${media_type}/${time_window}?api_key=${process.env.TMDB_API_KEY}`;
-    //       }
+          let url: string;
+          if (query) {
+            url = `https://api.themoviedb.org/3/search/${media_type}?api_key=${
+              process.env.TMDB_API_KEY
+            }&query=${encodeURIComponent(query)}`;
+          } else {
+            url = `https://api.themoviedb.org/3/trending/${media_type}/${time_window}?api_key=${process.env.TMDB_API_KEY}`;
+          }
 
-    //       const response = await fetch(url);
-    //       if (!response.ok) {
-    //         throw new Error('Failed to fetch trending movies');
-    //       }
-    //       const data = await response.json();
-    //       const movies = data.results.map((media: any) => {
-    //         if (!media.media_type) {
-    //           media.media_type = media_type;
-    //         }
-    //         return media;
-    //       });
-    //       return <MoviesCard data={movies} title={generated_description} />;
-    //     },
-    //   },
-    //   //   get_weather: {
-    //   //     description: 'Get the current weather for a city',
-    //   //     parameters: z
-    //   //       .object({
-    //   //         city: z.string().describe('the city to get the weather for'),
-    //   //       })
-    //   //       .required(),
-    //   //     async *generate({ city }) {
-    //   //       yield <WeatherCard city={city} />;
-    //   //       // await new Promise((resolve) => setTimeout(resolve, 5000));
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error('Failed to fetch trending movies');
+          }
+          const data = await response.json();
+          const movies = data.results.map((media: any) => {
+            if (!media.media_type) {
+              media.media_type = media_type;
+            }
+            return media;
+          });
+          return <MoviesCard data={movies} title={generated_description} />;
+        },
+      },
+      //   get_weather: {
+      //     description: 'Get the current weather for a city',
+      //     parameters: z
+      //       .object({
+      //         city: z.string().describe('the city to get the weather for'),
+      //       })
+      //       .required(),
+      //     async *generate({ city }) {
+      //       yield <WeatherCard city={city} />;
+      //       // await new Promise((resolve) => setTimeout(resolve, 5000));
 
-    //   //       const weatherInfo = await getWeatherAsync(city);
-    //   //       console.log('weatherInfo', JSON.stringify(weatherInfo));
-    //   //       return <WeatherCard city={city} data={weatherInfo} />;
-    //   //     },
-    //   //   },
-    // },
+      //       const weatherInfo = await getWeatherAsync(city);
+      //       console.log('weatherInfo', JSON.stringify(weatherInfo));
+      //       return <WeatherCard city={city} data={weatherInfo} />;
+      //     },
+      //   },
+    },
   });
 
   return {
