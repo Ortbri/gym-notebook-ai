@@ -17,6 +17,9 @@
     "web": "expo start --web",
     "clean:proj": "rm -rf .expo && rm -rf node_modules && rm -rf pnpm-lock.yaml && rm -rf ios && rm -rf android",
     "testflight": "npx testflight",
+    "export:ios:rsc": "npx expo export -p ios",
+    "rsc:server": "npx expo serve",
+    "rsc:ios": "EXPO_NO_DEPLOY=1 npx expo run:ios --configuration Release --device",
     "submit": "eas submit --profile production"
   },
   "dependencies": {

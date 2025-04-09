@@ -42,9 +42,13 @@ export const RevenueCatProvider = ({ children }: ProviderProps) => {
 
       if (Platform.OS === 'android') {
         await Purchases.configure({ apiKey: APIKeys.google });
-      } else {
+      }
+      if (Platform.OS === 'ios') {
         // console.log('apple key ----', APIKeys.apple);
         await Purchases.configure({ apiKey: APIKeys.apple });
+      }
+      if (Platform.OS === 'web') {
+        return;
       }
       setIsReady(true);
       //   const offerings = await Purchases.getOfferings();
