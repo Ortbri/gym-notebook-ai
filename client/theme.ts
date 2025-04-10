@@ -159,8 +159,8 @@ export const lightTheme = {
     },
     accent: {
       light: palette.primary[2],
-      regular: palette.primary[6],
-      strong: palette.primary[8],
+      regular: palette.primary[4],
+      strong: palette.primary[5],
     },
     success: {
       bg: palette.success[1],
