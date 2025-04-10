@@ -1,13 +1,16 @@
+import { useAuth, useUser } from '@clerk/clerk-expo';
 import * as Burnt from 'burnt';
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { View, Pressable } from 'react-native';
+import { Pressable, View } from 'react-native';
 import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
-import { useUnistyles, StyleSheet } from 'react-native-unistyles';
+import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { IconSymbol } from '~/components/IconSymbol';
 import { Typography } from '~/components/Typography';
 import { useRevenueCat } from '~/providers/RevenueCatProvider';
 import { useHaptics } from '~/utils/haptic';
+
 // iOS-style settings list item component
 interface SettingsItemProps {
   title: string;
@@ -69,8 +72,28 @@ const SettingsItem = ({
     </Pressable>
   );
 };
-export default function SubscriptionTestListItem() {
+
+// Group of settings items with a title
+interface SettingsGroupProps {
+  title?: string;
+  children: React.ReactNode;
+}
+
+const SettingsGroup = ({ title, children }: SettingsGroupProps) => {
+  return (
+    <View style={stylesheet.settingsGroupContainer}>
+      {/* {title && <Text style={stylesheet.settingsGroupTitle}>{title}</Text>} */}
+      <View style={stylesheet.settingsGroupContent}>{children}</View>
+    </View>
+  );
+};
+
+export default function Menu() {
+  const { signOut } = useAuth();
+  const { user } = useUser();
   const { isPro } = useRevenueCat();
+  const { theme } = useUnistyles();
+  const router = useRouter();
 
   const goPro = async () => {
     const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
@@ -90,29 +113,73 @@ export default function SubscriptionTestListItem() {
         return false;
     }
   };
+
   return (
-    <SettingsItem
-      title="Subscription"
-      icon="creditcard"
-      subtitle={isPro ? 'Pro' : 'Free'}
-      isLastItem
-      onPress={() => {
-        if (isPro) {
-          Burnt.toast({
-            title: 'You are a pro',
-            preset: 'done',
-            haptic: 'success',
-            duration: 2,
-          });
-        } else {
-          goPro();
-        }
-      }}
-    />
+    <View style={stylesheet.container}>
+      <SettingsGroup title="App">
+        <SettingsItem
+          title="Testing Route"
+          icon="hammer"
+          iconColor={theme.colors.accent.regular}
+          isLastItem
+          onPress={() => {
+            router.navigate('/(app)/(root)/(tabs)/statistics/settings/test');
+          }}
+        />
+      </SettingsGroup>
+      <SettingsGroup title="Account">
+        <SettingsItem
+          title={user?.firstName || 'User'}
+          subtitle={user?.emailAddresses?.[0]?.emailAddress || 'No email'}
+          icon="person.crop.circle"
+          iconColor={theme.colors.accent.regular}
+          onPress={() => {
+            Burnt.toast({
+              title: 'Profile settings coming soon',
+              preset: 'done',
+              haptic: 'success',
+              duration: 2,
+            });
+          }}
+        />
+        <SettingsItem
+          title="Subscription"
+          icon="creditcard"
+          iconColor={isPro ? theme.colors.success.main : theme.colors.text.tertiary}
+          subtitle={isPro ? 'Pro' : 'Free'}
+          isLastItem
+          onPress={() => {
+            if (isPro) {
+              Burnt.toast({
+                title: 'You are a pro',
+                preset: 'done',
+                haptic: 'success',
+                duration: 2,
+              });
+            } else {
+              goPro();
+            }
+          }}
+        />
+      </SettingsGroup>
+      <SettingsGroup>
+        <SettingsItem
+          title="Sign Out"
+          icon="rectangle.portrait.and.arrow.right"
+          iconColor={theme.colors.error.main}
+          showChevron={false}
+          isLastItem
+          onPress={signOut}
+        />
+      </SettingsGroup>
+    </View>
   );
 }
 
 const stylesheet = StyleSheet.create((theme) => ({
+  container: {
+    flex: 1,
+  },
   button: {
     backgroundColor: theme.colors.error.bg,
     paddingVertical: 18,

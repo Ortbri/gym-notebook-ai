@@ -18,7 +18,7 @@ import Animated, {
   Easing,
   interpolateColor,
 } from 'react-native-reanimated';
-import { StyleSheet, UnistylesVariants, useUnistyles } from 'react-native-unistyles';
+import { StyleSheet, UnistylesVariants, useUnistyles, mq } from 'react-native-unistyles';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 const AnimatedView = Animated.createAnimatedComponent(View);
@@ -258,8 +258,8 @@ export const PasswordInput = forwardRef<TextInput, PasswordInputProps>(
 
 const styles = StyleSheet.create((theme) => ({
   container: {
+    marginBottom: theme.spacing.sm,
     width: '100%',
-    marginVertical: theme.spacing.sm,
   },
   label: {
     fontSize: theme.fontSize.sm,
@@ -274,6 +274,7 @@ const styles = StyleSheet.create((theme) => ({
     borderWidth: 1,
     borderRadius: theme.radius.lg,
     backgroundColor: 'transparent',
+    overflow: 'hidden',
     variants: {
       size: {
         sm: {

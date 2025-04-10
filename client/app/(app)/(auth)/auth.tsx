@@ -8,6 +8,7 @@ import { View, Text } from 'react-native';
 import { StyleSheet, withUnistyles } from 'react-native-unistyles';
 
 import { Button } from '~/components/ui/Button';
+import { Form } from '~/components/ui/Form';
 
 export const useWarmUpBrowser = () => {
   useEffect(() => {
@@ -28,7 +29,7 @@ const UniIonicons = withUnistyles(Ionicons, (theme, rt) => ({
 }));
 
 export default function Home() {
-  useWarmUpBrowser();
+  // useWarmUpBrowser();
   const router = useRouter();
   // Use the `useSSO()` hook to access the `startSSOFlow()` method
   const { startSSOFlow } = useSSO();
@@ -63,16 +64,13 @@ export default function Home() {
   );
 
   return (
-    <View style={styles.container}>
+    <Form>
       <Text style={styles.title}>Gym Notebook</Text>
-
-      <View style={styles.emptyCont} />
       <View style={styles.btnContainer}>
         <Button
-          leftIcon={<UniIonicons name="logo-google" size={20} />}
           title="Continue with Email"
           size="lg"
-          variant="secondary"
+          variant="primary"
           onPress={() => router.navigate('/(app)/(auth)/email/sign-in')}
         />
         <Button
@@ -101,7 +99,7 @@ export default function Home() {
           </Link>
         </Text>
       </View>
-    </View>
+    </Form>
   );
 }
 
@@ -123,11 +121,6 @@ const styles = StyleSheet.create((theme, rt) => ({
   },
   btnContainer: {
     gap: 8,
-  },
-  btnText: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: theme.colors.palette.gray[1],
   },
   text: {
     marginHorizontal: 14,

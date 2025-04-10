@@ -16,7 +16,7 @@ import Animated, {
   withSequence,
   interpolateColor,
 } from 'react-native-reanimated';
-import { StyleSheet, UnistylesVariants } from 'react-native-unistyles';
+import { StyleSheet, UnistylesVariants, mq } from 'react-native-unistyles';
 
 type ButtonShape = 'rounded' | 'circular' | 'pill' | 'square';
 
@@ -141,6 +141,8 @@ const styles = StyleSheet.create((theme) => ({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'stretch',
+    // Keep the stretch for mobile, remove the centering for web since Form will handle it
     variants: {
       size: {
         sm: {
@@ -159,8 +161,19 @@ const styles = StyleSheet.create((theme) => ({
       variant: {
         primary: {
           backgroundColor: theme.colors.accent.strong,
+          borderColor: theme.colors.accent.strong,
           borderWidth: 1,
-          borderColor: theme.colors.accent.strong, // Same as background
+          _web: {
+            ':hover': {
+              // backgroundColor: theme.colors.accent.strong + 'CC', // 80% opacity
+            },
+            ':focus': {
+              // outlineStyle: 'solid',
+              // outlineWidth: 2,
+              // outlineColor: theme.colors.accent.strong,
+              // outlineOffset: 2,
+            },
+          },
         },
         secondary: {
           backgroundColor: theme.colors.bg.secondary,

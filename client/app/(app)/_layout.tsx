@@ -7,19 +7,16 @@ export const unstable_settings = {
 
 const AppLayout = () => {
   const { theme } = useUnistyles();
-
   return (
     <Stack
       screenOptions={{
         animation: 'fade',
         animationDuration: 50,
-
         contentStyle: {
-          // this is the root background color behind the tabs
-          // backgroundColor: theme.colors.bg.primary,
+          backgroundColor: theme.colors.bg.primary,
         },
       }}>
-      <Stack.Screen name="(auth)/auth" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(root)" options={{ headerShown: false }} />
     </Stack>
   );
