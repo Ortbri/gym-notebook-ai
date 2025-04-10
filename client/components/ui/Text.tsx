@@ -1,12 +1,11 @@
 import React from 'react';
-import { Text, StyleProp, TextStyle } from 'react-native';
+import { Text as RNText, StyleProp, TextStyle } from 'react-native';
 import { StyleSheet, UnistylesVariants } from 'react-native-unistyles';
 
 interface TypographyProps extends React.PropsWithChildren, UnistylesVariants<typeof styles> {
   style?: StyleProp<TextStyle>;
 }
-
-export const Typography: React.FunctionComponent<TypographyProps> = ({
+export const Text: React.FunctionComponent<TypographyProps> = ({
   children,
   isBold,
   color,
@@ -19,38 +18,40 @@ export const Typography: React.FunctionComponent<TypographyProps> = ({
     size,
   });
 
-  return <Text style={[styles.text, style]}>{children}</Text>;
+  return <RNText style={[styles.text, style]}>{children}</RNText>;
 };
 
 const styles = StyleSheet.create((theme) => ({
-  // baseText: {
-  //   variants: {
-  //     fontFamily: {
-  //       bold: {
-  //         fontFamily: theme.fonts.SourGummyBold,
-  //       },
-  //       regular: {
-  //         fontFamily: theme.fonts.SourGummyRegular,
-  //       },
-  //       light: {
-  //         fontFamily: theme.fonts.SourGummy,
-  //       },
-  //     },
-  //   },
-  // },
   text: {
-    // fontFamily: 'SourGummy',
     variants: {
       size: {
-        title: {
-          fontSize: 20,
-        },
-        subtitle: {
-          fontSize: 18,
-        },
-        default: {
+        h1: { fontSize: 32, fontWeight: '700', lineHeight: 40 },
+        h2: { fontSize: 28, fontWeight: '700', lineHeight: 36 },
+        h3: { fontSize: 24, fontWeight: '600', lineHeight: 32 },
+        h4: { fontSize: 20, fontWeight: '600', lineHeight: 28 },
+        lead: { fontSize: 18, fontWeight: '400', lineHeight: 28 },
+        p: { fontSize: 16, lineHeight: 24 },
+        blockquote: { fontSize: 16, fontStyle: 'italic', lineHeight: 24 },
+        inlineCode: {
           fontSize: 14,
+          fontFamily: 'Courier',
+          backgroundColor: theme.colors.bg.secondary,
+          borderRadius: 4,
+          paddingHorizontal: 4,
+          paddingVertical: 2,
+          alignSelf: 'flex-start', // key for inline look
         },
+
+        code: {
+          fontSize: 14,
+          fontFamily: 'Courier',
+          backgroundColor: theme.colors.bg.secondary,
+          padding: 12,
+          borderRadius: 6,
+          width: '100%',
+        },
+
+        caption: { fontSize: 12, color: theme.colors.text.tertiary },
       },
       isBold: {
         true: {
@@ -66,13 +67,41 @@ const styles = StyleSheet.create((theme) => ({
         },
       },
     },
+    align: {
+      center: { textAlign: 'center' },
+      left: { textAlign: 'left' },
+      right: { textAlign: 'right' },
+    },
+    emphasis: {
+      true: { fontStyle: 'italic' },
+    },
+    muted: {
+      true: { color: theme.colors.text.tertiary },
+    },
+
     compoundVariants: [
       {
+        size: 'inlineCode',
         isBold: true,
-        color: 'tertiary',
         styles: {
-          borderBottomWidth: 1,
-          borderBottomColor: theme.colors.bg.secondary,
+          borderRadius: 4,
+          paddingHorizontal: 4,
+          paddingVertical: 2,
+        },
+      },
+      {
+        size: 'blockquote',
+        styles: {
+          paddingLeft: 12,
+          borderLeftWidth: 3,
+          borderLeftColor: theme.colors.bg.tertiary,
+        },
+      },
+      {
+        muted: true,
+        isBold: true,
+        styles: {
+          opacity: 0.7,
         },
       },
     ],
