@@ -1,10 +1,11 @@
 import { subMonths } from 'date-fns';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { memo } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { IconSymbol } from '~/components/IconSymbol';
+import { Text } from '~/components/ui/Text';
 import { useGenerateWeeks } from '~/components/week-calendar/utils';
 
 const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
@@ -82,6 +83,9 @@ const Page = () => {
     <View style={styles.container}>
       <Text style={styles.text}>Today</Text>
       <ChatListItem />
+      <Link href="/(app)/(root)/listB/new" style={{ marginTop: 100 }}>
+        <Text>ListB</Text>
+      </Link>
       {/* <Calendar
         weeks={weeks}
         offsetPageLimit={7}

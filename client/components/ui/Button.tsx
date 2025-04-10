@@ -150,7 +150,7 @@ const styles = StyleSheet.create((theme) => ({
           paddingHorizontal: theme.spacing.sm,
         },
         md: {
-          paddingVertical: theme.spacing.sm,
+          paddingVertical: theme.spacing.md,
           paddingHorizontal: theme.spacing.md,
         },
         lg: {
