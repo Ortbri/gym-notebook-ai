@@ -1,12 +1,13 @@
-import { useClerk, useSSO } from '@clerk/clerk-expo';
+import { useSSO } from '@clerk/clerk-expo';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import * as AuthSession from 'expo-auth-session';
-import * as Linking from 'expo-linking';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import React, { useCallback, useEffect } from 'react';
-import { View, Button, Text, Pressable } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
+import { View, Text } from 'react-native';
+import { StyleSheet, withUnistyles } from 'react-native-unistyles';
+
+import { Button } from '~/components/ui/Button';
 
 export const useWarmUpBrowser = () => {
   useEffect(() => {
@@ -22,12 +23,15 @@ export const useWarmUpBrowser = () => {
 
 WebBrowser.maybeCompleteAuthSession();
 
+const UniIonicons = withUnistyles(Ionicons, (theme, rt) => ({
+  color: theme.colors.text.primary,
+}));
+
 export default function Home() {
   useWarmUpBrowser();
-
+  const router = useRouter();
   // Use the `useSSO()` hook to access the `startSSOFlow()` method
   const { startSSOFlow } = useSSO();
-
   const onPress = useCallback(
     async (type: 'google' | 'apple') => {
       try {
@@ -58,53 +62,45 @@ export default function Home() {
     [startSSOFlow]
   );
 
-  // Use `useClerk()` to access the `signOut()` function
-  const { signOut } = useClerk();
-
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-      // Redirect to your desired page
-      Linking.openURL(Linking.createURL('/'));
-    } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      console.error(JSON.stringify(err, null, 2));
-    }
-  };
-
-  const openLink = async () => {
-    await WebBrowser.openBrowserAsync('https://gymnotebook.app');
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome</Text>
+      <Text style={styles.title}>Gym Notebook</Text>
+
       <View style={styles.emptyCont} />
+      <View style={styles.btnContainer}>
+        <Button
+          leftIcon={<UniIonicons name="logo-google" size={20} />}
+          title="Continue with Email"
+          size="lg"
+          variant="secondary"
+          onPress={() => router.navigate('/(app)/(auth)/email/sign-in')}
+        />
+        <Button
+          leftIcon={<UniIonicons name="logo-google" size={20} />}
+          title="Continue with Google"
+          size="lg"
+          variant="secondary"
+          onPress={() => onPress('google')}
+        />
+        <Button
+          leftIcon={<UniIonicons name="logo-apple" size={20} />}
+          title="Continue with Apple"
+          size="lg"
+          variant="secondary"
+          onPress={() => onPress('apple')}
+        />
 
-      <Pressable style={styles.btnContainer} onPress={() => onPress('google')}>
-        <Ionicons name="logo-google" size={18} />
-        <Text style={styles.btnText}>Sign in w/ google</Text>
-      </Pressable>
-      <Pressable style={styles.btnContainer} onPress={() => onPress('apple')}>
-        <Ionicons name="logo-apple" size={18} />
-        <Text style={styles.btnText}>Sign in w/ apples</Text>
-      </Pressable>
-      <Pressable style={styles.btnContainer} onPress={openLink}>
-        <Ionicons name="mail" size={18} />
-        <Text style={styles.btnText}>Continue w/ email</Text>
-      </Pressable>
-
-      <Text style={styles.text}>
-        By continuing, you agree to our{' '}
-        <Link href="https://gymnotebook.app">
-          <Text style={styles.link}>Terms of Service</Text>
-        </Link>{' '}
-        and{' '}
-        <Link href="https://gymnotebook.app">
-          <Text style={styles.link}>Privacy Policy</Text>
-        </Link>
-      </Text>
+        <Text style={styles.text}>
+          By continuing, you agree to our{' '}
+          <Link href="https://gymnotebook.app">
+            <Text style={styles.link}>Terms of Service</Text>
+          </Link>{' '}
+          and{' '}
+          <Link href="https://gymnotebook.app">
+            <Text style={styles.link}>Privacy Policy</Text>
+          </Link>
+        </Text>
+      </View>
     </View>
   );
 }
@@ -119,25 +115,19 @@ const styles = StyleSheet.create((theme, rt) => ({
   title: {
     fontSize: 40,
     fontWeight: '900',
+    color: theme.colors.text.primary,
+    fontFamily: theme.fonts.SourGummyBold,
   },
   emptyCont: {
     flex: 1,
   },
   btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: theme.radius.lg,
-    borderColor: theme.colors.bg.tertiary,
-    borderWidth: 1,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    marginBottom: 12,
     gap: 8,
   },
   btnText: {
     fontSize: 16,
     fontWeight: '500',
+    color: theme.colors.palette.gray[1],
   },
   text: {
     marginHorizontal: 14,
