@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native-unistyles';
-import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 export { ErrorBoundary } from 'expo-router';
 
 // Initialize Sentry
@@ -107,14 +106,12 @@ export default function AppLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <TinyBaseProvider>
-        <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-          <ClerkLoaded>
-            <InitialLayout fontsLoaded={fontsLoaded} />
-            <Toaster position="bottom-right" />
-          </ClerkLoaded>
-        </ClerkProvider>
-      </TinyBaseProvider>
+      <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+        <ClerkLoaded>
+          <InitialLayout fontsLoaded={fontsLoaded} />
+          <Toaster position="bottom-right" />
+        </ClerkLoaded>
+      </ClerkProvider>
     </GestureHandlerRootView>
   );
 }
