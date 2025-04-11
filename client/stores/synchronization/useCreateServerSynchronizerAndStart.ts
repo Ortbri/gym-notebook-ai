@@ -30,12 +30,12 @@ export const useCreateServerSynchronizerAndStart = <Schemas extends OptionalSche
       await synchronizer.startSync();
 
       // If the websocket reconnects in the future, do another explicit sync.
-      // synchronizer.getWebSocket().addEventListener('open', () => {
-      //   synchronizer.load().then(() => synchronizer.save());
-      // });
       synchronizer.getWebSocket().addEventListener('open', () => {
-        synchronizer.load(); // just pull from server, don't push
+        synchronizer.load().then(() => synchronizer.save());
       });
+      // synchronizer.getWebSocket().addEventListener('open', () => {
+      //   synchronizer.load(); // just pull from server, don't push
+      // });
 
       return synchronizer;
     },
