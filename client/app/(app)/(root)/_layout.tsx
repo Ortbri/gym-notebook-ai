@@ -45,9 +45,12 @@ export default function RootLayout() {
             <Stack.Screen
               name="listB/new/scan"
               options={{
-                title: 'Scan',
-                presentation: 'modal',
-                ...headerBlurSettings,
+                title: '',
+                presentation: 'formSheet',
+                sheetGrabberVisible: true,
+                sheetCornerRadius: 40,
+                headerTransparent: true,
+                // ...headerBlurSettings,
               }}
             />
             <Stack.Screen
@@ -55,6 +58,34 @@ export default function RootLayout() {
               options={{
                 title: 'List Item',
                 headerBackTitle: 'Home',
+                ...headerBlurSettings,
+              }}
+            />
+            <Stack.Screen
+              name="listB/[listId]/product/new"
+              options={{
+                title: 'Product',
+                headerBackTitle: 'List',
+                ...headerBlurSettings,
+              }}
+            />
+            <Stack.Screen
+              name="listB/[listId]/share"
+              options={{
+                title: 'Share',
+                headerBackTitle: 'List',
+                presentation: 'formSheet',
+                sheetGrabberVisible: true,
+                sheetCornerRadius: 40,
+                // headerTransparent: true,
+                ...headerBlurSettings,
+              }}
+            />
+            <Stack.Screen
+              name="listB/[listId]/product/[productId]"
+              options={{
+                title: 'Product',
+                headerBackTitle: 'List',
                 ...headerBlurSettings,
               }}
             />
@@ -80,6 +111,14 @@ export default function RootLayout() {
               options={{
                 title: 'DB Sync',
                 headerShown: true,
+              }}
+            />
+            <Stack.Screen
+              name="settings/profile"
+              options={{
+                title: 'Profile',
+                headerShown: true,
+                ...headerBlurSettings,
               }}
             />
           </Stack>

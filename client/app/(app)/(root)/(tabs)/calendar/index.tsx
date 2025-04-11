@@ -3,12 +3,11 @@ import { Link, Stack, useRouter } from 'expo-router';
 import { View, TouchableOpacity, Pressable, FlatList } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import ChatListItem from '~/components/ChatListItem';
 import { IconSymbol } from '~/components/IconSymbol';
 import { Text } from '~/components/ui/Text';
 import { useGenerateWeeks } from '~/components/week-calendar/utils';
 import { useShoppingListIds } from '~/stores/ListsStore';
-
-// TODO: Stopped at 3:39:51
 
 // const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
 //   return (
@@ -29,7 +28,7 @@ import { useShoppingListIds } from '~/stores/ListsStore';
 //   );
 // });
 
-function ChatListItem() {
+function EmptyChatListItem() {
   const router = useRouter();
   const { theme } = useUnistyles();
   const lastMessage =
@@ -89,7 +88,11 @@ const Page = () => {
           title: '',
           headerLeft: () => (
             <Link href="/(app)/(root)/listB/new" style={{}} asChild>
-              <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+              <TouchableOpacity
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}
+                onLongPress={() => {
+                  // console.log('long pressed');
+                }}>
                 <Text style={styles.text}>Today</Text>
                 <IconSymbol name="plus" size={24} weight="bold" />
               </TouchableOpacity>
@@ -98,7 +101,7 @@ const Page = () => {
         }}
       />
       {/* <View style={styles.container}> */}
-      {/* <ChatListItem /> */}
+      {/* <EmptyChatListItem /> */}
       <FlatList
         contentInsetAdjustmentBehavior="automatic"
         data={shoppingListIds}
@@ -106,17 +109,12 @@ const Page = () => {
           paddingTop: 16,
           paddingHorizontal: 16,
           gap: 16,
+          paddingBottom: 40,
           // gap: 500,
           // paddingTop: 100,
         }}
-        ListEmptyComponent={<ChatListItem />}
-        renderItem={({ item }) => (
-          <Link href={`/(app)/(root)/listB/${item}`} asChild>
-            <Pressable>
-              <Text>{item}</Text>
-            </Pressable>
-          </Link>
-        )}
+        ListEmptyComponent={<EmptyChatListItem />}
+        renderItem={({ item }) => <ChatListItem listId={item} />}
       />
       {/* </View> */}
     </>

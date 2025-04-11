@@ -99,6 +99,7 @@ export const useShoppingListValue = <ValueId extends ShoppingListValueId>(
   listId: string,
   valueId: ValueId
 ): [Value<Schemas[1], ValueId>, (value: Value<Schemas[1], ValueId>) => void] => [
+  // @ts-ignore
   useValue(valueId, useStoreId(listId)),
   useSetValueCallback(
     valueId,

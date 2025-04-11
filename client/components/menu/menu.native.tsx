@@ -122,12 +122,13 @@ export default function Menu() {
           icon="person.crop.circle"
           iconColor={theme.colors.accent.regular}
           onPress={() => {
-            Burnt.toast({
-              title: 'Profile settings coming soon',
-              preset: 'done',
-              haptic: 'success',
-              duration: 2,
-            });
+            router.navigate('/(app)/(root)/settings/profile');
+            // Burnt.toast({
+            //   title: 'Profile settings coming soon',
+            //   preset: 'done',
+            //   haptic: 'success',
+            //   duration: 2,
+            // });
           }}
         />
         {/* <SettingsItem
@@ -172,6 +173,30 @@ export default function Menu() {
           onPress={signOut}
         />
       </SettingsGroup>
+      <SettingsGroup title="App">
+        <SettingsItem
+          title="Testing Route"
+          icon="hammer"
+          iconColor={theme.colors.accent.regular}
+          isLastItem
+          onPress={() => {
+            router.navigate('/(app)/(root)/settings/test');
+          }}
+        />
+      </SettingsGroup>
+
+      {/* <SettingsGroup>
+        <SettingsItem
+          title="Delete Account"
+          icon="trash"
+          iconColor={theme.colors.accent.regular}
+          showChevron={false}
+          isLastItem
+          onPress={() => {
+            router.navigate('/(app)/(root)/settings/delete');
+          }}
+        /> */}
+      {/* </SettingsGroup> */}
     </View>
   );
 }
