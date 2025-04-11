@@ -15,7 +15,7 @@ const TabsLayout = () => {
   return (
     <View style={{ flex: 1 }}>
       <Pressable
-        onPress={() => router.navigate('/(app)/(root)/(tabs)/statistics/settings/menu')}
+        onPress={() => router.navigate('/(app)/(root)/settings/menu')}
         style={{
           height: 35,
           width: 35,

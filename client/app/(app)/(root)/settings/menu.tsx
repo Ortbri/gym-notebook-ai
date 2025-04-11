@@ -3,10 +3,7 @@ import Menu from '~/components/menu/menu';
 
 export default function MenuScreen() {
   return (
-    <BodyScrollView
-      contentContainerStyle={{
-        gap: 16,
-      }}>
+    <BodyScrollView contentContainerStyle={{}}>
       <Menu />
     </BodyScrollView>
   );

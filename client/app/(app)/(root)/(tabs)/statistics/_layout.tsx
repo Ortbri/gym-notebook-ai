@@ -13,29 +13,6 @@ const StatisticsLayout = () => {
           title: 'Statistics',
         }}
       />
-      <Stack.Screen
-        name="settings/menu"
-        options={{
-          title: 'Settings',
-          headerLargeTitle: true,
-          headerShown: true,
-          ...headerBlurSettings,
-        }}
-      />
-      <Stack.Screen
-        name="settings/test"
-        options={{
-          title: 'Test',
-          headerShown: true,
-        }}
-      />
-      <Stack.Screen
-        name="settings/dbSync"
-        options={{
-          title: 'DB Sync',
-          headerShown: true,
-        }}
-      />
     </Stack>
   );
 };

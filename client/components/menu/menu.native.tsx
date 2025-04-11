@@ -3,12 +3,11 @@ import * as Burnt from 'burnt';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Pressable, View } from 'react-native';
-import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
+// import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { IconSymbol } from '~/components/IconSymbol';
 import { Typography } from '~/components/Typography';
-import { useRevenueCat } from '~/providers/RevenueCatProvider';
 import { useHaptics } from '~/utils/haptic';
 
 // iOS-style settings list item component
@@ -91,28 +90,28 @@ const SettingsGroup = ({ title, children }: SettingsGroupProps) => {
 export default function Menu() {
   const { signOut } = useAuth();
   const { user } = useUser();
-  const { isPro } = useRevenueCat();
+  // const { isPro } = useRevenueCat();
   const { theme } = useUnistyles();
   const router = useRouter();
 
-  const goPro = async () => {
-    const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
-      displayCloseButton: false,
-      fontFamily: 'SourGummyRegular',
-    });
+  // const goPro = async () => {
+  //   const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
+  //     displayCloseButton: false,
+  //     fontFamily: 'SourGummyRegular',
+  //   });
 
-    switch (paywallResult) {
-      case PAYWALL_RESULT.NOT_PRESENTED:
-      case PAYWALL_RESULT.ERROR:
-      case PAYWALL_RESULT.CANCELLED:
-        return false;
-      case PAYWALL_RESULT.PURCHASED:
-      case PAYWALL_RESULT.RESTORED:
-        return true;
-      default:
-        return false;
-    }
-  };
+  //   switch (paywallResult) {
+  //     case PAYWALL_RESULT.NOT_PRESENTED:
+  //     case PAYWALL_RESULT.ERROR:
+  //     case PAYWALL_RESULT.CANCELLED:
+  //       return false;
+  //     case PAYWALL_RESULT.PURCHASED:
+  //     case PAYWALL_RESULT.RESTORED:
+  //       return true;
+  //     default:
+  //       return false;
+  //   }
+  // };
 
   return (
     <View style={stylesheet.container}>
@@ -142,7 +141,7 @@ export default function Menu() {
             });
           }}
         />
-        <SettingsItem
+        {/* <SettingsItem
           title="Subscription"
           icon="creditcard"
           iconColor={isPro ? theme.colors.success.main : theme.colors.text.tertiary}
@@ -160,7 +159,7 @@ export default function Menu() {
               goPro();
             }
           }}
-        />
+        /> */}
       </SettingsGroup>
       <SettingsGroup>
         <SettingsItem
@@ -179,6 +178,7 @@ export default function Menu() {
 const stylesheet = StyleSheet.create((theme) => ({
   container: {
     flex: 1,
+    gap: 16,
   },
   button: {
     backgroundColor: theme.colors.error.bg,
