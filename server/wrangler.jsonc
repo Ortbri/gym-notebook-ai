@@ -9,10 +9,19 @@
 	"compatibility_date": "2025-04-07",
 	"migrations": [
 		{
-			"new_sqlite_classes": [
-				"GymNotesDurableObject"
-			],
-			"tag": "v1"
+			"tag": "v1",
+			"new_classes": [
+				"MyDurableObject"
+			]
+		},
+		{
+			"tag": "v2",
+			"renamed_classes": [
+				{
+					"from": "MyDurableObject",
+					"to": "GymNotesDurableObject"
+				}
+			]
 		}
 	],
 	"durable_objects": {
@@ -24,7 +33,8 @@
 		]
 	},
 	"observability": {
-		"enabled": true
+		"enabled": true,
+		"head_sampling_rate": 0.1
 	},
 	/**
 	 * Smart Placement
