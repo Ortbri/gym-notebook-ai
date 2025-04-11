@@ -1,3 +1,4 @@
+import Superwall from '@superwall/react-native-superwall';
 import React from 'react';
 import { ScrollView } from 'react-native';
 
@@ -21,7 +22,18 @@ export default function Test() {
       <Text size="caption" isBold>
         Caption
       </Text> */}
-      <Button title="Test" variant="primary">
+      <Button
+        title="Test"
+        variant="primary"
+        onPress={() => {
+          console.log('Scan a QR code');
+          Superwall.shared.register({
+            placement: 'session_start',
+            feature: () => {
+              console.log('Scan a QR Success');
+            },
+          });
+        }}>
         Text
       </Button>
     </ScrollView>

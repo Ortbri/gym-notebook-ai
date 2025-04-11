@@ -1,3 +1,4 @@
+import Superwall from '@superwall/react-native-superwall';
 import { Href, useGlobalSearchParams, useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { View } from 'react-native';
@@ -90,7 +91,16 @@ export default function ListB() {
         title="Scan a QR code"
         onPress={() => {
           console.log('Scan a QR code');
-          handleDismissTo('/(app)/(root)/listB/new/scan');
+          Superwall.shared.register({
+            placement: 'start_chat',
+            feature: () => {
+              handleDismissTo('/(app)/(root)/listB/new/scan');
+
+              // navigation.navigate('LaunchedFeature', {
+              //   value: 'Non-gated feature launched',
+              // });
+            },
+          });
         }}
       />
     </BodyScrollView>

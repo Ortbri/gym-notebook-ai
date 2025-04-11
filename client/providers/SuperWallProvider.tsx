@@ -1,5 +1,5 @@
 import { useAuth } from '@clerk/clerk-expo'; // make sure this is imported
-import Superwall from '@superwall/react-native-superwall';
+import Superwall, { LogLevel } from '@superwall/react-native-superwall';
 import React, { createContext, useContext, useState } from 'react';
 
 import { RCPurchaseController } from '~/api/superwalls/RCPurchaseController';
@@ -36,6 +36,8 @@ export const SuperWallProvider = ({ children }: ProviderProps) => {
       // Superwall.shared.setUserAttributes({ test: 'abc' });
       purchaseController.syncSubscriptionStatus();
       setIsReady(true);
+
+      Superwall.instance.logLevel = LogLevel.Warn;
     };
     setupSuperwall();
   }, []);

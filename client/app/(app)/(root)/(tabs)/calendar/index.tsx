@@ -103,8 +103,11 @@ const Page = () => {
         contentInsetAdjustmentBehavior="automatic"
         data={shoppingListIds}
         contentContainerStyle={{
-          gap: 500,
-          paddingTop: 100,
+          paddingTop: 16,
+          paddingHorizontal: 16,
+          gap: 16,
+          // gap: 500,
+          // paddingTop: 100,
         }}
         ListEmptyComponent={<ChatListItem />}
         renderItem={({ item }) => (

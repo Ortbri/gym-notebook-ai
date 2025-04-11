@@ -31,7 +31,6 @@ export default function RootLayout() {
                 title: 'List B',
                 presentation: 'formSheet',
                 sheetGrabberVisible: true,
-
                 ...headerBlurSettings,
               }}
             />
@@ -54,7 +53,8 @@ export default function RootLayout() {
             <Stack.Screen
               name="listB/[listId]/index"
               options={{
-                title: 'List B',
+                title: 'List Item',
+                headerBackTitle: 'Home',
                 ...headerBlurSettings,
               }}
             />
