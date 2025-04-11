@@ -4,9 +4,9 @@ import React from 'react';
 import useNavStyle from '~/components/nav/NavStyles';
 
 const CalendarLayout = () => {
-  const { headerTransparentSettings } = useNavStyle();
+  const { headerBlurSettings } = useNavStyle();
   return (
-    <Stack screenOptions={headerTransparentSettings}>
+    <Stack screenOptions={headerBlurSettings}>
       <Stack.Screen
         name="index"
         options={{

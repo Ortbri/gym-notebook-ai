@@ -3,7 +3,7 @@ import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 
 import useNavStyle from '~/components/nav/NavStyles';
 import { BaseItemProvider } from '~/providers/BaseItemProvider';
-import { RevenueCatProvider } from '~/providers/RevenueCatProvider';
+import { SuperWallProvider } from '~/providers/SuperWallProvider';
 import ShoppingListsStore from '~/stores/ListsStore';
 
 export default function RootLayout() {
@@ -11,7 +11,7 @@ export default function RootLayout() {
   return (
     <TinyBaseProvider>
       <ShoppingListsStore />
-      <RevenueCatProvider>
+      <SuperWallProvider>
         <BaseItemProvider>
           <Stack screenOptions={{}}>
             {/* NESTED STACK */}
@@ -51,9 +51,16 @@ export default function RootLayout() {
                 ...headerBlurSettings,
               }}
             />
+            <Stack.Screen
+              name="listB/[listId]/index"
+              options={{
+                title: 'List B',
+                ...headerBlurSettings,
+              }}
+            />
           </Stack>
         </BaseItemProvider>
-      </RevenueCatProvider>
+      </SuperWallProvider>
     </TinyBaseProvider>
   );
 }

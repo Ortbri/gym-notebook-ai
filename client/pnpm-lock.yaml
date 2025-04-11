@@ -38,6 +38,9 @@ importers:
       '@sentry/react-native':
         specifier: ^6.3.0
         version: 6.10.0(expo@52.0.44(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@expo/metro-runtime@4.0.1(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1)))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1))(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
+      '@superwall/react-native-superwall':
+        specifier: ^2.0.10
+        version: 2.0.10(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
       ai:
         specifier: ^4.3.2
         version: 4.3.4(react@18.3.1)(zod@3.24.2)
@@ -142,9 +145,6 @@ importers:
         version: 6.5.1(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
       react-native-purchases:
         specifier: ^8.9.3
-        version: 8.9.4(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
-      react-native-purchases-ui:
-        specifier: ^8.9.4
         version: 8.9.4(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
       react-native-qrcode-svg:
         specifier: ^6.3.15
@@ -1908,6 +1908,13 @@ packages:
   '@stripe/stripe-js@5.6.0':
     resolution: {integrity: sha512-w8CEY73X/7tw2KKlL3iOk679V9bWseE4GzNz3zlaYxcTjmcmWOathRb0emgo/QQ3eoNzmq68+2Y2gxluAv3xGw==}
     engines: {node: '>=12.16'}
+
+  '@superwall/react-native-superwall@2.0.10':
+    resolution: {integrity: sha512-XkUo1jQttcRnXadD80uhN6fJQ0dMEaLZ6GLCslRxFeTiepzLKkpkc3mIE2Va0R5QKH9e+Nim7PaZFgbfrfpXgw==}
+    engines: {node: '>= 18.0.0'}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
@@ -4810,12 +4817,6 @@ packages:
 
   react-native-pager-view@6.5.1:
     resolution: {integrity: sha512-YdX7bP+rPYvATMU7HzlMq9JaG3ui/+cVRbFZFGW+QshDULANFg9ECR1BA7H7JTIcO/ZgWCwF+1aVmYG5yBA9Og==}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-
-  react-native-purchases-ui@8.9.4:
-    resolution: {integrity: sha512-5d5VE82vmd7GrmOmIw3gbz6Zz85hVctdcURcrReAZGAxRfAmO7ytgKqq7WqRvmjgrgdYxHIVD/FJ4jPfoHY4Bg==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -8246,6 +8247,12 @@ snapshots:
 
   '@stripe/stripe-js@5.6.0': {}
 
+  '@superwall/react-native-superwall@2.0.10(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      events: 3.3.0
+      react: 18.3.1
+      react-native: 0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1)
+
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
@@ -11642,13 +11649,6 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-native: 0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1)
-
-  react-native-purchases-ui@8.9.4(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1):
-    dependencies:
-      '@revenuecat/purchases-typescript-internal': 13.28.0
-      react: 18.3.1
-      react-native: 0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1)
-      react-native-purchases: 8.9.4(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
 
   react-native-purchases@8.9.4(react-native@0.77.2(@babel/core@7.26.10)(@babel/preset-env@7.26.9(@babel/core@7.26.10))(@types/react@18.3.20)(react@18.3.1))(react@18.3.1):
     dependencies:

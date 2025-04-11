@@ -36,6 +36,9 @@ export const useAddShoppingListCallback = () => {
   return useCallback(
     (name: string, description: string, emoji: string, color: string) => {
       const id = randomUUID();
+      if (!store) {
+        return;
+      }
       store.setRow('lists', id, {
         id,
         valuesCopy: JSON.stringify({

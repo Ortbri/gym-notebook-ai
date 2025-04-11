@@ -1,31 +1,34 @@
 import { subMonths } from 'date-fns';
-import { Link, useRouter } from 'expo-router';
+import { Link, Stack, useRouter } from 'expo-router';
 import { memo } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Pressable, FlatList } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { IconSymbol } from '~/components/IconSymbol';
 import { Text } from '~/components/ui/Text';
 import { useGenerateWeeks } from '~/components/week-calendar/utils';
+import { useShoppingListIds } from '~/stores/ListsStore';
 
-const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
-  return (
-    <View style={styles.dayContainer}>
-      <Text style={{ textAlign: 'center', fontSize: 16, paddingVertical: 6 }}>
-        {day.toLocaleDateString()}
-      </Text>
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 14,
-          paddingVertical: 6,
-          opacity: 0.5,
-        }}>
-        {isActive ? 'Active' : 'Inactive'}
-      </Text>
-    </View>
-  );
-});
+// TODO: Stopped at 3:39:51
+
+// const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
+//   return (
+//     <View style={styles.dayContainer}>
+//       <Text style={{ textAlign: 'center', fontSize: 16, paddingVertical: 6 }}>
+//         {day.toLocaleDateString()}
+//       </Text>
+//       <Text
+//         style={{
+//           textAlign: 'center',
+//           fontSize: 14,
+//           paddingVertical: 6,
+//           opacity: 0.5,
+//         }}>
+//         {isActive ? 'Active' : 'Inactive'}
+//       </Text>
+//     </View>
+//   );
+// });
 
 function ChatListItem() {
   const router = useRouter();
@@ -79,36 +82,52 @@ const Page = () => {
     return <Day day={day} isActive={isActive} />;
   };
 
+  const shoppingListIds = useShoppingListIds();
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Today</Text>
-      <ChatListItem />
-      <Link href="/(app)/(root)/listB/new" style={{ marginTop: 100 }}>
-        <Text>ListB</Text>
-      </Link>
-      {/* <Calendar
-        weeks={weeks}
-        offsetPageLimit={7}
-        onDateChange={(date) => {
-          console.log(`New date: ${date.toLocaleDateString()}`);
+    <>
+      <Stack.Screen
+        options={{
+          title: '',
+          headerLeft: () => (
+            <Link href="/(app)/(root)/listB/new" style={{}} asChild>
+              <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                <Text style={styles.text}>Today</Text>
+                <IconSymbol name="plus" size={24} weight="bold" />
+              </TouchableOpacity>
+            </Link>
+          ),
         }}
-        dimWeekends
-        initialDate={new Date()}>
-        <Calendar.Strip style={{ paddingTop: 14 }} />
-        <Calendar.Screen containerStyle={styles.calendarScreen} renderDay={renderDay} />
-      </Calendar> */}
-    </View>
+      />
+      {/* <View style={styles.container}> */}
+      {/* <ChatListItem /> */}
+      <FlatList
+        contentInsetAdjustmentBehavior="automatic"
+        data={shoppingListIds}
+        contentContainerStyle={{
+          gap: 500,
+          paddingTop: 100,
+        }}
+        ListEmptyComponent={<ChatListItem />}
+        renderItem={({ item }) => (
+          <Link href={`/(app)/(root)/listB/${item}`} asChild>
+            <Pressable>
+              <Text>{item}</Text>
+            </Pressable>
+          </Link>
+        )}
+      />
+      {/* </View> */}
+    </>
   );
 };
 const styles = StyleSheet.create((theme, rt) => ({
   container: {
     flex: 1,
-    paddingTop: rt.insets.top,
+    paddingTop: rt.insets.top + 40,
     paddingBottom: rt.insets.bottom,
   },
   text: {
     fontSize: 30,
-    paddingLeft: 16,
     fontWeight: 'bold',
     color: theme.colors.text.primary,
     fontFamily: theme.fonts.SourGummyBold,
@@ -198,3 +217,15 @@ const styles = StyleSheet.create((theme, rt) => ({
 }));
 
 export default Page;
+
+/* <Calendar
+        weeks={weeks}
+        offsetPageLimit={7}
+        onDateChange={(date) => {
+          console.log(`New date: ${date.toLocaleDateString()}`);
+        }}
+        dimWeekends
+        initialDate={new Date()}>
+        <Calendar.Strip style={{ paddingTop: 14 }} />
+        <Calendar.Screen containerStyle={styles.calendarScreen} renderDay={renderDay} />
+      </Calendar> */

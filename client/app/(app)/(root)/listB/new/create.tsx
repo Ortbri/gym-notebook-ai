@@ -1,19 +1,13 @@
-import { Link, Stack, useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { StyleSheet } from 'react-native-unistyles';
 
 import { BodyScrollView } from '~/components/BodyScroll';
 import { Button } from '~/components/ui/Button';
 import { Input } from '~/components/ui/Input';
 import { useBaseItems } from '~/providers/BaseItemProvider';
-
-// import { BodyScrollView } from '@/components/ui/BodyScrollView';
-// import Button from '@/components/ui/button';
-// import TextInput from '@/components/ui/text-input';
-// import { appleBlue, backgroundColors, emojies } from '@/constants/Colors';
-// import { useListCreation } from '@/context/ListCreationContext';
-// import { useAddShoppingListCallback } from '@/stores/ShoppingListsStore';
+import { useAddShoppingListCallback } from '~/stores/ListsStore';
 
 export default function CreateListScreen() {
   const [listName, setListName] = useState('');
@@ -21,7 +15,7 @@ export default function CreateListScreen() {
   const { selectedEmoji, setSelectedEmoji, selectedColor, setSelectedColor } = useBaseItems();
 
   const router = useRouter();
-  // const useAddShoppingList = useAddShoppingListCallback();
+  const useAddShoppingList = useAddShoppingListCallback();
 
   useEffect(() => {
     setSelectedEmoji('🦍');
@@ -39,10 +33,11 @@ export default function CreateListScreen() {
       return;
     }
 
-    // const listId = useAddShoppingList(listName, listDescription, selectedEmoji, selectedColor);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const listId = useAddShoppingList(listName, listDescription, selectedEmoji, selectedColor);
 
     router.replace({
-      pathname: '/list/[listId]',
+      pathname: '/listB/[listId]',
       params: { listId },
     });
   };
