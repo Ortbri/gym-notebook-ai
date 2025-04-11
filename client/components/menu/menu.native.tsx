@@ -115,17 +115,6 @@ export default function Menu() {
 
   return (
     <View style={stylesheet.container}>
-      <SettingsGroup title="App">
-        <SettingsItem
-          title="Testing Route"
-          icon="hammer"
-          iconColor={theme.colors.accent.regular}
-          isLastItem
-          onPress={() => {
-            router.navigate('/(app)/(root)/(tabs)/statistics/settings/test');
-          }}
-        />
-      </SettingsGroup>
       <SettingsGroup title="Account">
         <SettingsItem
           title={user?.firstName || 'User'}
@@ -161,6 +150,18 @@ export default function Menu() {
           }}
         /> */}
       </SettingsGroup>
+      <SettingsGroup title="App">
+        <SettingsItem
+          title="Testing Route"
+          icon="hammer"
+          iconColor={theme.colors.accent.regular}
+          isLastItem
+          onPress={() => {
+            router.navigate('/(app)/(root)/settings/test');
+          }}
+        />
+      </SettingsGroup>
+
       <SettingsGroup>
         <SettingsItem
           title="Sign Out"

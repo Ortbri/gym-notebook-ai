@@ -1,6 +1,5 @@
 import { subMonths } from 'date-fns';
 import { Link, Stack, useRouter } from 'expo-router';
-import { memo } from 'react';
 import { View, TouchableOpacity, Pressable, FlatList } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
