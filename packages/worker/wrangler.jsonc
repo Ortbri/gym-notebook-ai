@@ -4,25 +4,16 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "server",
+	"name": "gym-notebook-do",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-04-05",
 	"migrations": [
 		{
 			"tag": "v1",
-			"new_classes": [
-				"MyDurableObject"
+			"new_sqlite_classes": [
+				"GymNotesDurableObject"
 			]
 		},
-		{
-			"tag": "v2",
-			"renamed_classes": [
-				{
-					"from": "MyDurableObject",
-					"to": "GymNotesDurableObject"
-				}
-			]
-		}
 	],
 	"durable_objects": {
 		"bindings": [
@@ -67,11 +58,4 @@
 	 * Service Bindings (communicate between multiple Workers)
 	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
 	 */
-	"services": [
-		{
-			"binding": "WORKOUT_RPC",
-			"service": "worker",
-			"entrypoint": "WorkoutRPC"
-		}
-	]
 }

@@ -14,7 +14,7 @@ export default function Home() {
         <HoverBorderGradient
           containerClassName="rounded-full cursor-pointer"
           as="button"
-          className="dark:bg-black  flex items-center space-x-2"
+          className="bg-black  flex items-center space-x-2"
         >
           <span>Join Waitlist</span>
         </HoverBorderGradient>
