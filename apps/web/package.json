@@ -3,10 +3,10 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev --turbopack",
+		"dev": "next start",
+		"next-dev": "next dev --turbopack",
 		"dev:w": "wrangler dev",
 		"build": "next build",
-		"start": "next start",
 		"lint": "next lint",
 		"deploy": "opennextjs-cloudflare && wrangler deploy",
 		"preview": "opennextjs-cloudflare && wrangler dev",
