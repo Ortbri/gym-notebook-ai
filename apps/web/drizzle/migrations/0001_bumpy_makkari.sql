@@ -1,0 +1,1 @@
+ALTER TABLE `waitlist_users` RENAME COLUMN "created_at" TO "createdAt";

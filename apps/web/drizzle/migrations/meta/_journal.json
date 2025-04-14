@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1743444963061,
+      "tag": "0000_typical_veda",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1743456412987,
+      "tag": "0001_bumpy_makkari",
+      "breakpoints": true
+    }
+  ]
+}

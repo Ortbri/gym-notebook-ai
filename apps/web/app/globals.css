@@ -1,0 +1,205 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* Paper theme - Light mode */
+  --radius: 0.625rem;
+  --background: oklch(0.98 0.02 77.0);
+  /* Eggshell paper color */
+  --foreground: oklch(0.25 0.02 280.0);
+  /* Dark ink color */
+
+  --card: white;
+  /* White card background */
+  --card-foreground: oklch(0.2 0.03 270.0);
+
+  --popover: white;
+  --popover-foreground: oklch(0.2 0.03 270.0);
+
+  --primary: oklch(0.55 0.18 230.0);
+  /* Blue ink color */
+  --primary-foreground: oklch(0.99 0.01 90.0);
+
+  --secondary: oklch(0.95 0.03 90.0);
+  /* Lighter paper texture */
+  --secondary-foreground: oklch(0.25 0.1 230.0);
+
+  --muted: oklch(0.92 0.02 95.0);
+  /* Faded paper */
+  --muted-foreground: oklch(0.5 0.05 260.0);
+
+  --accent: oklch(0.9 0.1 40.0);
+  /* Highlighter color */
+  --accent-foreground: oklch(0.2 0.03 270.0);
+
+  --destructive: oklch(0.65 0.24 25.0);
+  /* Red ink */
+  --border: oklch(0.85 0.03 90.0);
+  /* Paper edge */
+  --input: oklch(0.9 0.02 95.0);
+  --ring: oklch(0.7 0.1 230.0);
+
+  /* Exercise tracking colors */
+  --chart-1: oklch(0.65 0.22 40.0);
+  /* Warm-up */
+  --chart-2: oklch(0.6 0.2 180.0);
+  /* Cardio */
+  --chart-3: oklch(0.4 0.15 230.0);
+  /* Strength */
+  --chart-4: oklch(0.83 0.19 85.0);
+  /* Flexibility */
+  --chart-5: oklch(0.77 0.19 70.0);
+  /* Rest */
+
+  /* Sidebar - notebook binding effect */
+  --sidebar: oklch(0.93 0.04 80.0);
+  /* Slightly textured binding */
+  --sidebar-foreground: oklch(0.2 0.03 270.0);
+  --sidebar-primary: oklch(0.55 0.18 230.0);
+  --sidebar-primary-foreground: oklch(0.98 0.01 90.0);
+  --sidebar-accent: oklch(0.9 0.05 80.0);
+  --sidebar-accent-foreground: oklch(0.2 0.03 270.0);
+  --sidebar-border: oklch(0.85 0.04 85.0);
+  --sidebar-ring: oklch(0.7 0.1 230.0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+body {
+  font-family: var(--font-custom);
+}
+
+
+/* Add subtle paper texture - optimized with loading strategy */
+.paipa-texture {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.16;
+  /* Load texture asynchronously for better performance */
+  background-image: none;
+  background-repeat: repeat;
+}
+
+/* Add texture only after page loads - use optimized version */
+.loaded .paipa-texture {
+  background-image: url('/textures/optimized/paipa-small.jpg');
+}
+
+
+/* Notebook style for page containers */
+.page-container {
+  position: relative;
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  background: var(--card);
+  margin-bottom: 1.5rem;
+}
+
+/* Notebook lines for text areas */
+.notebook-lines {
+  background-image: linear-gradient(var(--border) 1px, transparent 1px);
+  background-size: 100% 2rem;
+  line-height: 2rem;
+  padding: 0.25rem;
+}
+
+/* Notebook binding effect for sidebar */
+.sidebar {
+  position: relative;
+  background: var(--sidebar);
+  border-right: 1px solid var(--sidebar-border);
+}
+
+/* Create spiral binding effect */
+.sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -8px;
+  height: 100%;
+  width: 16px;
+  background-image: repeating-linear-gradient(0deg,
+      var(--sidebar-border) 0px,
+      var(--sidebar-border) 3px,
+      transparent 3px,
+      transparent 12px);
+  z-index: 10;
+}
+
+/* Animation keyframes */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
