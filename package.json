@@ -4,8 +4,13 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "deploy": "turbo run deploy"
+    "deploy": "turbo run deploy",
+    "lint": "turbo run lint"
   },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "devDependencies": {
     "turbo": "2.5.0"
   },

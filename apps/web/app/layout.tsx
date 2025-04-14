@@ -12,78 +12,24 @@ const customFont = localFont({
     },
      {
       path: '../public/fonts/Satoshi-Regular.otf',
-      weight: '400',
+      weight: '500',
       style: 'normal',
-    },
-  
-  ],
-  variable: '--font-custom',
-  display: 'swap', // Use 'swap' for better performance
-  preload: true,   // Preload the font files
-});
-
-// Additional font weights loaded with lower priority
-const additionalFonts = localFont({
-  src: [
-    {
-      path: '../public/fonts/Satoshi-Regular.otf',
-      weight: '400',
-      style: 'normal',
-    },
-      {
-      path: '../public/fonts/Satoshi-Bold.otf',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/Satoshi-Italic.otf',
-      weight: '400',
-      style: 'italic',
-    },
-    {
-      path: '../public/fonts/Satoshi-BoldItalic.otf',
-      weight: '700',
-      style: 'italic',
     },
     {
       path: '../public/fonts/Satoshi-Light.otf',
       weight: '300',
       style: 'normal',
     },
-    {
-      path: '../public/fonts/Satoshi-LightItalic.otf',
-      weight: '300',
-      style: 'italic',
-    },
-    {
-      path: '../public/fonts/Satoshi-Medium.otf',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/Satoshi-MediumItalic.otf',
-      weight: '500',
-      style: 'italic',
-    },
-    {
-      path: '../public/fonts/Satoshi-Black.otf',
-      weight: '900',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/Satoshi-BlackItalic.otf',
-      weight: '900',
-      style: 'italic',
-    }
   ],
-  variable: '--font-additional',
-  display: 'swap',
-  preload: false, // Don't preload these fonts
+  variable: '--font-custom',
+  display: 'swap', // Use 'swap' for better performance
+  preload: true,   // Preload the font files
 });
+
 
 export const metadata: Metadata = {
   title: "Gym Notebook AI",
-  description: "Your notebook for the gym - no clutter just your notes to track progress",
+  description: "Your notebook for the gym - just your notes to track and improve",
 };
 
 export default function RootLayout({
@@ -94,12 +40,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${customFont.variable} ${additionalFonts.variable} antialiased`}
+        className={`${customFont.variable} antialiased`}
         >
         {children}
 
-      <footer className="text-center text-sm text-muted-foreground pb-4 pt-14">
-        <p>
+      <footer className=" pb-4 pt-14">
+        <p className="text-muted-foreground text-center text-xs">
           &copy; 2025 Gym Notebook AI. All rights reserved.
         </p>
       </footer>
