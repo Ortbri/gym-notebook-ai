@@ -43,12 +43,6 @@ export default function RootLayout({
         className={`${customFont.variable} antialiased`}
         >
         {children}
-
-      <footer className=" pb-4 pt-14">
-        <p className="text-muted-foreground text-center text-xs">
-          &copy; 2025 Gym Notebook AI. All rights reserved.
-        </p>
-      </footer>
       </body>
     </html>
   );
