@@ -110,6 +110,10 @@
     @apply bg-background text-foreground;
   }
 }
+/* --------------------------------- styling -------------------------------- */
+.glow-border {
+  background: radial-gradient(75% 181% at 50% 50%, #fff 0%, rgba(255, 255, 255, 0) 100%);
+}
 /* -------------------------- animation key frames -------------------------- */
 @keyframes fadeSlideIn {
   0% {
