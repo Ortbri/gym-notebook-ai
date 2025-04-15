@@ -1,14 +1,13 @@
-// import ReconnectingWebSocket from 'reconnecting-websocket'; // is mobile
-
+import ReconnectingWebSocket from 'reconnecting-websocket';
 import { createWsSynchronizer } from 'tinybase/synchronizers/synchronizer-ws-client/with-schemas';
 import * as UiReact from 'tinybase/ui-react/with-schemas';
 import { MergeableStore, OptionalSchemas } from 'tinybase/with-schemas';
 
-const SYNC_SERVER_URL = process.env.EXPO_PUBLIC_SYNC_SERVER_URL;
+const SYNC_SERVER_URL = 'http://localhost:8787/';
 
-if (!SYNC_SERVER_URL) {
-  throw new Error('Please set EXPO_PUBLIC_SYNC_SERVER_URL in .env to the URL of the sync server');
-}
+// if (!SYNC_SERVER_URL) {
+//   throw new Error('Please set EXPO_PUBLIC_SYNC_SERVER_URL in .env to the URL of the sync server');
+// }
 
 export const useCreateServerSynchronizerAndStart = <Schemas extends OptionalSchemas>(
   storeId: string,
@@ -20,7 +19,10 @@ export const useCreateServerSynchronizerAndStart = <Schemas extends OptionalSche
       // Create the synchronizer.
       const synchronizer = await createWsSynchronizer(
         store,
-        new WebSocket(SYNC_SERVER_URL + storeId)
+        new ReconnectingWebSocket(SYNC_SERVER_URL + storeId, [], {
+          maxReconnectionDelay: 100000,
+          connectionTimeout: 100000,
+        })
       );
 
       //TODO: only sync every month

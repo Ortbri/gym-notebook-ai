@@ -1,8 +1,8 @@
+import { useUser, useAuth } from '@clerk/clerk-expo';
 import React from 'react';
 import { View, ScrollView, Image, Pressable } from 'react-native';
-import { StyleSheet } from 'react-native-unistyles';
-import { useUser, useAuth } from '@clerk/clerk-expo';
 import QRCode from 'react-native-qrcode-svg';
+import { StyleSheet } from 'react-native-unistyles';
 
 import { Button } from '~/components/ui/Button';
 import { Text } from '~/components/ui/Text';
@@ -33,9 +33,8 @@ export default function Profile() {
   // Handle loading state or if user is not signed in
   if (!isLoaded || !isSignedIn || !user) {
     // Optionally return a loading spinner or null
-    return null; 
+    return null;
   }
-
 
   const primaryEmail = user.primaryEmailAddress?.emailAddress;
   const joinDate = user.createdAt ? user.createdAt.toLocaleDateString() : 'N/A';
@@ -44,15 +43,11 @@ export default function Profile() {
     <ScrollView style={styles.container} contentInsetAdjustmentBehavior="automatic">
       <View style={styles.header}>
         {user.imageUrl ? (
-          <Image
-            source={{ uri: user.imageUrl }}
-           style={styles.profileImage}
-          />
-         ) : (
-           // Add a placeholder if no image URL
-           <View style={[styles.profileImage, styles.placeholderImage]} />
-         )}
-
+          <Image source={{ uri: user.imageUrl }} style={styles.profileImage} />
+        ) : (
+          // Add a placeholder if no image URL
+          <View style={[styles.profileImage, styles.placeholderImage]} />
+        )}
 
         <View style={styles.userInfo}>
           <Text size="h3">{user.fullName || 'User'}</Text>
@@ -63,6 +58,12 @@ export default function Profile() {
           )}
           <Text size="caption" color="tertiary">
             Joined {joinDate}
+          </Text>
+          <Text size="caption" color="tertiary">
+            {user.id}
+          </Text>
+          <Text size="caption" color="tertiary">
+            {useUser().user?.id}
           </Text>
         </View>
       </View>
@@ -102,7 +103,11 @@ export default function Profile() {
       <View style={styles.section}>
         <Button title="Sign Out" variant="secondary" onPress={handleSignOut} />
         {/* Consider adding a confirmation dialog for delete */}
-        <Button title="Delete Account" variant="error" onPress={() => console.log('Delete account')} />
+        <Button
+          title="Delete Account"
+          variant="error"
+          onPress={() => console.log('Delete account')}
+        />
       </View>
     </ScrollView>
   );

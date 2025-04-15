@@ -7,11 +7,10 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import { BodyScrollView } from '~/components/BodyScroll';
-import { Form } from '~/components/ui/Form';
 import { Button } from '~/components/ui/Button';
+import { Form } from '~/components/ui/Form';
 import { Input, PasswordInput } from '~/components/ui/Input';
-import { Typography } from '~/components/ui/Text';
+import { Text } from '~/components/ui/Text';
 
 // Handle any pending authentication sessions
 WebBrowser.maybeCompleteAuthSession();
@@ -66,7 +65,7 @@ export default function SignInScreen() {
   return (
     <Form>
       {/* <View style={styles.formSection}> */}
-      {Platform.OS === 'web' ? <Typography>Sign in</Typography> : null}
+      {Platform.OS === 'web' ? <Text>Sign in</Text> : null}
       <Input
         autoCapitalize="none"
         value={emailAddress}
@@ -82,9 +81,9 @@ export default function SignInScreen() {
         onChangeText={(pwd: string) => setPassword(pwd)}
       />
       {errors.map((error) => (
-        <Typography key={error.longMessage} style={{ color: theme.colors.error.main }}>
+        <Text key={error.longMessage} style={{ color: theme.colors.error.main }}>
           {error.longMessage}
-        </Typography>
+        </Text>
       ))}
       <Button
         title="Sign in"
@@ -96,7 +95,7 @@ export default function SignInScreen() {
 
       <View style={styles.footer}>
         <View style={styles.footerSection}>
-          <Typography style={styles.footerText}>Don't have an account?</Typography>
+          <Text style={styles.footerText}>Don't have an account?</Text>
           <Button
             title="Sign up"
             onPress={() => router.push('./sign-up')}
@@ -106,7 +105,7 @@ export default function SignInScreen() {
         </View>
 
         <View style={styles.footerSection}>
-          <Typography style={styles.footerText}>Forgot password?</Typography>
+          <Text style={styles.footerText}>Forgot password?</Text>
           <Button
             title="Reset password"
             onPress={() => router.push('./reset-password')}

@@ -1,5 +1,8 @@
 import { GlowingEffect } from "@/components/glowing-effect";
 import { HoverBorderGradient } from "@/components/hover-border-gradient";
+// import Pricing from "@/components/Pricing";
+
+
 import TextSeperator from "@/components/TextSeperator";
 import { Box, Search, Settings, Sparkles } from "lucide-react";
 
@@ -67,14 +70,9 @@ export default function Home() {
           />
         </ul>
       </section>
-      {/* SECTION 3 */}
-      {/* <section>
-        <TextSeperator text="Demo" />
-      </section> */}
-      {/* SECTION 4 */}
-      <section>
+      <section className="flex flex-col items-center justify-center gap-14 max-w-7xl mx-auto">
         <TextSeperator text="Pricing" />
-        
+        {/* <Pricing /> */}
       </section>
       {/* FOOTER */}
       <footer className=" pb-4 pt-14">
@@ -125,3 +123,7 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
     </li>
   );
 };
+
+/* -------------------------------------------------------------------------- */
+/*                                   pricing                                  */
+/* -------------------------------------------------------------------------- */

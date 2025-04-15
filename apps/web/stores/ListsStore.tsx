@@ -1,7 +1,8 @@
-// import { useUser } from '@clerk/clerk-expo'`;
+// import { useUser } from '@clerk/clerk-expo';
+
+// import { useUser } from '@clerk/nextjs';
+// import crypto from 'node:crypto';
 // import { randomUUID } from 'expo-crypto';
-import { useUser } from '@clerk/nextjs';
-import crypto from 'node:crypto';
 import React, { useCallback } from 'react';
 import * as UiReact from 'tinybase/ui-react/with-schemas';
 import { createMergeableStore, NoValuesSchema } from 'tinybase/with-schemas';
@@ -31,14 +32,14 @@ const {
   useTable,
 } = UiReact as UiReact.WithSchemas<[typeof TABLES_SCHEMA, NoValuesSchema]>;
 
-const useStoreId = () => STORE_ID_PREFIX + useUser().user?.id;
+const useStoreId = () => STORE_ID_PREFIX + 'user_2vAzt3IyUAwK2BM5QE3qqZEwmgj';
 
 // Returns a callback that adds a new shopping list to the store.
 export const useAddShoppingListCallback = () => {
   const store = useStore(useStoreId());
   return useCallback(
     (name: string, description: string, emoji: string, color: string) => {
-      const id = crypto.randomUUID();
+      const id = 1232313;
       if (!store) {
         return;
       }

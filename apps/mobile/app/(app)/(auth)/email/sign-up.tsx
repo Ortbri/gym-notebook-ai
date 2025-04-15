@@ -9,7 +9,8 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 import { BodyScrollView } from '~/components/BodyScroll';
 import { Button } from '~/components/ui/Button';
 import { Input, PasswordInput } from '~/components/ui/Input';
-import { Typography } from '~/components/ui/Text';
+// import { Text } from '~/components/ui/Text';
+import { Text } from '~/components/ui/Text';
 
 // import { ThemedText } from '@/components/ThemedText';
 // import { BodyScrollView } from '@/components/ui/BodyScrollView';
@@ -110,9 +111,9 @@ export default function SignUpScreen() {
             size="lg"
           />
           {errors.map((error) => (
-            <Typography key={error.longMessage} style={{ color: theme.colors.error.main }}>
+            <Text key={error.longMessage} style={{ color: theme.colors.error.main }}>
               {error.longMessage}
-            </Typography>
+            </Text>
           ))}
         </View>
       </BodyScrollView>
@@ -143,9 +144,9 @@ export default function SignUpScreen() {
           size="lg"
         />
         {errors.map((error) => (
-          <Typography key={error.longMessage} style={{ color: theme.colors.error.main }}>
+          <Text key={error.longMessage} style={{ color: theme.colors.error.main }}>
             {error.longMessage}
-          </Typography>
+          </Text>
         ))}
       </View>
     </BodyScrollView>

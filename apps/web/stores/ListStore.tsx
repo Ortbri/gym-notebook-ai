@@ -1,4 +1,4 @@
-import crypto from 'node:crypto';
+// import { randomUUID } from 'expo-crypto';
 import { useCallback } from 'react';
 import { useRemoteRowId } from 'tinybase/ui-react';
 import * as UiReact from 'tinybase/ui-react/with-schemas';
@@ -7,7 +7,7 @@ import { Cell, createMergeableStore, createRelationships, Value } from 'tinybase
 import { useCreateClientPersisterAndStart } from './persistence/useCreateClientPersisterAndStart';
 import { useCreateServerSynchronizerAndStart } from './synchronization/useCreateServerSynchronizerAndStart';
 
-import { useUserIdAndNickname } from '~/hooks/useNickname';
+// import { useUserIdAndNickname } from '~/hooks/useNickname';
 
 const STORE_ID_PREFIX = 'shoppingListStore-';
 
@@ -69,13 +69,11 @@ const useStoreId = (listId: string) => STORE_ID_PREFIX + listId;
 export const useAddShoppingListProductCallback = (listId: string) => {
   const store = useStore(useStoreId(listId));
 
-  const [userId] = useUserIdAndNickname();
+  // const [userId] = 
+  const userId = 'user_2vAzt3IyUAwK2BM5QE3qqZEwmgj';
   return useCallback(
     (name: string, quantity: number, units: string, notes: string) => {
       const id = crypto.randomUUID();
-      if (!store) {
-        return;
-      }
       store.setRow('products', id, {
         id,
         name,
@@ -162,7 +160,9 @@ export default function ShoppingListStore({
   useValuesCopy: (id: string) => [string, (valuesCopy: string) => void];
 }) {
   const storeId = useStoreId(listId);
-  const [userId, nickname] = useUserIdAndNickname();
+  // const [userId, nickname] = useUserIdAndNickname();
+  const userId = 'user_2vAzt3IyUAwK2BM5QE3qqZEwmgj';
+  const nickname = 'John Doe';
   const [valuesCopy, setValuesCopy] = useValuesCopy(listId);
 
   const store = useCreateMergeableStore(() =>

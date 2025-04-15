@@ -1,6 +1,6 @@
 'use server';
 
-import { ChatUI } from '~/components/ChatUI';
+// import { ChatUI } from '~/components/ChatUI';
 import { TestClient } from '~/components/testClient';
 import { AI } from '~/providers/AiProvider';
 

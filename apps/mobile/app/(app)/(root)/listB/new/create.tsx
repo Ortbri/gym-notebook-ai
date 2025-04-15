@@ -57,7 +57,7 @@ export default function CreateListScreen() {
     ];
 
     const testEmojis = ['🛒', '🍖', '🎉', '📎', '⛺️', '🎁', '🔨', '📚', '🎂', '🏠'];
-    const testColors = Object.values(backgroundColors).slice(0, 10);
+    // const testColors = Object.values(backgroundColors).slice(0, 10);
 
     testListNames.forEach((name, index) => {
       useAddShoppingList(

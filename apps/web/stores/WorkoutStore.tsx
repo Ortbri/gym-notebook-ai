@@ -5,7 +5,7 @@ import { useCreateClientPersisterAndStart } from './persistence/useCreateClientP
 import { useCreateServerSynchronizerAndStart } from './synchronization/useCreateServerSynchronizerAndStart';
 
 // 🔒 Shared store across users
-const WORKOUT_STORE_ID = 'workoutStore';
+const WORKOUT_STORE_ID = 'workoutStore-';
 // 🔑 Global values (not per-row) — ex: last update timestamp
 const WORKOUTS_VALUES_SCHEMA = {
   lastUpdated: { type: 'string' },
@@ -75,7 +75,6 @@ export const WorkoutStoreProvider = () => {
 
   return null;
 };
-
 /* -------------------------------------------------------------------------- */
 /*                                    hooks                                   */
 /* -------------------------------------------------------------------------- */
@@ -114,9 +113,12 @@ export const useSetWorkoutCell = (rowId: string, cellId: WorkoutProductCellId) =
     'workouts',
     rowId,
     cellId,
-    // @ts-ignore
     (newValue) => newValue,
     [],
     WORKOUT_STORE_ID
   );
 };
+
+
+
+
