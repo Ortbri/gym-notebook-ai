@@ -75,7 +75,7 @@ export const WorkoutStoreProvider = () => {
 
 /* ------------------ HOOKS ------------------ */
 
-export const useWorkoutPage = (offset: number, limit: number = 20) => {
+export const useWorkoutPage = (offset: number, limit: number = 200) => {
   const ids = useSortedRowIds('workouts', undefined, false, undefined, undefined, WORKOUT_STORE_ID);
   const table = useTable('workouts', WORKOUT_STORE_ID);
   return ids.slice(offset, offset + limit).map((id) => ({ id, ...table[id] }));
