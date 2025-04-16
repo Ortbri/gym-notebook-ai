@@ -2,8 +2,9 @@ import * as UiReact from 'tinybase/ui-react/with-schemas';
 import { createMergeableStore } from 'tinybase/with-schemas';
 import { useCreateClientPersisterAndStart } from './persistence/useCreateClientPersisterAndStart';
 import { useCreateServerSynchronizerAndStart } from './synchronization/useCreateServerSynchronizerAndStart';
+import { useMemo } from 'react';
 
-export const WORKOUT_STORE_ID = 'workoutStore';
+export const WORKOUT_STORE_ID = 'exerciseLibrary';
 
 const WORKOUTS_VALUES_SCHEMA = {
   lastUpdated: { type: 'string' },
@@ -11,7 +12,8 @@ const WORKOUTS_VALUES_SCHEMA = {
 
 const WORKOUTS_TABLE_SCHEMA = {
   workouts: {
-    excercise: { type: 'string' },
+    id: { type: 'string' }, 
+    name: { type: 'string' },
     short_demo: { type: 'string' },
     long_demo: { type: 'string' },
     difficulty: { type: 'string' },
@@ -59,6 +61,7 @@ const {
   useValue,
 } = UiReact as UiReact.WithSchemas<Schemas>;
 
+/* -------------------------------- provider -------------------------------- */
 export const WorkoutStoreProvider = () => {
   const store = useCreateMergeableStore(() =>
     createMergeableStore()
@@ -73,13 +76,20 @@ export const WorkoutStoreProvider = () => {
   return null;
 };
 
-/* ------------------ HOOKS ------------------ */
+/* ---------------------------------- hooks --------------------------------- */
 
-export const useWorkoutPage = (offset: number, limit: number = 200) => {
+// export const useWorkoutPage = (offset: number, limit: number = 200) => {
+//   const ids = useSortedRowIds('workouts', undefined, false, undefined, undefined, WORKOUT_STORE_ID);
+//   const table = useTable('workouts', WORKOUT_STORE_ID);
+//   return ids.slice(offset, offset + limit).map((id) => ({ id, ...table[id] }));
+// };
+
+export const useWorkoutPage = (offset: number, limit = 3000) => {
   const ids = useSortedRowIds('workouts', undefined, false, undefined, undefined, WORKOUT_STORE_ID);
   const table = useTable('workouts', WORKOUT_STORE_ID);
   return ids.slice(offset, offset + limit).map((id) => ({ id, ...table[id] }));
 };
+
 
 export const useWorkoutCell = (rowId: string, cellId: WorkoutCellId) => {
   return useCell('workouts', rowId, cellId, WORKOUT_STORE_ID);

@@ -3,10 +3,8 @@
 import React from 'react';
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -27,7 +25,6 @@ function CreateWorkoutSheet() {
           <SheetDescription>Add a new workout to the TinyBase store.</SheetDescription>
         </SheetHeader>
         <UploadWorkoutCSV />
-      
       </SheetContent>
     </Sheet>
   );
