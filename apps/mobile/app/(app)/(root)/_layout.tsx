@@ -4,14 +4,12 @@ import { Provider as TinyBaseProvider } from 'tinybase/ui-react';
 import useNavStyle from '~/components/nav/NavStyles';
 import { BaseItemProvider } from '~/providers/BaseItemProvider';
 import { SuperWallProvider } from '~/providers/SuperWallProvider';
-import ShoppingListsStore from '~/stores/ListsStore';
 import { WorkoutStoreProvider } from '~/stores/WorkoutStore';
 
 export default function RootLayout() {
   const { headerBlurSettings } = useNavStyle();
   return (
     <TinyBaseProvider>
-      <ShoppingListsStore />
       <WorkoutStoreProvider />
       <SuperWallProvider>
         <BaseItemProvider>

@@ -80,7 +80,7 @@ const Page = () => {
     return <Day day={day} isActive={isActive} />;
   };
 
-  const shoppingListIds = useShoppingListIds();
+  // const shoppingListIds = useShoppingListIds();
   return (
     <>
       <Stack.Screen
@@ -94,7 +94,7 @@ const Page = () => {
                   // console.log('long pressed');
                 }}>
                 <Text style={styles.text}>Today</Text>
-                <IconSymbol name="plus" size={24} weight="bold" />
+                {/* <IconSymbol name="plus" size={24} weight="bold" /> */}
               </TouchableOpacity>
             </Link>
           ),
@@ -104,7 +104,7 @@ const Page = () => {
       {/* <EmptyChatListItem /> */}
       <FlatList
         contentInsetAdjustmentBehavior="automatic"
-        data={shoppingListIds}
+        // data={shoppingListIds}
         contentContainerStyle={{
           paddingTop: 16,
           paddingHorizontal: 16,
