@@ -1,18 +1,21 @@
+import { useMemo } from 'react';
+import { useRowCount } from 'tinybase/ui-react';
 import * as UiReact from 'tinybase/ui-react/with-schemas';
 import { createMergeableStore } from 'tinybase/with-schemas';
 
 import { useCreateClientPersisterAndStart } from './persistence/useCreateClientPersisterAndStart';
 import { useCreateServerSynchronizerAndStart } from './synchronization/useCreateServerSynchronizerAndStart';
 
-// 🔒 Shared store across users
-const WORKOUT_STORE_ID = 'workoutStore';
-// 🔑 Global values (not per-row) — ex: last update timestamp
+export const WORKOUT_STORE_ID = 'exerciseLibrary';
+
 const WORKOUTS_VALUES_SCHEMA = {
   lastUpdated: { type: 'string' },
 } as const;
-// 🧱 Main table schema for 3000+ workouts
+
 const WORKOUTS_TABLE_SCHEMA = {
   workouts: {
+    id: { type: 'string' },
+    name: { type: 'string' },
     short_demo: { type: 'string' },
     long_demo: { type: 'string' },
     difficulty: { type: 'string' },
@@ -47,10 +50,11 @@ const WORKOUTS_TABLE_SCHEMA = {
 } as const;
 
 type Schemas = [typeof WORKOUTS_TABLE_SCHEMA, typeof WORKOUTS_VALUES_SCHEMA];
-type WorkoutProductCellId = keyof (typeof WORKOUTS_TABLE_SCHEMA)['workouts'];
+type WorkoutCellId = keyof (typeof WORKOUTS_TABLE_SCHEMA)['workouts'];
 
 const {
   useCell,
+  useRowIds,
   useCreateMergeableStore,
   useProvideStore,
   useSetCellCallback,
@@ -60,7 +64,7 @@ const {
   useValue,
 } = UiReact as UiReact.WithSchemas<Schemas>;
 
-// 🧠 Create, persist, and optionally sync workout data
+/* -------------------------------- provider -------------------------------- */
 export const WorkoutStoreProvider = () => {
   const store = useCreateMergeableStore(() =>
     createMergeableStore()
@@ -69,54 +73,63 @@ export const WorkoutStoreProvider = () => {
   );
 
   useCreateClientPersisterAndStart(WORKOUT_STORE_ID, store);
-  useCreateServerSynchronizerAndStart(WORKOUT_STORE_ID, store); // Optional: turn off in dev
-
+  useCreateServerSynchronizerAndStart(WORKOUT_STORE_ID, store);
   useProvideStore(WORKOUT_STORE_ID, store);
 
   return null;
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                    hooks                                   */
-/* -------------------------------------------------------------------------- */
+/* ---------------------------------- hooks --------------------------------- */
 
-// ✅ Paginate workouts (render 20 at a time)
-export const useWorkoutPage = (offset: number, limit: number = 20) => {
-  const ids = useSortedRowIds('workouts', WORKOUT_STORE_ID);
+export const useWorkoutCount = () => useRowCount('workouts', WORKOUT_STORE_ID);
+
+// export const useWorkoutPage = (offset: number, limit: number = 200) => {
+//   const ids = useSortedRowIds('workouts', undefined, false, undefined, undefined, WORKOUT_STORE_ID);
+//   const table = useTable('workouts', WORKOUT_STORE_ID);
+//   return ids.slice(offset, offset + limit).map((id) => ({ id, ...table[id] }));
+// };
+
+// export const useWorkoutPage = (offset: number) => {
+//   const ids = useSortedRowIds('workouts', undefined, false, undefined, undefined, WORKOUT_STORE_ID);
+//   const table = useTable('workouts', WORKOUT_STORE_ID);
+//   return ids.map((id) => ({ id, ...table[id] }));
+// };
+
+export const useWorkoutPage = (offset: number, limit = 80) => {
+  const ids = useRowIds('workouts', WORKOUT_STORE_ID);
   const table = useTable('workouts', WORKOUT_STORE_ID);
+
   return ids.slice(offset, offset + limit).map((id) => ({ id, ...table[id] }));
 };
 
-// ✅ Read a single cell value (like "muscle_1")
-export const useWorkoutCell = (rowId: string, cellId: WorkoutProductCellId) => {
+export const useWorkoutCell = (rowId: string, cellId: WorkoutCellId) => {
   return useCell('workouts', rowId, cellId, WORKOUT_STORE_ID);
 };
 
-// ✅ Update global lastUpdated (local only)
 export const useUpdateLastUpdated = () => {
   return useSetValueCallback('lastUpdated', () => new Date().toISOString(), [], WORKOUT_STORE_ID);
 };
 
-// ✅ Read lastUpdated (global sync indicator)
 export const useLastUpdated = () => {
   return useValue('lastUpdated', WORKOUT_STORE_ID);
 };
-/* -------------------------------- dev only -------------------------------- */
 
-// ⚠️ ONLY FOR DEV OR DEBUG — avoid in prod with 3k rows
+// ⚠️ DEV ONLY
 export const useAllWorkouts = () => {
   const table = useTable('workouts', WORKOUT_STORE_ID);
   return Object.entries(table).map(([id, row]) => ({ id, ...row }));
 };
-// ⚠️ ONLY FOR DEV OR DEBUG
-export const useSetWorkoutCell = (rowId: string, cellId: WorkoutProductCellId) => {
+
+export const useSetWorkoutCell = (rowId: string, cellId: WorkoutCellId) => {
   return useSetCellCallback(
     'workouts',
     rowId,
     cellId,
-    // @ts-ignore
-    (newValue) => newValue,
+    (newValue: UiReact.CellValue<Schemas, 'workouts', typeof cellId>) => newValue,
     [],
     WORKOUT_STORE_ID
   );
 };
+// function useStoreId(listId: string): import("tinybase/ui-react").StoreOrStoreId | undefined {
+//   throw new Error('Function not implemented.');
+// }

@@ -48,18 +48,20 @@ export function UploadWorkoutCSV() {
       const chunk = rows.slice(index, index + BATCH_SIZE);
       batchCount++;
 
-      console.log(`📦 Importing batch #${batchCount} (${chunk.length} rows)`);
+      //   console.log(`📦 Importing batch #${batchCount} (${chunk.length} rows)`);
 
+      console.log("⏳ Importing row IDs:");
       for (const row of chunk) {
         const id = row.id?.trim();
         if (!id) continue;
+        console.log("➕", id);
         store.setRow("workouts", id, { ...row, id });
-    }
-    
-    setBatchInfo({
-      count: Math.ceil(rows.length / BATCH_SIZE),
-      current: batchCount,
-    });
+      }
+      setBatchInfo({
+        count: Math.ceil(rows.length / BATCH_SIZE),
+        current: batchCount,
+      });
+      console.log("📊 All row IDs:", store.getRowIds("workouts"));
       index += BATCH_SIZE;
       if (index < rows.length) {
         setTimeout(importChunk, BATCH_DELAY);

@@ -22,7 +22,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { useWorkoutPage } from "@/stores/WorkoutStore";
+import { useWorkoutCount, useWorkoutPage } from "@/stores/WorkoutStore";
 
 // Define a more specific type for a workout
 type Workout = ReturnType<typeof useWorkoutPage>[number];
@@ -35,14 +35,11 @@ const visibleCols: (keyof Workout)[] = [
   "equipment_main",
 ];
 
-const PAGE_SIZE = 200;
-
 export function TableDemo() {
+  const PAGE_SIZE = 200;
   const [pageIndex, setPageIndex] = useState(0);
-  const workouts = useWorkoutPage(pageIndex);
+  const workouts = useWorkoutPage(pageIndex * PAGE_SIZE);
 
-  console.log(`page index ------ ${pageIndex} `);
-  // Use the specific Workout type
   const [selectedWorkout, setSelectedWorkout] = useState<Workout | null>(null);
 
   const handleNext = () => {
@@ -53,8 +50,12 @@ export function TableDemo() {
     if (pageIndex > 0) setPageIndex((prev) => prev - 1);
   };
 
+  const rowCount = useWorkoutCount();
+
+  
   return (
     <div className="overflow-auto space-y-4">
+      <div className="flex flex-row">Row Count - {rowCount}</div>
       <Table className="">
         <TableHeader>
           <TableRow>

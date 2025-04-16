@@ -1,7 +1,5 @@
-// import { useUser } from '@clerk/clerk-expo'`;
-// import { randomUUID } from 'expo-crypto';
-import { useUser } from '@clerk/nextjs';
-import crypto from 'node:crypto';
+import { useUser } from '@clerk/clerk-expo';
+import { randomUUID } from 'expo-crypto';
 import React, { useCallback } from 'react';
 import * as UiReact from 'tinybase/ui-react/with-schemas';
 import { createMergeableStore, NoValuesSchema } from 'tinybase/with-schemas';

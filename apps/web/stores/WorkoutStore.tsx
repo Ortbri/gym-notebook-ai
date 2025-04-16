@@ -3,6 +3,7 @@ import { createMergeableStore } from 'tinybase/with-schemas';
 import { useCreateClientPersisterAndStart } from './persistence/useCreateClientPersisterAndStart';
 import { useCreateServerSynchronizerAndStart } from './synchronization/useCreateServerSynchronizerAndStart';
 import { useMemo } from 'react';
+import { useRowCount } from 'tinybase/ui-react';
 
 export const WORKOUT_STORE_ID = 'exerciseLibrary';
 
@@ -52,6 +53,7 @@ type WorkoutCellId = keyof (typeof WORKOUTS_TABLE_SCHEMA)['workouts'];
 
 const {
   useCell,
+  useRowIds,
   useCreateMergeableStore,
   useProvideStore,
   useSetCellCallback,
@@ -78,15 +80,26 @@ export const WorkoutStoreProvider = () => {
 
 /* ---------------------------------- hooks --------------------------------- */
 
+
+export const useWorkoutCount = () =>
+  useRowCount('workouts', WORKOUT_STORE_ID);
+
 // export const useWorkoutPage = (offset: number, limit: number = 200) => {
 //   const ids = useSortedRowIds('workouts', undefined, false, undefined, undefined, WORKOUT_STORE_ID);
 //   const table = useTable('workouts', WORKOUT_STORE_ID);
 //   return ids.slice(offset, offset + limit).map((id) => ({ id, ...table[id] }));
 // };
 
-export const useWorkoutPage = (offset: number, limit = 3000) => {
-  const ids = useSortedRowIds('workouts', undefined, false, undefined, undefined, WORKOUT_STORE_ID);
+// export const useWorkoutPage = (offset: number) => {
+//   const ids = useSortedRowIds('workouts', undefined, false, undefined, undefined, WORKOUT_STORE_ID);
+//   const table = useTable('workouts', WORKOUT_STORE_ID);
+//   return ids.map((id) => ({ id, ...table[id] }));
+// };
+
+export const useWorkoutPage = (offset: number, limit = 200) => {
+  const ids = useRowIds('workouts', WORKOUT_STORE_ID);
   const table = useTable('workouts', WORKOUT_STORE_ID);
+
   return ids.slice(offset, offset + limit).map((id) => ({ id, ...table[id] }));
 };
 
@@ -119,3 +132,7 @@ export const useSetWorkoutCell = (rowId: string, cellId: WorkoutCellId) => {
     WORKOUT_STORE_ID
   );
 };
+// function useStoreId(listId: string): import("tinybase/ui-react").StoreOrStoreId | undefined {
+//   throw new Error('Function not implemented.');
+// }
+

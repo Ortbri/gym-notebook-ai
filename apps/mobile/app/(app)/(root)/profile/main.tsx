@@ -1,4 +1,5 @@
 import { useUser, useAuth } from '@clerk/clerk-expo';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { View, ScrollView, Image, Pressable } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
@@ -17,6 +18,7 @@ import { Text } from '~/components/ui/Text';
 
 export default function Profile() {
   const { isLoaded, isSignedIn, user } = useUser();
+  const router = useRouter();
   const { signOut } = useAuth();
 
   const handleSignOut = async () => {
@@ -78,6 +80,11 @@ export default function Profile() {
         </Pressable>
         <Pressable style={styles.settingsItem}>
           <Text size="p">Privacy Settings</Text>
+        </Pressable>
+        <Pressable
+          style={styles.settingsItem}
+          onPress={() => router.navigate('/(app)/(root)/profile/test')}>
+          <Text size="p">Testing</Text>
         </Pressable>
       </View>
 
