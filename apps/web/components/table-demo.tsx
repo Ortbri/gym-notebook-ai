@@ -117,7 +117,7 @@ export function TableDemo() {
         open={!!selectedWorkout}
         onOpenChange={(open) => !open && setSelectedWorkout(null)}
       >
-        <SheetContent side="bottom">
+        <SheetContent side="right">
           <SheetHeader>
             <SheetTitle className="text-xl font-bold">
               {selectedWorkout?.name ?? "Workout"}
