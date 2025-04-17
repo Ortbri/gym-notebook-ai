@@ -13,7 +13,7 @@ export default function RootLayout() {
       <WorkoutStoreProvider />
       <SuperWallProvider>
         <BaseItemProvider>
-          <Stack screenOptions={{}}>
+          <Stack>
             {/* NESTED STACK */}
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             {/* NORMAL STACK */}
@@ -22,70 +22,6 @@ export default function RootLayout() {
               options={{
                 title: 'Chat Null',
                 headerShown: true,
-                ...headerBlurSettings,
-              }}
-            />
-            <Stack.Screen
-              name="listB/new/index"
-              options={{
-                title: 'List B',
-                presentation: 'formSheet',
-                sheetGrabberVisible: true,
-                ...headerBlurSettings,
-              }}
-            />
-            <Stack.Screen
-              name="listB/new/create"
-              options={{
-                title: 'Create',
-                // presentation: 'modal',
-                ...headerBlurSettings,
-              }}
-            />
-            <Stack.Screen
-              name="listB/new/scan"
-              options={{
-                title: '',
-                presentation: 'formSheet',
-                sheetGrabberVisible: true,
-                sheetCornerRadius: 40,
-                headerTransparent: true,
-                // ...headerBlurSettings,
-              }}
-            />
-            <Stack.Screen
-              name="listB/[listId]/index"
-              options={{
-                title: 'List Item',
-                headerBackTitle: 'Home',
-                ...headerBlurSettings,
-              }}
-            />
-            <Stack.Screen
-              name="listB/[listId]/product/new"
-              options={{
-                title: 'Product',
-                headerBackTitle: 'List',
-                ...headerBlurSettings,
-              }}
-            />
-            <Stack.Screen
-              name="listB/[listId]/share"
-              options={{
-                title: 'Share',
-                headerBackTitle: 'List',
-                presentation: 'formSheet',
-                sheetGrabberVisible: true,
-                sheetCornerRadius: 40,
-                // headerTransparent: true,
-                ...headerBlurSettings,
-              }}
-            />
-            <Stack.Screen
-              name="listB/[listId]/product/[productId]"
-              options={{
-                title: 'Product',
-                headerBackTitle: 'List',
                 ...headerBlurSettings,
               }}
             />

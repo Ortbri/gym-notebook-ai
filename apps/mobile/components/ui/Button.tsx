@@ -1,22 +1,19 @@
-import * as Haptics from 'expo-haptics';
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
-  Text,
-  PressableProps,
-  Platform,
-  Pressable,
-  View,
   GestureResponderEvent,
+  Pressable,
+  PressableProps,
+  Text,
+  View
 } from 'react-native';
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
   Easing,
-  withTiming,
+  useAnimatedStyle,
+  useSharedValue,
   withSequence,
-  interpolateColor,
+  withTiming
 } from 'react-native-reanimated';
-import { StyleSheet, UnistylesVariants, mq } from 'react-native-unistyles';
+import { StyleSheet, UnistylesVariants } from 'react-native-unistyles';
 
 type ButtonShape = 'rounded' | 'circular' | 'pill' | 'square';
 
@@ -226,7 +223,7 @@ const styles = StyleSheet.create((theme) => ({
     gap: theme.gap(0.5),
   },
   text: {
-    fontFamily: theme.fonts.SourGummyBold,
+    fontFamily: theme.fonts.SatoshiBold,
     fontSize: theme.fontSize.md,
     variants: {
       size: {

@@ -1,32 +1,32 @@
 import { subMonths } from 'date-fns';
 import { Link, Stack, useRouter } from 'expo-router';
-import { View, TouchableOpacity, Pressable, FlatList } from 'react-native';
+import { memo } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
-import ChatListItem from '~/components/ChatListItem';
 import { IconSymbol } from '~/components/IconSymbol';
 import { Text } from '~/components/ui/Text';
+import { Calendar } from '~/components/week-calendar';
 import { useGenerateWeeks } from '~/components/week-calendar/utils';
-import { useShoppingListIds } from '~/stores/ListsStore';
 
-// const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
-//   return (
-//     <View style={styles.dayContainer}>
-//       <Text style={{ textAlign: 'center', fontSize: 16, paddingVertical: 6 }}>
-//         {day.toLocaleDateString()}
-//       </Text>
-//       <Text
-//         style={{
-//           textAlign: 'center',
-//           fontSize: 14,
-//           paddingVertical: 6,
-//           opacity: 0.5,
-//         }}>
-//         {isActive ? 'Active' : 'Inactive'}
-//       </Text>
-//     </View>
-//   );
-// });
+const Day = memo(({ day, isActive }: { day: Date; isActive: boolean }) => {
+  return (
+    <View style={styles.dayContainer}>
+      <Text style={{ textAlign: 'center', fontSize: 16, paddingVertical: 6 }}>
+        {day.toLocaleDateString()}
+      </Text>
+      <Text
+        style={{
+          textAlign: 'center',
+          fontSize: 14,
+          paddingVertical: 6,
+          opacity: 0.5,
+        }}>
+        {isActive ? 'Active' : 'Inactive'}
+      </Text>
+    </View>
+  );
+});
 
 function EmptyChatListItem() {
   const router = useRouter();
@@ -100,22 +100,18 @@ const Page = () => {
           ),
         }}
       />
-      {/* <View style={styles.container}> */}
-      {/* <EmptyChatListItem /> */}
-      <FlatList
-        contentInsetAdjustmentBehavior="automatic"
-        // data={shoppingListIds}
-        contentContainerStyle={{
-          paddingTop: 16,
-          paddingHorizontal: 16,
-          gap: 16,
-          paddingBottom: 40,
-          // gap: 500,
-          // paddingTop: 100,
+      <Calendar
+        weeks={weeks}
+        offsetPageLimit={7}
+        onDateChange={(date) => {
+          console.log(`New date: ${date.toLocaleDateString()}`);
         }}
-        ListEmptyComponent={<EmptyChatListItem />}
-        renderItem={({ item }) => <ChatListItem listId={item} />}
-      />
+        dimWeekends
+        initialDate={new Date()}>
+        <Calendar.Strip style={{ paddingVertical: 14 }} />
+        <Calendar.Screen containerStyle={styles.calendarScreen} renderDay={renderDay} />
+      </Calendar>
+
       {/* </View> */}
     </>
   );
@@ -130,7 +126,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     fontSize: 30,
     fontWeight: 'bold',
     color: theme.colors.text.primary,
-    fontFamily: theme.fonts.SourGummyBold,
+    fontFamily: theme.fonts.SatoshiBold,
   },
   dayContentStyle: {
     height: 600,
@@ -142,7 +138,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     justifyContent: 'center',
   },
   calendarScreen: {
-    height: rt.screen.height - 140,
+    height: rt.screen.height,
   },
   chatItemContainer: {
     flexDirection: 'row',
@@ -217,15 +213,3 @@ const styles = StyleSheet.create((theme, rt) => ({
 }));
 
 export default Page;
-
-/* <Calendar
-        weeks={weeks}
-        offsetPageLimit={7}
-        onDateChange={(date) => {
-          console.log(`New date: ${date.toLocaleDateString()}`);
-        }}
-        dimWeekends
-        initialDate={new Date()}>
-        <Calendar.Strip style={{ paddingTop: 14 }} />
-        <Calendar.Screen containerStyle={styles.calendarScreen} renderDay={renderDay} />
-      </Calendar> */

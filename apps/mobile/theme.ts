@@ -119,9 +119,10 @@ const sharedValues = {
   },
 
   fonts: {
-    SourGummy: 'SourGummy',
-    SourGummyBold: 'SourGummyBold',
-    SourGummyRegular: 'SourGummyRegular',
+    Satoshi: 'Satoshi',
+    SatoshiBold: 'SatoshiBold',
+    SatoshiLight: 'SatoshiLight',
+    SatoshiRegular: 'SatoshiRegular',
   },
 
   shadow: {

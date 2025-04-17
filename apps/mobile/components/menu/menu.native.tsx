@@ -1,9 +1,7 @@
 import { useAuth, useUser } from '@clerk/clerk-expo';
-import * as Burnt from 'burnt';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Pressable, View } from 'react-native';
-// import RevenueCatUI, { PAYWALL_RESULT } from 'react-native-purchases-ui';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { IconSymbol } from '~/components/IconSymbol';
@@ -90,29 +88,8 @@ const SettingsGroup = ({ title, children }: SettingsGroupProps) => {
 export default function Menu() {
   const { signOut } = useAuth();
   const { user } = useUser();
-  // const { isPro } = useRevenueCat();
   const { theme } = useUnistyles();
   const router = useRouter();
-
-  // const goPro = async () => {
-  //   const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
-  //     displayCloseButton: false,
-  //     fontFamily: 'SourGummyRegular',
-  //   });
-
-  //   switch (paywallResult) {
-  //     case PAYWALL_RESULT.NOT_PRESENTED:
-  //     case PAYWALL_RESULT.ERROR:
-  //     case PAYWALL_RESULT.CANCELLED:
-  //       return false;
-  //     case PAYWALL_RESULT.PURCHASED:
-  //     case PAYWALL_RESULT.RESTORED:
-  //       return true;
-  //     default:
-  //       return false;
-  //   }
-  // };
-
   return (
     <View style={stylesheet.container}>
       <SettingsGroup title="Account">
@@ -217,7 +194,7 @@ const stylesheet = StyleSheet.create((theme) => ({
     borderColor: theme.colors.border.strong,
   },
   buttonText: {
-    fontFamily: theme.fonts.SourGummyBold,
+    fontFamily: theme.fonts.SatoshiBold,
     color: theme.colors.text.primary,
     fontSize: 16,
     fontWeight: '600',
@@ -262,7 +239,7 @@ const stylesheet = StyleSheet.create((theme) => ({
   settingsItemTitle: {
     fontSize: 16,
     color: theme.colors.text.primary,
-    fontFamily: theme.fonts.SourGummyRegular,
+    fontFamily: theme.fonts.SatoshiRegular,
   },
   settingsItemSubtitle: {
     fontSize: 14,

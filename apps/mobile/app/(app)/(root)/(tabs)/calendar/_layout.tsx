@@ -4,14 +4,13 @@ import React from 'react';
 import useNavStyle from '~/components/nav/NavStyles';
 
 const CalendarLayout = () => {
-  const { headerBlurSettings } = useNavStyle();
+  const { headerDefaultSettings } = useNavStyle();
   return (
-    <Stack screenOptions={headerBlurSettings}>
+    <Stack screenOptions={headerDefaultSettings}>
       <Stack.Screen
         name="index"
         options={{
           title: '',
-          // headerLargeTitle: true,
         }}
       />
     </Stack>

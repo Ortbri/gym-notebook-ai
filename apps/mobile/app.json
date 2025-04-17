@@ -35,9 +35,10 @@
         "expo-font",
         {
           "fonts": [
-            "./assets/fonts/SourGummy-Bold.ttf",
-            "./assets/fonts/SourGummy-Light.ttf",
-            "./assets/fonts/SourGummy-Regular.ttf"
+            "./assets/fonts/Satoshi-Black.ttf",
+            "./assets/fonts/Satoshi-Bold.ttf",
+            "./assets/fonts/Satoshi-Light.ttf",
+            "./assets/fonts/Satoshi-Regular.ttf"
           ]
         }
       ],
@@ -48,7 +49,10 @@
           "project": "gym-notebook",
           "organization": "colony"
         }
-      ]
+      ],
+      "expo-secure-store",
+      "expo-web-browser",
+      "react-native-edge-to-edge"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -114,7 +114,7 @@ const styles = StyleSheet.create((theme, rt) => ({
     fontSize: 40,
     fontWeight: '900',
     color: theme.colors.text.primary,
-    fontFamily: theme.fonts.SourGummyBold,
+    fontFamily: theme.fonts.SatoshiBold,
   },
   emptyCont: {
     flex: 1,

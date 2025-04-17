@@ -1,24 +1,24 @@
-import React, { useState, useRef, forwardRef } from 'react';
+import React, { forwardRef, useRef, useState } from 'react';
 import {
-  View,
-  TextInput,
-  Text,
-  TextInputProps,
+  NativeSyntheticEvent,
+  Platform,
   Pressable,
   StyleProp,
-  ViewStyle,
-  NativeSyntheticEvent,
+  Text,
+  TextInput,
   TextInputFocusEventData,
-  Platform,
+  TextInputProps,
+  View,
+  ViewStyle,
 } from 'react-native';
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
   Easing,
   interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
-import { StyleSheet, UnistylesVariants, useUnistyles, mq } from 'react-native-unistyles';
+import { StyleSheet, UnistylesVariants, useUnistyles } from 'react-native-unistyles';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 const AnimatedView = Animated.createAnimatedComponent(View);
@@ -264,7 +264,7 @@ const styles = StyleSheet.create((theme) => ({
   label: {
     fontSize: theme.fontSize.sm,
     marginBottom: theme.spacing.xs,
-    fontFamily: theme.fonts.SourGummyBold,
+    fontFamily: theme.fonts.SatoshiBold,
     color: theme.colors.text.secondary,
   },
   inputContainer: {
@@ -317,7 +317,7 @@ const styles = StyleSheet.create((theme) => ({
   },
   input: {
     flex: 1,
-    fontFamily: theme.fonts.SourGummyRegular,
+    fontFamily: theme.fonts.SatoshiRegular,
     color: theme.colors.text.primary,
     paddingHorizontal: theme.spacing.sm,
 
@@ -376,7 +376,7 @@ const styles = StyleSheet.create((theme) => ({
   helperText: {
     marginTop: theme.spacing.xs,
     fontSize: theme.fontSize.xs,
-    fontFamily: theme.fonts.SourGummyRegular,
+    fontFamily: theme.fonts.SatoshiRegular,
     color: theme.colors.text.secondary,
   },
   errorText: {

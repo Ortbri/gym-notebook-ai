@@ -52,9 +52,8 @@ A mobile-first gym logbook powered by AI. Users can:
 ## Project Structure
 
 app/
+  _layout.tsx
   (app)/
-    sign-in.tsx
-    sign-up.tsx
       (auth)/
         auth.tsx           # Voice logging
       (root)/ // this here is the protected route for payed features
@@ -67,6 +66,7 @@ app/
                 index.tsx           # charts of progress -- stats on how you are doing
           chat/ // this here is the protected route for payed features
             [id].tsx          # Voice logging / generate workout / manual logging 
+      _layout.tsx
 
 ---
 

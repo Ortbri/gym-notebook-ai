@@ -1,16 +1,19 @@
-import { ClerkLoaded, ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import { ClerkProvider } from '@clerk/clerk-expo';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import * as Sentry from '@sentry/react-native';
 import { Toaster } from 'burnt/web';
 import { useFonts } from 'expo-font';
-import { SplashScreen, useRouter, useSegments, usePathname, Slot } from 'expo-router';
-import { useEffect } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { Slot, SplashScreen } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native-unistyles';
-export { ErrorBoundary } from 'expo-router';
 
-// Initialize Sentry
+export { ErrorBoundary } from 'expo-router';
+/* -------------------------------------------------------------------------- */
+/*                                   splash                                   */
+/* -------------------------------------------------------------------------- */
+SplashScreen.preventAutoHideAsync();
+/* -------------------------------------------------------------------------- */
+/*                              Initialize Sentry                             */
+/* -------------------------------------------------------------------------- */
 const navigationIntegration = Sentry.reactNavigationIntegration({
   enableTimeToInitialDisplay: true,
 });
@@ -34,83 +37,30 @@ if (process.env.NODE_ENV === 'production') {
     ],
   });
 }
-
-// Prevent the splash screen from auto-hiding before getting the color scheme.
-SplashScreen.preventAutoHideAsync();
-
-function InitialLayout({ fontsLoaded }: { fontsLoaded: boolean }) {
-  const router = useRouter();
-  const segments = useSegments();
-  const pathname = usePathname();
-  const { isSignedIn, isLoaded: authLoaded } = useAuth();
-  // console.log('is signed in', isSignedIn);
-
-  useEffect(() => {
-    if (!authLoaded || !fontsLoaded) return;
-
-    const isInRoot = segments[1] === '(root)';
-
-    if (isSignedIn && !isInRoot) {
-      router.replace('/(app)/(root)/(tabs)/calendar');
-    } else if (!isSignedIn && pathname !== '/') {
-      router.replace('/(app)/(auth)/auth');
-    }
-
-    // Slight delay for visual polish
-    setTimeout(() => {
-      SplashScreen.hideAsync();
-    }, 1000);
-  }, [isSignedIn, authLoaded, fontsLoaded]);
-
-  if (!fontsLoaded || !authLoaded) {
-    return <Loading />;
-  }
-
-  return <Slot />;
-}
-
-function Loading() {
-  return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color="#0000ff" />
-    </View>
-  );
-}
-const styles = StyleSheet.create((theme) => ({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
-  },
-}));
-
-const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
-if (!publishableKey) {
-  throw new Error('Missing Publishable Key');
-}
-
-export default function AppLayout() {
+/* -------------------------------------------------------------------------- */
+/*                                 app layout                                 */
+/* -------------------------------------------------------------------------- */
+export default function InitLayout() {
   const [fontsLoaded, fontError] = useFonts({
-    SourGummy: require('../assets/fonts/SourGummy-Light.ttf'),
-    SourGummyBold: require('../assets/fonts/SourGummy-Bold.ttf'),
-    SourGummyRegular: require('../assets/fonts/SourGummy-Regular.ttf'),
+    SatoshiBlack: require('../assets/fonts/Satoshi-Black.ttf'),
+    SatoshiBold: require('../assets/fonts/Satoshi-Bold.ttf'),
+    SatoshiLight: require('../assets/fonts/Satoshi-Light.ttf'),
+    Satoshi: require('../assets/fonts/Satoshi-Regular.ttf'),
   });
 
-  console.log('Fonts loaded:', fontsLoaded, 'Font error:', fontError);
-
+  // hold splash until fonts or error
   if (!fontsLoaded && !fontError) {
-    return null; // Keep splash visible
+    return null;
   }
+
+  const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
+  if (!publishableKey) throw new Error('Missing Clerk publishable key');
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-        <ClerkLoaded>
-          <InitialLayout fontsLoaded={fontsLoaded} />
-          <Toaster position="bottom-right" />
-        </ClerkLoaded>
+        <Slot />
+        <Toaster position="bottom-right" />
       </ClerkProvider>
     </GestureHandlerRootView>
   );
