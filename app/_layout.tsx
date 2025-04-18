@@ -48,7 +48,6 @@ export default function InitLayout() {
     Satoshi: require('../assets/fonts/Satoshi-Regular.ttf'),
   });
 
-  // hold splash until fonts or error
   if (!fontsLoaded && !fontError) {
     return null;
   }
