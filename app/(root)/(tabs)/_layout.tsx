@@ -20,6 +20,7 @@ const TabsLayout = () => {
   const router = useRouter();
   const { user } = useUser();
   const { theme } = useUnistyles();
+
   const weeks = useGenerateWeeks(subMonths(new Date(), 5), new Date());
 
   return (
@@ -34,7 +35,7 @@ const TabsLayout = () => {
       <View style={tabStyles.container}>
         {/* avatar */}
         <Pressable
-          onPress={() => router.navigate('/(root)/profile/main')}
+          onPress={() => router.navigate('/(root)/profile')}
           style={tabStyles.avatarContainer}>
           <Image source={{ uri: user?.imageUrl }} style={tabStyles.avatar} />
         </Pressable>

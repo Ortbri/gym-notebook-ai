@@ -16,6 +16,7 @@ export default function RootLayout() {
           {/* NESTED STACK */}
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           {/* NORMAL STACK */}
+          {/* CHAT */}
           <Stack.Screen
             name="chat/[id]"
             options={{
@@ -24,8 +25,9 @@ export default function RootLayout() {
               ...headerBlurSettings,
             }}
           />
+          {/* PROFILE */}
           <Stack.Screen
-            name="profile/[id]"
+            name="profile"
             options={{
               title: 'Profile',
               headerBackTitle: 'Home',

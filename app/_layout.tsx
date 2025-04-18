@@ -12,6 +12,7 @@ import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
 import { SuperWallProvider } from '~/providers/SuperWallProvider';
 
+// TODO: should we keep superwall in the ap layout or bring it in a bit more?
 /* ------------------------------ err boundary ------------------------------ */
 export { ErrorBoundary } from 'expo-router';
 /* --------------------------------- splash --------------------------------- */

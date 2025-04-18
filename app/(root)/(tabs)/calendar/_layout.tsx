@@ -11,7 +11,7 @@ const CalendarLayout = () => {
       <Stack.Screen
         name="index"
         options={{
-          title: '', // Keep title blank, ActiveDayTitle will provide it
+          title: '',
           headerLeft: () => <ActiveDayTitle />,
         }}
       />
