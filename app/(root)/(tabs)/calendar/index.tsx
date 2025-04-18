@@ -1,6 +1,6 @@
 import { subMonths } from 'date-fns';
-import { Link, Stack, useRouter } from 'expo-router';
-import { memo } from 'react';
+import { useRouter } from 'expo-router';
+import React, { memo } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
@@ -40,7 +40,7 @@ function EmptyChatListItem() {
     <TouchableOpacity
       style={styles.chatItemContainer}
       onPress={() => {
-        router.navigate('/(app)/(root)/chat/1');
+        router.navigate('/(root)/chat/1');
       }}>
       <View style={styles.avatarContainer}>
         <View style={styles.avatar}>
@@ -83,23 +83,6 @@ const Page = () => {
   // const shoppingListIds = useShoppingListIds();
   return (
     <>
-      <Stack.Screen
-        options={{
-          title: '',
-          headerLeft: () => (
-            <Link href="/(app)/(root)/listB/new" style={{}} asChild>
-              <TouchableOpacity
-                style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}
-                onLongPress={() => {
-                  // console.log('long pressed');
-                }}>
-                <Text style={styles.text}>Today</Text>
-                {/* <IconSymbol name="plus" size={24} weight="bold" /> */}
-              </TouchableOpacity>
-            </Link>
-          ),
-        }}
-      />
       <Calendar
         weeks={weeks}
         offsetPageLimit={7}

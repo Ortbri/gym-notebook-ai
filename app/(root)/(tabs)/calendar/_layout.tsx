@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 import React from 'react';
 
 import useNavStyle from '~/components/nav/NavStyles';
+import { ActiveDayTitle } from '~/components/week-calendar/components/active-day';
 
 const CalendarLayout = () => {
   const { headerDefaultSettings } = useNavStyle();
@@ -10,7 +11,8 @@ const CalendarLayout = () => {
       <Stack.Screen
         name="index"
         options={{
-          title: '',
+          title: '', // Keep title blank, ActiveDayTitle will provide it
+          headerLeft: () => <ActiveDayTitle />,
         }}
       />
     </Stack>

@@ -171,11 +171,14 @@ export const CalendarStrip = ({
 const styles = StyleSheet.create((theme, rt) => ({
   weekContainer: {
     width: rt.screen.width,
+    // top: rt.insets.top,
+    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   dayContainer: {
+    // width: rt.screen.width / 7,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
