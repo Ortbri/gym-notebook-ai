@@ -51,7 +51,6 @@
         }
       ],
       "expo-secure-store",
-      "expo-web-browser",
       "react-native-edge-to-edge"
     ],
     "experiments": {
