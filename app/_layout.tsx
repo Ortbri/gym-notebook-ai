@@ -10,6 +10,8 @@ import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StyleSheet, useUnistyles } from 'react-native-unistyles';
 
+import { SuperWallProvider } from '~/providers/SuperWallProvider';
+
 /* ------------------------------ err boundary ------------------------------ */
 export { ErrorBoundary } from 'expo-router';
 /* --------------------------------- splash --------------------------------- */
@@ -114,8 +116,10 @@ export default function AppLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-        <InitialLayout />
-        <Toaster position="bottom-right" />
+        <SuperWallProvider>
+          <InitialLayout />
+          <Toaster position="bottom-right" />
+        </SuperWallProvider>
       </ClerkProvider>
     </GestureHandlerRootView>
   );
