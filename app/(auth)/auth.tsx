@@ -4,7 +4,7 @@ import * as AuthSession from 'expo-auth-session';
 import { Link, useRouter } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
 import React, { useCallback, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { StyleSheet, withUnistyles } from 'react-native-unistyles';
 
 import { Button } from '~/components/ui/Button';

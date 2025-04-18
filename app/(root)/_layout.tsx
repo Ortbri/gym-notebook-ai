@@ -7,7 +7,13 @@ import { SuperWallProvider } from '~/providers/SuperWallProvider';
 import { WorkoutStoreProvider } from '~/stores/WorkoutStore';
 
 export default function RootLayout() {
+  // const { isSignedIn, isLoaded } = useAuth();
   const { headerBlurSettings } = useNavStyle();
+
+  // if (!isSignedIn) {
+  //   return <Redirect href="/(auth)/auth" />;
+  // }
+
   return (
     <TinyBaseProvider>
       <WorkoutStoreProvider />
@@ -41,13 +47,6 @@ export default function RootLayout() {
                 title: 'Test',
                 headerShown: true,
                 ...headerBlurSettings,
-              }}
-            />
-            <Stack.Screen
-              name="profile/dbSync"
-              options={{
-                title: 'DB Sync',
-                headerShown: true,
               }}
             />
             <Stack.Screen
